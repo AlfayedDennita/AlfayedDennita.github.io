@@ -7,7 +7,7 @@ import reactPortfolioData from '/scripts/data/react-portfolio.json' assert { typ
 const isPrefersDarkScheme = window.matchMedia('(prefer-color-scheme: dark)');
 const browserTheme = isPrefersDarkScheme ? 'dark' : 'light';
 
-let currentTheme = localStorage.getItem('theme') || browserTheme;
+let currentTheme = localStorage.getItem('home_theme') || browserTheme;
 document.body.dataset.theme = currentTheme;
 
 const metaTheme = document.querySelector('meta[name="theme-color"]');
@@ -20,13 +20,13 @@ themeToggleButton.addEventListener('click', () => {
       currentTheme = 'dark';
       document.body.dataset.theme = currentTheme;
       metaTheme.setAttribute('content', '#333');
-      localStorage.setItem('theme', currentTheme);
+      localStorage.setItem('home_theme', currentTheme);
       break;
     case 'dark':
       currentTheme = 'light';
       document.body.dataset.theme = currentTheme;
       metaTheme.setAttribute('content', '#fff');
-      localStorage.setItem('theme', currentTheme);
+      localStorage.setItem('home_theme', currentTheme);
   }
 });
 
