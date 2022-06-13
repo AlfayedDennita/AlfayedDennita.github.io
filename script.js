@@ -1,4 +1,6 @@
-import SlicingPortfolioComponent from '/scripts/components/SlicingPortfolioComponent.js';
+import PortfolioComponent from '/scripts/components/PortfolioComponent.js';
+import slicingPortfolioData from '/scripts/data/slicing-portfolio.json' assert { type: 'json' };
+import reactPortfolioData from '/scripts/data/react-portfolio.json' assert { type: 'json' };
 
 /* Theme Handling */
 
@@ -30,11 +32,19 @@ themeToggleButton.addEventListener('click', () => {
 
 /* Copyright Year */
 
-const copyrightYear = document.querySelector('#copyright span');
-copyrightYear.innerHTML = new Date().getFullYear();
+const copyrightText = document.querySelector('#copyright');
+copyrightText.innerHTML += ' ' + new Date().getFullYear();
 
-/* Slicing Portfolio Component */
+/* Portfolio Component */
 
-const slicingPortfolio = new SlicingPortfolioComponent({
+new PortfolioComponent({
+  title: 'Slicing',
   container: document.querySelector('#slicing-portfolio'),
+  data: slicingPortfolioData,
+});
+
+new PortfolioComponent({
+  title: 'React',
+  container: document.querySelector('#react-portfolio'),
+  data: reactPortfolioData,
 });
