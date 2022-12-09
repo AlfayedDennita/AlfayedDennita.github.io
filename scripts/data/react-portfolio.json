@@ -1,5 +1,10 @@
 [
   {
+    "name": "Forus",
+    "url": "https://forus-beta.vercel.app/",
+    "image_url": "https://raw.githubusercontent.com/AlfayedDennita/forus/main/thumbnail.png"
+  },
+  {
     "name": "Astronote!",
     "url": "https://astronote.vercel.app/",
     "image_url": "https://raw.githubusercontent.com/AlfayedDennita/astronote/main/thumbnail.png"
