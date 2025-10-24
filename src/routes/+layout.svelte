@@ -1,17 +1,286 @@
 <script>
   let { children } = $props();
+
+  const staticKeywords = new Set([
+    'Alfayed Dennita',
+    'Muhammad Alfayed Dennita',
+    'Fayden',
+    'Fayden World',
+    'personal',
+  ]);
+
+  let pageData = $state({
+    title: "Fayden World - Alfayed Dennita's Personal Website",
+    description:
+      "Fayden World is Alfayed Dennita's main personal website that contains public personal information, such as personal description, software development portfolio, art gallery, and contact details.",
+    additionalKeywords: new Set(['portfolio', 'projects', 'contacts']),
+  });
+
+  const keywords = $derived(
+    [...staticKeywords.union(pageData.additionalKeywords)].join(', ')
+  );
 </script>
 
 <svelte:head>
-  <meta
-    name="description"
-    content="Fayden World is Alfayed Dennita's main personal website that contains public personal information, such as personal description, software development portfolio, art gallery, and contact details."
-  />
-  <meta
-    name="keywords"
-    content="Alfayed Dennita, Muhammad Alfayed Dennita, Fayden, Fayden World, personal, portfolio, projects, contacts"
-  />
-  <title>Fayden World - Alfayed Dennita's Personal Website</title>
+  <meta name="description" content={pageData.description} />
+  <meta name="keywords" content={keywords} />
+  <title>{pageData.title}</title>
 </svelte:head>
 
 {@render children?.()}
+
+<style>
+  :global {
+    /*--- Additional Sanitization ---*/
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    :where(:root) {
+      cursor: initial;
+      interpolate-size: allow-keywords; /* Enable animations involving an intrinsic size */
+    }
+
+    :where(body, html, *:focus-within) {
+      scroll-behavior: smooth;
+    }
+
+    :where(body) {
+      min-height: 100vh;
+    }
+
+    :where(p) {
+      text-wrap: pretty;
+    }
+
+    :where(h1, h2, h3, h4, h5, h6) {
+      text-wrap: balance;
+    }
+
+    /*--- Project Configs ---*/
+
+    @property --font-family-heading {
+      syntax: '*';
+      inherits: false;
+      initial-value: 'Jersey 20', 'sans-serif';
+    }
+
+    @property --font-family-body {
+      syntax: '*';
+      inherits: false;
+      initial-value: 'PT Sans', sans-serif;
+    }
+
+    @property --font-size-heading-1 {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 60px;
+    }
+
+    @property --font-size-heading-2 {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 48px;
+    }
+
+    @property --font-size-heading-3 {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 38px;
+    }
+
+    @property --font-size-heading-4 {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 30px;
+    }
+
+    @property --font-size-heading-5 {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 24px;
+    }
+
+    @property --font-size-heading-6 {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 20px;
+    }
+
+    @property --font-size-paragraph {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 16px;
+    }
+
+    @property --font-size-small {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 12px;
+    }
+
+    @property --color-primary-main {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #268fd9;
+    }
+
+    @property --color-primary-shadow {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #175682;
+    }
+
+    @property --color-primary-highlight {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #a8d2f0;
+    }
+
+    @property --color-secondary-main {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #e5c31a;
+    }
+
+    @property --color-secondary-shadow {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #827017;
+    }
+
+    @property --color-secondary-highlight {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #f5e7a3;
+    }
+
+    @property --color-white-pure {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #ffffff;
+    }
+
+    @property --color-white-alt-1 {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #eeeeee;
+    }
+
+    @property --color-white-alt-2 {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #dddddd;
+    }
+
+    @property --color-black-pure {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #000000;
+    }
+
+    @property --color-black-alt-1 {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #444444;
+    }
+
+    @property --color-black-alt-2 {
+      syntax: '<color>';
+      inherits: false;
+      initial-value: #888888;
+    }
+
+    @property --color-primary-main-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 38, 143, 217;
+    }
+
+    @property --color-primary-shadow-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 23, 86, 130;
+    }
+
+    @property --color-primary-highlight-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 168, 210, 240;
+    }
+
+    @property --color-secondary-main-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 229, 195, 26;
+    }
+
+    @property --color-secondary-shadow-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 130, 112, 23;
+    }
+
+    @property --color-secondary-highlight-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 245, 231, 163;
+    }
+
+    @property --color-white-pure-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 255, 255, 255;
+    }
+
+    @property --color-white-alt-1-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 238, 238, 238;
+    }
+
+    @property --color-white-alt-2-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 221, 221, 221;
+    }
+
+    @property --color-black-pure-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 0, 0, 0;
+    }
+
+    @property --color-black-alt-1-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 68, 68, 68;
+    }
+
+    @property --color-black-alt-2-rgb {
+      syntax: '<number>#';
+      inherits: false;
+      initial-value: 136, 136, 136;
+    }
+
+    @property --selection-background-color {
+      syntax: '<color>';
+      inherits: true;
+      initial-value: rgba(229, 195, 26, 0.5);
+    }
+
+    ::selection {
+      --selection-background-color: rgba(var(--color-secondary-main-rgb), 0.5);
+      background-color: var(--selection-background-color);
+    }
+
+    body {
+      background-color: var(--color-white-pure);
+      font-family: var(--font-family-body);
+      font-size: 1rem;
+      color: var(--color-black-pure);
+    }
+  }
+</style>
