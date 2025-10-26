@@ -45,7 +45,7 @@
     border-radius: 4px;
     color: var(--color-white-pure);
     font-family: var(--font-family-pixel);
-    font-size: 1rem;
+    font-size: var(--font-size-paragraph);
     text-transform: uppercase;
     text-decoration: underline wavy var(--underline-color) 1px;
     text-underline-offset: 2px;
