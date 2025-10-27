@@ -82,10 +82,22 @@
   initial-value: 16px;
 }
 
+@property --font-size-semi-small {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 14px;
+}
+
 @property --font-size-small {
   syntax: '<length>';
   inherits: false;
   initial-value: 12px;
+}
+
+@property --font-size-very-small {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 10px;
 }
 
 @property --color-primary-main {
@@ -232,16 +244,9 @@
   initial-value: 136, 136, 136;
 }
 
-@property --selection-background-color {
-  syntax: '<color>';
-  inherits: true;
-  initial-value: rgba(229, 195, 26, 0.5);
-}
-
 ::selection {
-  --selection-background-color: rgba(var(--color-secondary-main-rgb), 0.5);
-
-  background-color: var(--selection-background-color);
+  background-color: var(--color-primary-shadow);
+  color: var(--color-white-pure);
 }
 
 body {
