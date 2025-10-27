@@ -1,6 +1,7 @@
 <script>
   import '@hackernoon/pixel-icon-library/fonts/iconfont.css';
   import '$lib/styles/global.css';
+  import Header from './components/Header.svelte';
 
   let { children } = $props();
 
@@ -13,7 +14,7 @@
   ]);
 
   let pageData = $state({
-    title: "Fayden World - Alfayed Dennita's Personal Website",
+    title: 'Fayden World by Alfayed Dennita',
     description:
       "Fayden World is Alfayed Dennita's main personal website that contains public personal information, such as personal description, software development portfolio, art gallery, and contact details.",
     additionalKeywords: new Set(['portfolio', 'projects', 'contacts']),
@@ -30,6 +31,8 @@
   <title>{pageData.title}</title>
 </svelte:head>
 
+<Header />
+
 {@render children?.()}
 
-<style></style>
+<div style:height="20rem"></div>
