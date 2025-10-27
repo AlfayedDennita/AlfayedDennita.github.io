@@ -3,6 +3,7 @@
   const {
     tag = 'button',
     style = styles[0],
+    className,
     isSquare = false,
     children,
     ...props
@@ -15,6 +16,7 @@
     'button',
     `button--style-${styles.includes(style) ? style : styles[0]}`,
     isSquare && 'button--type-square',
+    className,
   ]}
   {...props}
 >
@@ -25,102 +27,70 @@
 
 <style>
   .button {
-    --drop-shadow-color: var(--color-primary-shadow);
-    --drop-shadow: 0 4px 0 0 var(--drop-shadow-color);
-    --outline-shadow-color: var(--color-secondary-main);
-    --outline-shadow: 0 0 0 0 transparent;
-    --underline-color: transparent;
+    --shadow-color: var(--color-primary-shadow);
+    --background-color: var(--color-primary-main);
+    --outline-color: var(--color-primary-main);
 
-    position: relative;
-    min-width: 48px;
-    min-height: 48px;
-    display: flex;
-    padding: 2px;
-    background-color: var(--color-primary-main);
+    display: inline-block;
+    padding: 2px 2px 6px 2px;
+    background-color: var(--shadow-color);
     border: none;
-    box-shadow:
-      inset 0 0 0 2px var(--drop-shadow-color),
-      var(--drop-shadow),
-      var(--outline-shadow);
     border-radius: 4px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
     color: var(--color-white-pure);
     font-family: var(--font-family-pixel);
     font-size: var(--font-size-paragraph);
     text-transform: uppercase;
-    text-decoration: underline wavy var(--underline-color) 1px;
-    text-underline-offset: 2px;
+    text-decoration: none;
     cursor: pointer;
     transition:
-      box-shadow 0.25s,
-      text-decoration 0.25s,
-      transform 0.25s;
+      padding 0.25s,
+      margin 0.25s,
+      outline 0.25s;
   }
 
   .button--style-secondary {
-    --drop-shadow-color: var(--color-secondary-shadow);
-    --outline-shadow-color: var(--color-black-alt-1);
+    --shadow-color: var(--color-secondary-shadow);
+    --background-color: var(--color-secondary-main);
+    --outline-color: var(--color-secondary-main);
 
-    background-color: var(--color-secondary-main);
     color: var(--color-black-pure);
   }
 
   .button--style-neutral {
-    --drop-shadow-color: var(--color-white-alt-2);
-    --outline-shadow-color: var(--color-black-alt-2);
+    --shadow-color: var(--color-white-alt-2);
+    --background-color: var(--color-white-alt-1);
+    --outline-color: var(--color-black-alt-2);
 
-    background-color: var(--color-white-alt-1);
     color: var(--color-black-pure);
   }
 
-  .button::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -4px;
-    height: 4px;
-  }
-
   .button:focus-visible {
-    --outline-shadow: 0 8px 0 0 var(--outline-shadow-color);
-    --underline-color: var(--color-secondary-highlight);
-
-    outline: none;
-  }
-
-  .button--style-secondary:focus-visible {
-    --underline-color: var(--color-black-alt-1);
-  }
-
-  .button--style-neutral:focus-visible {
-    --underline-color: var(--color-black-alt-2);
+    outline-color: var(--outline-color);
   }
 
   .button:active {
-    --drop-shadow: 0 0 0 0 transparent;
-    --outline-shadow: 0 0 0 0 transparent;
-
-    transform: translateY(4px);
-  }
-
-  .button:focus-visible:active {
-    transform: translateY(6px);
+    margin-top: 4px;
+    padding: 2px;
   }
 
   .button__container {
     --inset-shadow-color: var(--color-primary-highlight);
     --inset-shadow-color-alpha: rgba(var(--color-primary-highlight-rgb), 0.2);
 
-    flex-grow: 1;
+    min-width: 48px;
+    min-height: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
     padding: 4px 20px;
-    box-shadow:
-      inset 0 0 0 1px var(--inset-shadow-color-alpha),
-      inset 0 3px 0 0 var(--inset-shadow-color);
+    background-color: var(--background-color);
     border-radius: 2px;
+    box-shadow:
+      inset 0 3px 0 0 var(--inset-shadow-color),
+      inset 0 0 0 1px var(--inset-shadow-color-alpha);
     transition: box-shadow 0.25s;
   }
 
@@ -134,7 +104,7 @@
     --inset-shadow-color-alpha: rgba(var(--color-white-pure-rgb), 0.4);
   }
 
-  .button:is(:hover, :active) .button__container {
+  .button:is(:hover, :focus-visible, :active) .button__container {
     --inset-shadow-color-alpha: var(--inset-shadow-color);
   }
 
