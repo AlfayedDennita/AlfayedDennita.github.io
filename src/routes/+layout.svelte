@@ -34,5 +34,3 @@
 <Header />
 
 {@render children?.()}
-
-<div style:height="20rem"></div>
