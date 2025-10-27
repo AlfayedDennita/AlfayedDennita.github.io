@@ -83,8 +83,8 @@
     align-items: center;
     background:
       url('$lib/assets/jumbotron/objects/bird-top.gif') no-repeat,
-      url('$lib/assets/jumbotron/background/2.png') no-repeat,
-      url('$lib/assets/jumbotron/background/1.png') repeat-x;
+      url('$lib/assets/jumbotron/backgrounds/2.png') no-repeat,
+      url('$lib/assets/jumbotron/backgrounds/1.png') repeat-x;
     background-position-y: 144px, 0, 0;
     background-size:
       var(--bird-top-size) var(--bird-top-size),
@@ -107,8 +107,8 @@
     position: absolute;
     inset: 0;
     background:
-      url('$lib/assets/jumbotron/background/4.png') repeat-x,
-      url('$lib/assets/jumbotron/background/3.png') repeat-x;
+      url('$lib/assets/jumbotron/backgrounds/4.png') repeat-x,
+      url('$lib/assets/jumbotron/backgrounds/3.png') repeat-x;
     background-size: auto 100%;
     animation: cloud-top infinite linear;
   }
@@ -149,7 +149,7 @@
   .jumbotron__cloud-bottom {
     position: absolute;
     inset: 0;
-    background: url('$lib/assets/jumbotron/background/5.png') repeat-x;
+    background: url('$lib/assets/jumbotron/backgrounds/5.png') repeat-x;
     background-size: auto 100%;
     animation: cloud-bottom infinite linear;
   }
