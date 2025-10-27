@@ -44,11 +44,14 @@
     position: relative;
     display: flex;
     border: 2px solid var(--border-color);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
     box-shadow: -4px 4px var(--box-shadow-color);
     border-radius: 4px;
     transition:
-      box-shadow 0.25s,
-      border 0.25s;
+      border 0.25s,
+      outline 0.25s,
+      box-shadow 0.25s;
   }
 
   .input:hover {
@@ -59,6 +62,11 @@
     --border-color: var(--color-white-alt-2);
 
     box-shadow: -6px 6px var(--box-shadow-color);
+  }
+
+  .input:has(.input__field:focus-visible) {
+    outline-color: var(--color-black-alt-2);
+    box-shadow: none;
   }
 
   .input__field {
