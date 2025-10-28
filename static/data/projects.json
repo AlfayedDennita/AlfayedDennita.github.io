@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "slug": "project-a",
+    "title": "Project A",
+    "type": {
+      "icon": "globe",
+      "name": "Web Development"
+    },
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "images": []
+  },
+  {
+    "id": 2,
+    "slug": "project-b",
+    "title": "Project B",
+    "type": {
+      "icon": "machine-learning",
+      "name": "Machine Learning"
+    },
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "images": []
+  },
+  {
+    "id": 3,
+    "slug": "project-c",
+    "title": "Project C",
+    "type": {
+      "icon": "data-science",
+      "name": "Machine Learning"
+    },
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "images": []
+  },
+  {
+    "id": 4,
+    "slug": "project-d",
+    "title": "Project D",
+    "type": {
+      "icon": "android",
+      "name": "Android App"
+    },
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "images": []
+  },
+  {
+    "id": 5,
+    "slug": "project-e",
+    "title": "Project E",
+    "type": {
+      "icon": "apple",
+      "name": "iOS App"
+    },
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "images": []
+  },
+  {
+    "id": 6,
+    "slug": "project-f",
+    "title": "Project F",
+    "type": {
+      "icon": "discord",
+      "name": "Discord Bot"
+    },
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "images": []
+  }
+]

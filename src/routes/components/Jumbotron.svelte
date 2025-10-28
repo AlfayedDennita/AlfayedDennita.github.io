@@ -1,6 +1,8 @@
 <script>
   import Button from '$lib/components/Button.svelte';
 
+  let { jumbotronOffsetHeight = $bindable() } = $props();
+
   let windowInnerWidth = $state();
   let welcomeBoxOffsetHeight = $state();
 
@@ -15,6 +17,8 @@
   class="jumbotron"
   style:min-height={`${welcomeBoxOffsetHeight}px`}
   style:animation-duration={birdTopSpeed}
+  style:--jumbotron-offset-height={`${jumbotronOffsetHeight}px`}
+  bind:offsetHeight={jumbotronOffsetHeight}
 >
   <div
     class="jumbotron__welcome-box"
@@ -43,8 +47,8 @@
       <Button
         tag="a"
         href="#about"
-        style="secondary"
-        className="jumbotron__greeting-cta"
+        theme="secondary"
+        class="jumbotron__greeting-cta"
         title="Start Exploring"
       >
         Start Exploring
@@ -120,8 +124,8 @@
 
     to {
       background-position-x:
-        calc(576px * calc(100dvh / 324px)),
-        calc(576px * calc(100dvh / 324px) * -1);
+        calc(576px * calc(var(--jumbotron-offset-height) / 324px)),
+        calc(576px * calc(var(--jumbotron-offset-height) / 324px) * -1);
     }
   }
 
@@ -160,7 +164,9 @@
     }
 
     to {
-      background-position-x: calc(576px * calc(100dvh / 324px) * -1);
+      background-position-x: calc(
+        576px * calc(var(--jumbotron-offset-height) / 324px) * -1
+      );
     }
   }
 
