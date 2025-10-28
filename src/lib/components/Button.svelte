@@ -1,9 +1,9 @@
 <script>
-  const styles = ['primary', 'secondary', 'neutral'];
+  const themes = ['primary', 'secondary', 'neutral'];
   const {
     tag = 'button',
-    style = styles[0],
-    className,
+    theme = themes[0],
+    class: className,
     isSquare = false,
     children,
     ...props
@@ -14,7 +14,7 @@
   this={tag}
   class={[
     'button',
-    `button--style-${styles.includes(style) ? style : styles[0]}`,
+    `button--theme-${themes.includes(theme) ? theme : themes[0]}`,
     isSquare && 'button--type-square',
     className,
   ]}
@@ -50,7 +50,7 @@
       outline 0.25s;
   }
 
-  .button--style-secondary {
+  .button--theme-secondary {
     --shadow-color: var(--color-secondary-shadow);
     --background-color: var(--color-secondary-main);
     --outline-color: var(--color-secondary-main);
@@ -58,7 +58,7 @@
     color: var(--color-black-pure);
   }
 
-  .button--style-neutral {
+  .button--theme-neutral {
     --shadow-color: var(--color-white-alt-2);
     --background-color: var(--color-white-alt-1);
     --outline-color: var(--color-black-alt-2);
@@ -94,12 +94,12 @@
     transition: box-shadow 0.25s;
   }
 
-  .button--style-secondary .button__container {
+  .button--theme-secondary .button__container {
     --inset-shadow-color: var(--color-secondary-highlight);
     --inset-shadow-color-alpha: rgba(var(--color-secondary-highlight-rgb), 0.4);
   }
 
-  .button--style-neutral .button__container {
+  .button--theme-neutral .button__container {
     --inset-shadow-color: var(--color-white-pure);
     --inset-shadow-color-alpha: rgba(var(--color-white-pure-rgb), 0.4);
   }

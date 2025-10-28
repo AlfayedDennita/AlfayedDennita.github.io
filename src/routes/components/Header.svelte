@@ -35,7 +35,7 @@
     </div>
     <Button
       type="button"
-      style="secondary"
+      theme="secondary"
       title={isBGMPaused ? 'Play BGM' : 'Pause BGM'}
       isSquare
       onclick={() => (isBGMPaused = !isBGMPaused)}
@@ -51,7 +51,7 @@
 
 <style>
   .header {
-    z-index: 1;
+    z-index: 9999;
     position: absolute;
     top: 0;
     inset-inline: 0;
