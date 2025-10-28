@@ -7,8 +7,9 @@
       <p>
         Hello, visitor! I'm
         <span class="about__message-fayden">
-          <span class="about__message-blue">Fay</span>
-          <span class="about__message-yellow">den</span>
+          <span class="about__message-blue">Fay</span><span
+            class="about__message-yellow">den</span
+          >
         </span>
         (<span class="about__message-blue">Alfayed</span>
         <span class="about__message-yellow">Dennita</span>). I love exploring
@@ -101,11 +102,6 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-  }
-
-  .about__message-fayden {
-    display: inline-flex;
-    align-items: center;
   }
 
   .about__message-blue {
