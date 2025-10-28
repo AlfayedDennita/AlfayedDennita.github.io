@@ -98,7 +98,6 @@
     position: absolute;
     inset: 0;
     background: url('$lib/assets/faydev/backgrounds/cloud.png') repeat-x;
-    background-position-x: 0;
     background-size: auto var(--jumbotron-offset-height);
     pointer-events: none;
     animation: cloud var(--cloud-animation-duration) infinite linear;
@@ -130,6 +129,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 8px;
     text-align: center;
     user-select: none;
   }
