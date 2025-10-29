@@ -11,6 +11,8 @@
   import Button from '$lib/components/Button.svelte';
   import Input from '$lib/components/Input.svelte';
 
+  let { contactOffsetHeight = $bindable() } = $props();
+
   const socials = [
     {
       name: 'GitHub',
@@ -100,7 +102,7 @@
   {/if}
 </svelte:head>
 
-<section class="contact">
+<section class="contact" bind:offsetHeight={contactOffsetHeight}>
   <div class="contact__container">
     <div class="contact__socials">
       <header>
@@ -276,6 +278,11 @@
 </section>
 
 <style>
+  .contact {
+    z-index: 1;
+    position: relative;
+  }
+
   .contact__container {
     max-width: 1200px;
     margin: 0 auto;
@@ -302,7 +309,7 @@
   @media (min-width: 1200px) {
     .contact__container {
       gap: 128px;
-      padding: 256px 64px;
+      padding-inline: 64px;
     }
   }
 

@@ -1,7 +1,10 @@
 <script>
   import '@hackernoon/pixel-icon-library/fonts/iconfont.css';
   import '$lib/styles/global.css';
+  import { setContext } from 'svelte';
+
   import Header from './components/Header.svelte';
+  import Footer from './components/Footer.svelte';
 
   let { children } = $props();
 
@@ -23,6 +26,9 @@
   const keywords = $derived(
     [...staticKeywords.union(pageData.additionalKeywords)].join(', ')
   );
+
+  let footerOffsetHeight = $state({ height: undefined });
+  setContext('footer-offset-height', footerOffsetHeight);
 </script>
 
 <svelte:head>
@@ -32,5 +38,5 @@
 </svelte:head>
 
 <Header />
-
 {@render children?.()}
+<Footer bind:footerOffsetHeight={footerOffsetHeight.height} />
