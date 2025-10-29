@@ -24,7 +24,7 @@
   {/if}
   <svelte:element
     this={tags.includes(tag) ? tag : tags[0]}
-    class="input__field"
+    class={['input__field', tag === 'textarea' && 'input__field--is-textarea']}
     style:height
     style:resize
     {...props}
@@ -61,12 +61,8 @@
   .input:has(.input__field:focus) {
     --border-color: var(--color-white-alt-2);
 
-    box-shadow: -6px 6px var(--box-shadow-color);
-  }
-
-  .input:has(.input__field:focus-visible) {
+    box-shadow: 0 0 transparent;
     outline-color: var(--color-black-alt-2);
-    box-shadow: none;
   }
 
   .input__field {
@@ -79,7 +75,12 @@
     background-color: var(--color-white-pure);
     border: none;
     outline: none;
+    font-family: var(--font-family-sans);
     color: var(--color-black-pure);
+  }
+
+  .input__field--is-textarea {
+    padding-block: 16px;
   }
 
   .input__field::placeholder {

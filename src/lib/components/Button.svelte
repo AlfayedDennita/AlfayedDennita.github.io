@@ -45,6 +45,7 @@
     text-decoration: none;
     cursor: pointer;
     transition:
+      opacity 0.25s,
       padding 0.25s,
       margin 0.25s,
       outline 0.25s;
@@ -70,9 +71,14 @@
     outline-color: var(--outline-color);
   }
 
-  .button:active {
+  .button:not(:disabled):active {
     margin-top: 4px;
     padding: 2px;
+  }
+
+  .button[disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
   .button__container {
@@ -104,7 +110,8 @@
     --inset-shadow-color-alpha: rgba(var(--color-white-pure-rgb), 0.4);
   }
 
-  .button:is(:hover, :focus-visible, :active) .button__container {
+  .button:not(:disabled):is(:hover, :focus-visible, :active)
+    .button__container {
     --inset-shadow-color-alpha: var(--inset-shadow-color);
   }
 
