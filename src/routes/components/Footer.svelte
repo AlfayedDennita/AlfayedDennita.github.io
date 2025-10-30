@@ -62,13 +62,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 256px 16px 40px;
-  }
-
-  @media (min-width: 992px) {
-    .footer__container {
-      padding-top: 128px;
-    }
+    padding: 128px 16px 40px;
   }
 
   .footer__copyright {

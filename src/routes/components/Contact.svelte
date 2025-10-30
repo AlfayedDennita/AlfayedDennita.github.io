@@ -289,13 +289,13 @@
     display: flex;
     flex-direction: column;
     gap: 56px;
-    padding: 64px 16px;
+    padding: 64px 16px 192px;
   }
 
   @media (min-width: 576px) {
     .contact__container {
       gap: 64px;
-      padding: 96px 64px;
+      padding: 96px 64px 224px;
     }
   }
 
