@@ -27,8 +27,10 @@
     [...staticKeywords.union(pageData.additionalKeywords)].join(', ')
   );
 
-  let footerOffsetHeight = $state({ height: undefined });
-  setContext('footer-offset-height', footerOffsetHeight);
+  let headerHeight = $state({ offset: undefined });
+  setContext('header-height', headerHeight);
+  let footerHeight = $state({ offset: undefined });
+  setContext('footer-height', footerHeight);
 </script>
 
 <svelte:head>
@@ -37,6 +39,6 @@
   <title>{pageData.title}</title>
 </svelte:head>
 
-<Header />
+<Header bind:headerOffsetHeight={headerHeight.offset} />
 {@render children?.()}
-<Footer bind:footerOffsetHeight={footerOffsetHeight.height} />
+<Footer bind:footerOffsetHeight={footerHeight.offset} />

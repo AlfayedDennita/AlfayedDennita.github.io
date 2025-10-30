@@ -9,18 +9,26 @@
   import FooterObjects from './components/FooterObjects.svelte';
 
   const { data } = $props();
-  const footerOffsetHeight = getContext('footer-offset-height');
+  const footerHeight = getContext('footer-height');
 
   let jumbotronOffsetHeight = $state();
   let contactOffsetHeight = $state();
 </script>
 
-<Jumbotron bind:jumbotronOffsetHeight />
-<About />
-<Faydev projects={data.projects} {jumbotronOffsetHeight} />
-<FaydenSpace arts={data.arts} />
-<Contact bind:contactOffsetHeight />
-<FooterObjects
-  {contactOffsetHeight}
-  footerOffsetHeight={footerOffsetHeight.height}
-/>
+<main class="main">
+  <Jumbotron bind:jumbotronOffsetHeight />
+  <About />
+  <Faydev projects={data.projects} {jumbotronOffsetHeight} />
+  <FaydenSpace arts={data.arts} />
+  <Contact bind:contactOffsetHeight />
+  <FooterObjects
+    {contactOffsetHeight}
+    footerOffsetHeight={footerHeight.offset}
+  />
+</main>
+
+<style>
+  .main {
+    display: contents;
+  }
+</style>

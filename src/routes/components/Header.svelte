@@ -1,10 +1,11 @@
 <script>
   import Button from '$lib/components/Button.svelte';
 
+  let { headerOffsetHeight = $bindable() } = $props();
   let isBGMPaused = $state(true);
 </script>
 
-<header class="header">
+<header class="header" bind:offsetHeight={headerOffsetHeight}>
   <a href="/" class="title" title="Fayden World">
     <h1 class="title__text">
       <span class="title__left">Fayden</span>
