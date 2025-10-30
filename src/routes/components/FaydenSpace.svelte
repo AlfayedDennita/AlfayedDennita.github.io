@@ -1,7 +1,10 @@
 <script>
   import Button from '$lib/components/Button.svelte';
+  import ErrorLoad from '$lib/components/ErrorLoad.svelte';
 
   const { arts } = $props();
+
+  console.log(arts);
 </script>
 
 <section class="space">
@@ -18,32 +21,37 @@
   </header>
 
   <div class="space__arts">
-    <div class="space__gallery">
-      {#each { length: 6 }, i}
-        <svelte:element
-          this={arts[i] ? 'a' : 'div'}
-          href={arts[i]?.url}
-          target={arts[i] ? '_blank' : undefined}
-          rel={arts[i] ? 'external' : undefined}
-          title={arts[i]?.title}
-          class={['space__art', arts[i] && 'space__art--is-link']}
-        >
-          {#if arts[i]}
-            <img
-              src={arts[i].thumbnailUrl}
-              class="space__art-image"
-              alt={arts[i].title}
-            />
-            <div class="space__art-message">
-              <i class="space__art-message-icon hn hn-external-link-solid"></i>
-              <p class="space__art-message-text">See on DeviantArt</p>
-            </div>
-          {:else}
-            <p class="space__art-soon">More soon...</p>
-          {/if}
-        </svelte:element>
-      {/each}
-    </div>
+    {#if Error.isError(arts)}
+      <ErrorLoad message="DeviantArt is currently not responding." />
+    {:else}
+      <div class="space__gallery">
+        {#each { length: 6 }, i}
+          <svelte:element
+            this={arts[i] ? 'a' : 'div'}
+            href={arts[i]?.url}
+            target={arts[i] ? '_blank' : undefined}
+            rel={arts[i] ? 'external' : undefined}
+            title={arts[i]?.title}
+            class={['space__art', arts[i] && 'space__art--is-link']}
+          >
+            {#if arts[i]}
+              <img
+                src={arts[i].thumbnailUrl}
+                class="space__art-image"
+                alt={arts[i].title}
+              />
+              <div class="space__art-message">
+                <i class="space__art-message-icon hn hn-external-link-solid"
+                ></i>
+                <p class="space__art-message-text">See on DeviantArt</p>
+              </div>
+            {:else}
+              <p class="space__art-soon">More soon...</p>
+            {/if}
+          </svelte:element>
+        {/each}
+      </div>
+    {/if}
 
     <div class="space__arts-buttons">
       <Button
