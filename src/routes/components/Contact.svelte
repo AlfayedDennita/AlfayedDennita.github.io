@@ -8,10 +8,20 @@
   import Joi from 'joi';
   import enhance from 'svelte-captcha-enhance';
 
+  import { offsetTop } from '$lib/actions/offsetTop';
   import Button from '$lib/components/Button.svelte';
   import Input from '$lib/components/Input.svelte';
 
   let { contactOffsetHeight = $bindable() } = $props();
+
+  let elementOffsetTop = $state({
+    value: undefined,
+    update: () => undefined,
+  });
+
+  export function getOffsetTop() {
+    return elementOffsetTop;
+  }
 
   const socials = [
     {
@@ -102,7 +112,15 @@
   {/if}
 </svelte:head>
 
-<section class="contact" bind:offsetHeight={contactOffsetHeight}>
+<section
+  use:offsetTop={{
+    value: (newValue) => (elementOffsetTop.value = newValue),
+    update: (newUpdate) => (elementOffsetTop.update = newUpdate),
+  }}
+  class="contact"
+  id="contact"
+  bind:offsetHeight={contactOffsetHeight}
+>
   <div class="contact__container">
     <div class="contact__socials">
       <header>

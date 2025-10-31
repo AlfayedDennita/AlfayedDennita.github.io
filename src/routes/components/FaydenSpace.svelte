@@ -1,13 +1,28 @@
 <script>
+  import { offsetTop } from '$lib/actions/offsetTop';
   import Button from '$lib/components/Button.svelte';
   import ErrorLoad from '$lib/components/ErrorLoad.svelte';
 
   const { arts } = $props();
 
-  console.log(arts);
+  let elementOffsetTop = $state({
+    value: undefined,
+    update: () => undefined,
+  });
+
+  export function getOffsetTop() {
+    return elementOffsetTop;
+  }
 </script>
 
-<section class="space">
+<section
+  use:offsetTop={{
+    value: (newValue) => (elementOffsetTop.value = newValue),
+    update: (newUpdate) => (elementOffsetTop.update = newUpdate),
+  }}
+  class="space"
+  id="arts"
+>
   <header class="space__header">
     <div class="space__title">
       <i class="space__title-icon hn hn-pencil-ruler-solid"></i>

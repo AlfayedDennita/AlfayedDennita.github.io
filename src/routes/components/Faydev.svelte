@@ -1,9 +1,19 @@
 <script>
+  import { offsetTop } from '$lib/actions/offsetTop';
   import Button from '$lib/components/Button.svelte';
   import ProjectCards from '$lib/components/ProjectCards.svelte';
   import ProjectCard from '$lib/components/ProjectCard.svelte';
 
   const { projects, jumbotronOffsetHeight } = $props();
+
+  let elementOffsetTop = $state({
+    value: undefined,
+    update: () => undefined,
+  });
+
+  export function getOffsetTop() {
+    return elementOffsetTop;
+  }
 
   let windowInnerWidth = $state();
 
@@ -14,7 +24,12 @@
 <svelte:window bind:innerWidth={windowInnerWidth} />
 
 <section
+  use:offsetTop={{
+    value: (newValue) => (elementOffsetTop.value = newValue),
+    update: (newUpdate) => (elementOffsetTop.update = newUpdate),
+  }}
   class="faydev"
+  id="projects"
   style:animation-duration={birdSpeed}
   style:--jumbotron-offset-height={`${jumbotronOffsetHeight}px`}
   style:--cloud-animation-duration={cloudSpeed}

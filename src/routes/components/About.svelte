@@ -1,4 +1,24 @@
-<section class="about" id="about">
+<script>
+  import { offsetTop } from '$lib/actions/offsetTop';
+
+  let elementOffsetTop = $state({
+    value: undefined,
+    update: () => undefined,
+  });
+
+  export function getOffsetTop() {
+    return elementOffsetTop;
+  }
+</script>
+
+<section
+  use:offsetTop={{
+    value: (newValue) => (elementOffsetTop.value = newValue),
+    update: (newUpdate) => (elementOffsetTop.update = newUpdate),
+  }}
+  class="about"
+  id="about"
+>
   <div class="about__message">
     <h2 class="about__title">
       Meet the <i class="about__title-icon hn hn-sun-solid"></i> Wanderer
