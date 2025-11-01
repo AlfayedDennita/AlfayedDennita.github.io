@@ -8,7 +8,60 @@
       "name": "Web Development"
     },
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "images": []
+    "externalLinks": [
+      {
+        "name": "GitHub Repository",
+        "url": "https://github.com",
+        "icon": "github"
+      },
+      {
+        "name": "Live Demo",
+        "url": "https://google.com",
+        "icon": "globe-solid"
+      }
+    ],
+    "images": [
+      {
+        "name": "1-1.jpg",
+        "width": 1920,
+        "height": 1280,
+        "alt": "Image 1"
+      },
+      {
+        "name": "1-2.jpg",
+        "width": 1920,
+        "height": 1440,
+        "alt": "Image 2"
+      },
+      {
+        "name": "1-3.jpg",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Image 3"
+      }
+    ],
+    "badges": [
+      {
+        "name": "HTML5",
+        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
+      },
+      {
+        "name": "Tailwind CSS",
+        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+      },
+      {
+        "name": "JavaScript",
+        "content": "JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
+      },
+      {
+        "name": "SvelteKit",
+        "content": "SvelteKit-FF3E00?style=for-the-badge&logo=Svelte&logoColor=white"
+      },
+      {
+        "name": "Swagger",
+        "content": "Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white"
+      }
+    ]
   },
   {
     "id": 2,
@@ -18,7 +71,24 @@
       "icon": "machine-learning",
       "name": "Machine Learning"
     },
+    "badges": [
+      {
+        "name": "SvelteKit",
+        "content": "SvelteKit-FF3E00?style=for-the-badge&logo=Svelte&logoColor=white"
+      },
+      {
+        "name": "Swagger",
+        "content": "Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white"
+      }
+    ],
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "externalLinks": [
+      {
+        "name": "Google Colab",
+        "url": "https://google.com",
+        "icon": "google"
+      }
+    ],
     "images": []
   },
   {
@@ -29,8 +99,17 @@
       "icon": "data-science",
       "name": "Machine Learning"
     },
+    "badges": [],
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "images": []
+    "externalLinks": [],
+    "images": [
+      {
+        "name": "1-1.jpg",
+        "width": 1920,
+        "height": 1280,
+        "alt": "Image 1"
+      }
+    ]
   },
   {
     "id": 4,
@@ -40,8 +119,28 @@
       "icon": "android",
       "name": "Android App"
     },
+    "badges": [
+      {
+        "name": "HTML5",
+        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
+      }
+    ],
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "images": []
+    "externalLinks": [
+      {
+        "name": "Play Store",
+        "url": "https://google.com",
+        "icon": "google"
+      }
+    ],
+    "images": [
+      {
+        "name": "1-3.jpg",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Image 3"
+      }
+    ]
   },
   {
     "id": 5,
@@ -51,8 +150,38 @@
       "icon": "apple",
       "name": "iOS App"
     },
+    "badges": [
+      {
+        "name": "HTML5",
+        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
+      },
+      {
+        "name": "Tailwind CSS",
+        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+      }
+    ],
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "images": []
+    "externalLinks": [
+      {
+        "name": "App Store",
+        "url": "https://apple.com",
+        "icon": "apple"
+      }
+    ],
+    "images": [
+      {
+        "name": "1-2.jpg",
+        "width": 1920,
+        "height": 1440,
+        "alt": "Image 2"
+      },
+      {
+        "name": "1-3.jpg",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Image 3"
+      }
+    ]
   },
   {
     "id": 6,
@@ -62,7 +191,49 @@
       "icon": "discord",
       "name": "Discord Bot"
     },
+    "badges": [
+      {
+        "name": "HTML5",
+        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
+      },
+      {
+        "name": "Tailwind CSS",
+        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+      },
+      {
+        "name": "JavaScript",
+        "content": "JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
+      },
+      {
+        "name": "SvelteKit",
+        "content": "SvelteKit-FF3E00?style=for-the-badge&logo=Svelte&logoColor=white"
+      },
+      {
+        "name": "Swagger",
+        "content": "Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white"
+      }
+    ],
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "images": []
+    "externalLinks": [
+      {
+        "name": "Discord Server",
+        "url": "https://discord.com",
+        "icon": "discord"
+      }
+    ],
+    "images": [
+      {
+        "name": "1-1.jpg",
+        "width": 1920,
+        "height": 1280,
+        "alt": "Image 1"
+      },
+      {
+        "name": "1-2.jpg",
+        "width": 1920,
+        "height": 1440,
+        "alt": "Image 2"
+      }
+    ]
   }
 ]

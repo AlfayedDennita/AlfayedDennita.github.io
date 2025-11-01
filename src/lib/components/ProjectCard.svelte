@@ -5,7 +5,11 @@
 <div class="project-card">
   <div class="project-card__container">
     {#if image}
-      <img src={image} class="project-card__image" alt={title} />
+      <img
+        src={`/images/projects/${image.name}`}
+        class="project-card__image"
+        alt={image.alt}
+      />
     {:else}
       <p class="project-card__image project-card__image--is-blank">No Image</p>
     {/if}
