@@ -3,12 +3,14 @@
   import { watch } from 'runed';
 
   import { register as registerSwiperElements } from 'swiper/element';
-  import { Navigation, Pagination } from 'swiper/modules';
+  import { Navigation, Pagination, Thumbs, FreeMode } from 'swiper/modules';
   import PhotoSwipe from 'photoswipe';
   import PhotoSwipeLightbox from 'photoswipe/lightbox';
 
-  import swiperNavigationStyles from 'swiper/element/css/navigation?url';
+  import swiperFreeModeStyles from 'swiper/element/css/free-mode?url';
+  import 'swiper/element/css/navigation';
   import 'swiper/element/css/pagination';
+  import 'swiper/element/css/thumbs';
   import 'photoswipe/style.css';
 
   import Button from '$lib/components/Button.svelte';
@@ -18,8 +20,10 @@
   const { data } = $props();
 
   let swiper = $state();
+  let swiperThumbs = $state();
   let lightbox = $state();
   let activeSlideIdx = $state(0);
+  let windowInnerWidth = $state();
 
   function handleChangeSwiperActiveIndex(event) {
     activeSlideIdx = event.detail[0].activeIndex;
@@ -28,12 +32,17 @@
   function initSwiper() {
     if (swiper) {
       const swiperParams = {
-        modules: [Navigation, Pagination],
-        injectStylesUrls: [swiperNavigationStyles],
+        modules: [Navigation, Pagination, Thumbs, FreeMode],
+        navigation: {
+          prevEl: '.project__swiper-nav-button--is-prev',
+          nextEl: '.project__swiper-nav-button--is-next',
+        },
         pagination: {
           el: '.project__swiper-pagination',
-          bulletElement: 'button',
           clickable: true,
+        },
+        thumbs: {
+          swiper: '.project__thumbs',
         },
       };
 
@@ -45,16 +54,32 @@
       );
 
       swiper.initialize();
+
+      const swiperThumbsParams = {
+        modules: [FreeMode],
+        injectStylesUrls: [swiperFreeModeStyles],
+        freeMode: {
+          enabled: true,
+        },
+        slidesPerView: 4,
+        spaceBetween: 8,
+      };
+
+      Object.assign(swiperThumbs, swiperThumbsParams);
+
+      swiperThumbs.initialize();
     }
   }
 
   function destroySwiper() {
-    swiper.removeEventListener(
-      'swiperactiveindexchange',
-      handleChangeSwiperActiveIndex
-    );
+    if (swiper) {
+      swiper.removeEventListener(
+        'swiperactiveindexchange',
+        handleChangeSwiperActiveIndex
+      );
 
-    swiper?.swiper?.destroy();
+      swiper.swiper?.destroy();
+    }
   }
 
   function initLightbox() {
@@ -110,50 +135,130 @@
   });
 </script>
 
+<svelte:window bind:innerWidth={windowInnerWidth} />
+
 <section class="project" aria-labelledby="project-title">
   <div class="project__container">
-    <div class="project__images">
-      {#if data.project.images.length > 0}
-        {#key data.project.id}
-          <swiper-container
-            bind:this={swiper}
-            class="project__swiper"
-            init="false"
+    <nav class="project__breadcrumbs">
+      <ul class="project__breadcrumbs-list">
+        <li
+          class="project__breadcrumbs-list-item project__breadcrumbs-list-item--is-link"
+        >
+          <a
+            class="project__breadcrumbs-item project__breadcrumbs-item--is-link"
+            href="/"
+            title="Home"
           >
-            {#each data.project.images as image, i (image.name)}
-              <swiper-slide lazy="true">
-                <a
-                  class="project__image-anchor"
-                  href={`/images/projects/${image.name}`}
-                  data-pswp-width={image.width}
-                  data-pswp-height={image.height}
-                  data-cropped="true"
-                  title={image.alt}
-                  tabindex={i === activeSlideIdx ? 0 : -1}
-                >
-                  <img
-                    class="project__image"
-                    src={`/images/projects/${image.name}`}
-                    alt={data.project.alt}
-                    loading="lazy"
-                  />
-                </a>
-              </swiper-slide>
-            {/each}
-            <div
-              slot="container-end"
-              class="project__swiper-pagination swiper-pagination"
-            ></div>
-          </swiper-container>
-        {/key}
-      {:else}
-        <p class="project__no-image">No Image</p>
-      {/if}
-    </div>
+            <i class="hn hn-home-solid"></i>
+            Home
+          </a>
+        </li>
+        <li
+          class="project__breadcrumbs-list-item project__breadcrumbs-list-item--is-link"
+        >
+          <a
+            class="project__breadcrumbs-item project__breadcrumbs-item--is-link"
+            href="/projects"
+            title="All Projects"
+          >
+            <i class="hn hn-bullet-list-solid"></i>
+            Projects
+          </a>
+        </li>
+        <li class="project__breadcrumbs-list-item">
+          <p class="project__breadcrumbs-item">
+            {data.project.title}
+          </p>
+        </li>
+      </ul>
+    </nav>
+
+    <section class="project__images">
+      <div class="project__images-frame">
+        {#if data.project.images.length > 0}
+          {#key data.project.id}
+            <swiper-container
+              bind:this={swiper}
+              class="project__swiper"
+              init="false"
+            >
+              {#each data.project.images as image, i (image.name)}
+                <swiper-slide lazy="true">
+                  <a
+                    class="project__image-anchor"
+                    href={`/images/projects/${image.name}`}
+                    data-pswp-width={image.width}
+                    data-pswp-height={image.height}
+                    data-cropped="true"
+                    title={`View "${image.alt}"`}
+                    tabindex={i === activeSlideIdx ? 0 : -1}
+                  >
+                    <img
+                      class="project__image"
+                      src={`/images/projects/${image.name}`}
+                      alt={data.project.alt}
+                      loading="lazy"
+                    />
+                  </a>
+                </swiper-slide>
+              {/each}
+
+              <button
+                slot="container-end"
+                class="project__swiper-nav-button project__swiper-nav-button--is-prev swiper-button-prev"
+                type="button"
+                aria-label="Previous Image"
+                title="Previous Image"
+              ></button>
+              <button
+                slot="container-end"
+                class="project__swiper-nav-button project__swiper-nav-button--is-next swiper-button-next"
+                type="button"
+                aria-label="Next Image"
+                title="Next Image"
+              ></button>
+              <div
+                slot="container-end"
+                class="project__swiper-pagination swiper-pagination"
+              ></div>
+            </swiper-container>
+          {/key}
+        {:else}
+          <p class="project__no-image">No Image</p>
+        {/if}
+      </div>
+
+      {#key data.project.id}
+        <swiper-container
+          bind:this={swiperThumbs}
+          class="project__thumbs"
+          init="false"
+        >
+          {#each data.project.images as image, i (image.name)}
+            <swiper-slide lazy="true">
+              <button
+                class="project__thumb"
+                type="button"
+                title={`Go to Image #${i + 1}`}
+              >
+                <img
+                  class="project__thumb-image"
+                  src={`/images/projects/${image.name}`}
+                  alt={data.project.alt}
+                  loading="lazy"
+                />
+              </button>
+            </swiper-slide>
+          {/each}
+        </swiper-container>
+      {/key}
+    </section>
 
     <div class="project__info">
       <header class="project__header">
-        <h1 class="project__title" id="project-title">{data.project.title}</h1>
+        <h1 class="project__title" id="project-title">
+          {data.project.title}
+        </h1>
         <p class="project__type">
           <i class={['hn', `hn-${data.project.type.icon}`]}></i>
           {data.project.type.name}
@@ -161,55 +266,57 @@
       </header>
       <p class="project__description">{data.project.description}</p>
       {#if data.project.externalLinks.length > 0}
-        <ul class="project__links">
-          <li>
-            <h3 class="project__links-title">
-              {`External Link${data.project.externalLinks.length > 1 ? 's' : ''}`}
-              <i class="project__links-title-icon hn hn-external-link-solid"
-              ></i>
-              :
-            </h3>
-          </li>
-          {#each data.project.externalLinks as link (link.name)}
-            <li>
-              <a
-                class="project__link"
-                href={link.url}
-                target="_blank"
-                rel="external"
-                title={link.name}
-              >
-                <i class={['hn', `hn-${link.icon}`]}></i>
-                {link.name}
-              </a>
-            </li>
-          {/each}
-        </ul>
+        <section
+          class="project__links"
+          aria-labelledby="project-external-links"
+        >
+          <h3 class="project__links-title" id="project-external-links">
+            {`External Link${data.project.externalLinks.length > 1 ? 's' : ''}`}
+            <i class="project__links-title-icon hn hn-external-link-solid"></i>
+            :
+          </h3>
+          <ul class="project__links-list">
+            {#each data.project.externalLinks as link (link.name)}
+              <li>
+                <a
+                  class="project__link"
+                  href={link.url}
+                  target="_blank"
+                  rel="external"
+                  title={link.name}
+                >
+                  <i class={['hn', `hn-${link.icon}`]}></i>
+                  {link.name}
+                </a>
+              </li>
+            {/each}
+          </ul>
+        </section>
       {/if}
       {#if data.project.badges.length > 0}
-        <ul class="project__badges">
-          <li>
-            <h3 class="project__badges-title">Tech Stacks:</h3>
-          </li>
-          {#each data.project.badges as badge (badge.name)}
-            <li>
-              <img
-                class="project__badge"
-                src={`https://img.shields.io/badge/${badge.content}`}
-                alt={badge.name}
-              />
-            </li>
-          {/each}
-        </ul>
+        <section class="project__badges">
+          <h3 class="project__badges-title">Tech Stacks:</h3>
+          <ul class="project__badges-list">
+            {#each data.project.badges as badge (badge.name)}
+              <li>
+                <img
+                  class="project__badge"
+                  src={`https://img.shields.io/badge/${badge.content}`}
+                  alt={badge.name}
+                />
+              </li>
+            {/each}
+          </ul>
+        </section>
       {/if}
     </div>
 
     <div class="project__nav">
       {#if data.project.prevProject}
         <Button
+          class="project__nav-button project__nav-button--is-prev"
           tag="a"
           href={`/projects/${data.project.prevProject.slug}`}
-          style="flex: 1 0 auto"
           title={data.project.prevProject.title}
         >
           <i class="hn hn-arrow-left-solid"></i>
@@ -219,10 +326,10 @@
       {/if}
       {#if data.project.nextProject}
         <Button
+          class="project__nav-button project__nav-button--is-next"
           tag="a"
           href={`/projects/${data.project.nextProject.slug}`}
           theme="secondary"
-          style="flex: 1 0 auto"
           title={data.project.nextProject.title}
         >
           Next:
@@ -239,12 +346,127 @@
     max-width: 1200px;
     margin-inline: auto;
     margin-bottom: 16px;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-template-areas:
+      'images'
+      'breadcrumbs'
+      'info'
+      'nav';
+    gap: 32px;
+  }
+
+  @media (min-width: 576px) {
+    .project__container {
+      margin-bottom: 64px;
+      padding: 16px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .project__container {
+      padding: 32px 64px;
+    }
+  }
+
+  @media (min-width: 992px) {
+    .project__container {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-areas:
+        'breadcrumbs breadcrumbs'
+        'images info'
+        'nav nav';
+      padding: 32px;
+    }
+  }
+
+  .project__breadcrumbs {
+    grid-area: breadcrumbs;
+    padding-inline: 16px;
+  }
+
+  @media (min-width: 992px) {
+    .project__breadcrumbs {
+      width: 100%;
+      padding: 0;
+    }
+  }
+
+  .project__breadcrumbs-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .project__breadcrumbs-list-item--is-link::after {
+    content: '/';
+    margin-left: 8px;
+    font-size: var(--font-size-semi-small);
+  }
+
+  .project__breadcrumbs-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--font-size-semi-small);
+    color: var(--color-black-pure);
+    text-decoration: none;
+  }
+
+  .project__breadcrumbs-item--is-link {
+    border-radius: 2px;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    color: var(--color-primary-main);
+    text-decoration: 2px underline dotted transparent;
+    text-decoration-skip-ink: none;
+    text-underline-offset: 4px;
+    transition:
+      outline 0.25s,
+      text-decoration 0.25s;
+  }
+
+  .project__breadcrumbs-item--is-link:is(:hover, :focus-visible) {
+    text-decoration-color: var(--color-primary-main);
+  }
+
+  .project__breadcrumbs-item--is-link:focus-visible {
+    outline-color: var(--color-secondary-main);
+  }
+
+  .project__content {
     display: flex;
     flex-direction: column;
     gap: 32px;
   }
 
+  @media (min-width: 992px) {
+    .project__content {
+      --shadow-gap: 16px;
+
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0;
+    }
+  }
+
   .project__images {
+    grid-area: images;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  @media (min-width: 1200px) {
+    .project__images {
+      margin-right: 8px;
+    }
+  }
+
+  .project__images-frame {
+    overflow: hidden;
     width: 100%;
     aspect-ratio: 16 / 9;
     display: flex;
@@ -254,7 +476,38 @@
     font-family: var(--font-family-pixel);
     color: rgba(var(--color-black-alt-2-rgb), 0.5);
     text-align: center;
-    user-select: none;
+  }
+
+  @media (min-width: 576px) {
+    .project__images-frame {
+      border-radius: 8px;
+    }
+  }
+
+  .project__thumb {
+    overflow: hidden;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    transition: border 0.25s;
+  }
+
+  .project__thumb:focus-visible {
+    border: 2px solid var(--color-secondary-main);
+  }
+
+  .project__thumb-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.8);
+    transition: filter 0.25s;
+  }
+
+  .project__thumb:is(:hover, :focus-visible) .project__thumb-image {
+    filter: brightness(1);
   }
 
   .project__swiper {
@@ -271,6 +524,40 @@
     width: 100%;
   }
 
+  .project__swiper-nav-button {
+    --swiper-navigation-sides-offset: 0;
+    --swiper-navigation-color: var(--color-white-pure);
+
+    top: 0;
+    inset-block: 0;
+    background: none;
+    border: none;
+    outline: none;
+    padding: 16px;
+    transition: background 0.25s;
+  }
+
+  .project__swiper-nav-button:hover {
+    background-color: rgba(var(--color-black-pure-rgb), 0.1);
+  }
+
+  .project__swiper-nav-button:focus-visible {
+    background-color: rgba(var(--color-black-pure-rgb), 0.4);
+  }
+
+  .project__swiper-nav-button:global(.swiper-button-disabled) {
+    opacity: inherit;
+  }
+
+  .project__swiper-nav-button:global(.swiper-button-disabled)
+    :global(.swiper-navigation-icon) {
+    opacity: 0.2;
+  }
+
+  .project__swiper-nav-button :global(.swiper-navigation-icon) {
+    height: 16px;
+  }
+
   .project__swiper-pagination {
     display: flex;
     justify-content: center;
@@ -279,18 +566,13 @@
 
   .project__swiper-pagination :global(.swiper-pagination-bullet) {
     border: 2px solid transparent;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
     transition:
       background 0.25s,
-      border 0.25s,
-      outline 0.25s;
+      border 0.25s;
   }
 
-  .project__swiper-pagination :global(.swiper-pagination-bullet:focus-visible) {
+  .project__swiper-pagination :global(.swiper-pagination-bullet:hover) {
     --swiper-pagination-bullet-inactive-color: var(--color-white-alt-2);
-
-    outline-color: var(--color-white-pure);
   }
 
   .project__swiper-pagination :global(.swiper-pagination-bullet-active) {
@@ -352,11 +634,28 @@
     object-position: center;
   }
 
+  .project__no-image {
+    user-select: none;
+  }
+
   .project__info {
+    grid-area: info;
     display: flex;
     flex-direction: column;
     gap: 32px;
     padding-inline: 16px;
+  }
+
+  @media (min-width: 992px) {
+    .project__info {
+      padding: 0;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    .project__info {
+      margin-left: 8px;
+    }
   }
 
   .project__header {
@@ -388,10 +687,8 @@
 
   .project__links {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 8px;
-    list-style: none;
   }
 
   .project__links-title {
@@ -403,6 +700,10 @@
 
   .project__links-title-icon {
     font-size: var(--font-size-semi-small);
+  }
+
+  .project__links-list {
+    padding-left: 16px;
   }
 
   .project__link {
@@ -430,14 +731,20 @@
 
   .project__badges {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+    flex-direction: column;
     gap: 8px;
-    list-style: none;
   }
 
   .project__badges-title {
     font-size: var(--font-size-paragraph);
+  }
+
+  .project__badges-list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
   }
 
   .project__badge {
@@ -445,11 +752,37 @@
   }
 
   .project__nav {
-    margin-top: 16px;
+    grid-area: nav;
+    overflow: hidden;
+    margin-top: 32px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
     padding-inline: 16px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  @media (min-width: 768px) {
+    .project__nav {
+      margin-top: 64px;
+      padding: 0;
+    }
+  }
+
+  .project__nav :global(.project__nav-button) {
+    flex-grow: 1;
+  }
+
+  @media (min-width: 768px) {
+    .project__nav :global(.project__nav-button) {
+      flex-grow: 0;
+    }
+  }
+
+  .project__nav :global(.project__nav-button--is-next) {
+    margin-left: auto;
   }
 </style>
