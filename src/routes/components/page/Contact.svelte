@@ -12,7 +12,7 @@
   import Button from '$lib/components/ui/Button.svelte';
   import TextField from '$lib/components/ui/TextField.svelte';
 
-  let { contactOffsetHeight = $bindable() } = $props();
+  let offsetHeight = $state();
 
   let elementOffsetTop = $state({
     value: undefined,
@@ -104,6 +104,10 @@
 
     isSendingForm = false;
   }
+
+  export function getOffsetHeight() {
+    return offsetHeight;
+  }
 </script>
 
 <svelte:head>
@@ -119,7 +123,7 @@
   }}
   class="contact"
   id="contact"
-  bind:offsetHeight={contactOffsetHeight}
+  bind:offsetHeight
 >
   <div class="contact__container">
     <div class="contact__socials">

@@ -1,14 +1,17 @@
 <script>
   import Button from '$lib/components/ui/Button.svelte';
 
-  let { jumbotronOffsetHeight = $bindable() } = $props();
-
+  let offsetHeight = $state();
   let windowInnerWidth = $state();
   let welcomeBoxOffsetHeight = $state();
 
   const cloudsSpeed = $derived(`${windowInnerWidth / 5}s`);
   const birdTopSpeed = $derived(`${windowInnerWidth / 40}s`);
   const birdBottomSpeed = $derived(`${windowInnerWidth / 50}s`);
+
+  export function getOffsetHeight() {
+    return offsetHeight;
+  }
 </script>
 
 <svelte:window bind:innerWidth={windowInnerWidth} />
@@ -17,8 +20,8 @@
   class="jumbotron"
   style:min-height={`${welcomeBoxOffsetHeight}px`}
   style:animation-duration={birdTopSpeed}
-  style:--jumbotron-offset-height={`${jumbotronOffsetHeight}px`}
-  bind:offsetHeight={jumbotronOffsetHeight}
+  style:--jumbotron-offset-height={`${offsetHeight}px`}
+  bind:offsetHeight
 >
   <div
     class="jumbotron__welcome-box"

@@ -1,5 +1,5 @@
 <script>
-  let { footerOffsetHeight = $bindable() } = $props();
+  let offsetHeight = $state();
 
   const firstBuildYear = 2025;
   const currentYear = new Date().getFullYear();
@@ -11,6 +11,10 @@
   let windowInnerWidth = $state();
 
   const walkingKidsSpeed = $derived(`${windowInnerWidth / 20}s`);
+
+  export function getOffsetHeight() {
+    return offsetHeight;
+  }
 </script>
 
 <svelte:window bind:innerWidth={windowInnerWidth} />
@@ -18,7 +22,7 @@
 <footer
   class="footer"
   style:animation-duration={walkingKidsSpeed}
-  bind:offsetHeight={footerOffsetHeight}
+  bind:offsetHeight
 >
   <div class="footer__container">
     <p class="footer__copyright">

@@ -1,61 +1,66 @@
 <script>
   import { getContext } from 'svelte';
-
-  import Jumbotron from './components/Jumbotron.svelte';
-  import Navbar from './components/Navbar.svelte';
-  import About from './components/About.svelte';
-  import Faydev from './components/Faydev.svelte';
-  import FaydenSpace from './components/FaydenSpace.svelte';
-  import Contact from './components/Contact.svelte';
-  import FooterObjects from './components/FooterObjects.svelte';
+  import { setPageData } from '$lib/states/pageData.svelte';
+  import Jumbotron from './components/page/Jumbotron.svelte';
+  import Navbar from './components/page/Navbar.svelte';
+  import About from './components/page/About.svelte';
+  import Faydev from './components/page/Faydev.svelte';
+  import FaydenSpace from './components/page/FaydenSpace.svelte';
+  import Contact from './components/page/Contact.svelte';
+  import FooterObjects from './components/page/FooterObjects.svelte';
 
   const { data } = $props();
 
-  const footerHeight = getContext('footer-height');
+  setPageData({
+    additionalKeywords: ['portfolio', 'projects', 'arts', 'contact'],
+  });
 
-  const linkedSectionsComponent = $state(new Array(5).fill(undefined));
+  const getFooterOffsetHeight = getContext('footer-offset-height');
+
+  let jumbotron = $state();
+  let about = $state();
+  let faydev = $state();
+  let faydenSpace = $state();
+  let contact = $state();
 
   const linkedSections = $derived([
     {
       name: 'About',
       url: '#about',
-      offsetTop: linkedSectionsComponent[0]?.getOffsetTop(),
+      offsetTop: about?.getOffsetTop(),
     },
     {
       name: 'Projects',
       url: '#projects',
-      offsetTop: linkedSectionsComponent[1]?.getOffsetTop(),
+      offsetTop: faydev?.getOffsetTop(),
     },
     {
       name: 'Arts',
       url: '#arts',
-      offsetTop: linkedSectionsComponent[2]?.getOffsetTop(),
+      offsetTop: faydenSpace?.getOffsetTop(),
     },
     {
       name: 'Contact',
       url: '#contact',
-      offsetTop: linkedSectionsComponent[3]?.getOffsetTop(),
+      offsetTop: contact?.getOffsetTop(),
     },
   ]);
-
-  let jumbotronOffsetHeight = $state();
-  let contactOffsetHeight = $state();
 </script>
 
 <main class="main">
-  <Jumbotron bind:jumbotronOffsetHeight />
+  <Jumbotron bind:this={jumbotron} />
   <Navbar {linkedSections} />
-  <About bind:this={linkedSectionsComponent[0]} />
+  <About bind:this={about} />
   <Faydev
-    bind:this={linkedSectionsComponent[1]}
+    bind:this={faydev}
     projects={data.projects}
-    {jumbotronOffsetHeight}
+    jumbotronOffsetHeight={jumbotron?.getOffsetHeight()}
   />
-  <FaydenSpace bind:this={linkedSectionsComponent[2]} arts={data.arts} />
-  <Contact bind:this={linkedSectionsComponent[3]} bind:contactOffsetHeight />
+  <FaydenSpace bind:this={faydenSpace} arts={data.arts} />
+  <Contact bind:this={contact} />
   <FooterObjects
-    {contactOffsetHeight}
-    footerOffsetHeight={footerHeight.offset}
+    contactOffsetHeight={contact?.getOffsetHeight()}
+    footerOffsetHeight={getFooterOffsetHeight()}
   />
 </main>
 
