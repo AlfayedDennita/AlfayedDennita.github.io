@@ -1,6 +1,6 @@
 <script>
   import { offsetTop } from '$lib/actions/offsetTop';
-  import Button from '$lib/components/Button.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
   import ErrorLoad from '$lib/components/ErrorLoad.svelte';
 
   const { arts } = $props();
@@ -70,7 +70,6 @@
 
     <div class="space__arts-buttons">
       <Button
-        tag="a"
         href="https://www.deviantart.com/alfayeddennita/"
         theme="primary"
         target="_blank"
@@ -82,7 +81,6 @@
         <i class="hn hn-external-link-solid"></i>
       </Button>
       <Button
-        tag="a"
         href="https://www.instagram.com/fayden.space/"
         theme="secondary"
         target="_blank"

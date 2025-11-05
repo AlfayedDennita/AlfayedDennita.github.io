@@ -13,7 +13,7 @@
   import 'swiper/element/css/thumbs';
   import 'photoswipe/style.css';
 
-  import Button from '$lib/components/Button.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
 
   registerSwiperElements();
 
@@ -315,7 +315,6 @@
       {#if data.project.prevProject}
         <Button
           class="project__nav-button project__nav-button--is-prev"
-          tag="a"
           href={`/projects/${data.project.prevProject.slug}`}
           title={data.project.prevProject.title}
         >
@@ -327,7 +326,6 @@
       {#if data.project.nextProject}
         <Button
           class="project__nav-button project__nav-button--is-next"
-          tag="a"
           href={`/projects/${data.project.nextProject.slug}`}
           theme="secondary"
           title={data.project.nextProject.title}

@@ -1,5 +1,5 @@
 <script>
-  import Button from '$lib/components/Button.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
 
   let { headerOffsetHeight = $bindable() } = $props();
   let isBGMPaused = $state(true);
@@ -35,10 +35,9 @@
       </p>
     </div>
     <Button
-      type="button"
       theme="secondary"
       title={isBGMPaused ? 'Play BGM' : 'Pause BGM'}
-      isSquare
+      square
       onclick={() => (isBGMPaused = !isBGMPaused)}
     >
       {#if isBGMPaused}

@@ -1,6 +1,6 @@
 <script>
   import { offsetTop } from '$lib/actions/offsetTop';
-  import Button from '$lib/components/Button.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
   import ProjectCards from '$lib/components/ProjectCards.svelte';
   import ProjectCard from '$lib/components/ProjectCard.svelte';
 
@@ -74,7 +74,6 @@
     </ProjectCards>
 
     <Button
-      tag="a"
       href="/projects"
       theme="secondary"
       style="align-self: center"

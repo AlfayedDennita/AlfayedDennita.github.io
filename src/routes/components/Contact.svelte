@@ -9,8 +9,8 @@
   import enhance from 'svelte-captcha-enhance';
 
   import { offsetTop } from '$lib/actions/offsetTop';
-  import Button from '$lib/components/Button.svelte';
-  import Input from '$lib/components/Input.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
+  import TextField from '$lib/components/ui/TextField.svelte';
 
   let { contactOffsetHeight = $bindable() } = $props();
 
@@ -134,12 +134,11 @@
           {#each socials as social (social.name)}
             <li>
               <Button
-                tag="a"
                 href={social.url}
                 target="_blank"
                 rel="external"
                 title={social.name}
-                isSquare
+                square
               >
                 <i class={['hn', `hn-${social.icon}`]}></i>
               </Button>
@@ -159,7 +158,7 @@
     >
       <div class="contact__input contact__input--field-name" title="Name">
         <label for="input-name" class="contact__input-label">Name</label>
-        <Input
+        <TextField
           type="text"
           name="name"
           id="input-name"
@@ -177,7 +176,7 @@
           {#snippet iconLeft()}
             <i class="hn hn-user-solid"></i>
           {/snippet}
-        </Input>
+        </TextField>
         {#if ![undefined, true].includes(inputErrors.name)}
           <p class="contact__input-error" transition:slide>
             <i class="hn hn-exclamation-triangle-solid"></i>
@@ -193,7 +192,7 @@
           Email
           <span class="contact__input-label-required">(Required)</span>
         </label>
-        <Input
+        <TextField
           type="email"
           name="email"
           id="input-email"
@@ -212,7 +211,7 @@
           {#snippet iconLeft()}
             <i class="hn hn-envelope-solid"></i>
           {/snippet}
-        </Input>
+        </TextField>
         {#if ![undefined, true].includes(inputErrors.email)}
           <p class="contact__input-error" transition:slide>
             <i class="hn hn-exclamation-triangle-solid"></i>
@@ -228,12 +227,11 @@
           Message
           <span class="contact__input-label-required">(Required)</span>
         </label>
-        <Input
-          tag="textarea"
+        <TextField
+          fieldClass="contact__input-textarea"
+          type="textarea"
           name="message"
           id="input-message"
-          height="200px"
-          resize="none"
           required
           oninput={(event) => {
             sendingResponse.status = undefined;
@@ -278,7 +276,7 @@
         </div>
       {/if}
       <Button
-        type="Submit"
+        type="submit"
         class="contact__submit-button"
         title={isValidationError ? undefined : 'Send Message'}
         disabled={isValidationError || isSendingForm}
@@ -395,6 +393,11 @@
 
   .contact__input-label-required {
     color: var(--color-black-alt-2);
+  }
+
+  .contact__input :global(.contact__input-textarea) {
+    height: 192px;
+    resize: none;
   }
 
   .contact__input-error {
