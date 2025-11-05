@@ -1,26 +1,41 @@
 <script>
+  const types = ['button', 'submit', 'reset'];
   const themes = ['primary', 'secondary', 'neutral'];
+
   const {
-    tag = 'button',
-    theme = themes[0],
     class: className,
-    isSquare = false,
+    type = types[0],
+    href,
+    theme = themes[0],
+    square = false,
     children,
     ...props
   } = $props();
+
+  const finalType = $derived.by(() => {
+    if (href) {
+      return undefined;
+    } else if (types.includes(type)) {
+      return type;
+    } else {
+      return types[0];
+    }
+  });
 </script>
 
 <svelte:element
-  this={tag}
+  this={href ? 'a' : 'button'}
   class={[
     'button',
-    `button--theme-${themes.includes(theme) ? theme : themes[0]}`,
-    isSquare && 'button--type-square',
+    `button--theme--${themes.includes(theme) ? theme : themes[0]}`,
     className,
   ]}
+  class:button--square={square}
+  type={finalType}
+  {href}
   {...props}
 >
-  <div class="button__container">
+  <div class="button__inner">
     {@render children?.()}
   </div>
 </svelte:element>
@@ -32,26 +47,27 @@
     --outline-color: var(--color-primary-main);
 
     display: inline-block;
-    padding: 2px 2px 6px 2px;
+    padding: 2px 2px 6px;
     background-color: var(--shadow-color);
     border: none;
     border-radius: 4px;
     outline: 2px solid transparent;
     outline-offset: 2px;
-    color: var(--color-white-pure);
     font-family: var(--font-family-pixel);
     font-size: var(--font-size-paragraph);
+    text-align: center;
     text-transform: uppercase;
     text-decoration: none;
+    color: var(--color-white-pure);
     cursor: pointer;
     transition:
       opacity 0.25s,
-      padding 0.25s,
-      margin 0.25s,
-      outline 0.25s;
+      margin-top 0.25s,
+      padding-bottom 0.25s,
+      outline-color 0.25s;
   }
 
-  .button--theme-secondary {
+  .button--theme--secondary {
     --shadow-color: var(--color-secondary-shadow);
     --background-color: var(--color-secondary-main);
     --outline-color: var(--color-secondary-main);
@@ -59,7 +75,7 @@
     color: var(--color-black-pure);
   }
 
-  .button--theme-neutral {
+  .button--theme--neutral {
     --shadow-color: var(--color-white-alt-2);
     --background-color: var(--color-white-alt-1);
     --outline-color: var(--color-black-alt-2);
@@ -73,15 +89,15 @@
 
   .button:not(:disabled):active {
     margin-top: 4px;
-    padding: 2px;
+    padding-bottom: 2px;
   }
 
-  .button[disabled] {
+  .button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  .button__container {
+  .button__inner {
     --inset-shadow-color: var(--color-primary-highlight);
     --inset-shadow-color-alpha: rgba(var(--color-primary-highlight-rgb), 0.2);
 
@@ -100,22 +116,23 @@
     transition: box-shadow 0.25s;
   }
 
-  .button--theme-secondary .button__container {
+  .button--square .button__inner {
+    width: 48px;
+    height: 48px;
+    padding: 4px;
+  }
+
+  .button--theme--secondary .button__inner {
     --inset-shadow-color: var(--color-secondary-highlight);
     --inset-shadow-color-alpha: rgba(var(--color-secondary-highlight-rgb), 0.4);
   }
 
-  .button--theme-neutral .button__container {
+  .button--theme--neutral .button__inner {
     --inset-shadow-color: var(--color-white-pure);
     --inset-shadow-color-alpha: rgba(var(--color-white-pure-rgb), 0.4);
   }
 
-  .button:not(:disabled):is(:hover, :focus-visible, :active)
-    .button__container {
+  .button:not(:disabled):is(:hover, :focus-visible, :active) .button__inner {
     --inset-shadow-color-alpha: var(--inset-shadow-color);
-  }
-
-  .button--type-square .button__container {
-    padding: 4px;
   }
 </style>

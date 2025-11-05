@@ -1,5 +1,5 @@
 <script>
-  import Button from '$lib/components/Button.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
   import ProjectCards from '$lib/components/ProjectCards.svelte';
   import ProjectCard from '$lib/components/ProjectCard.svelte';
 
@@ -81,7 +81,7 @@
               onclick={() => (currentPage = page)}
               theme={currentPage === page ? 'secondary' : 'primary'}
               title={`Go to Page ${page}`}
-              isSquare
+              square
             >
               {page}
             </Button>

@@ -1,5 +1,5 @@
 <script>
-  import Button from '$lib/components/Button.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
 
   let { jumbotronOffsetHeight = $bindable() } = $props();
 
@@ -45,7 +45,6 @@
         </p>
       </div>
       <Button
-        tag="a"
         href="#about"
         theme="secondary"
         class="jumbotron__greeting-cta"
