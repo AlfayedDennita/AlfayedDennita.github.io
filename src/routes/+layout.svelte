@@ -1,6 +1,6 @@
 <script>
   import '@hackernoon/pixel-icon-library/fonts/iconfont.css';
-  import '$lib/styles/global.css';
+  import '$lib/styles/base.css';
   import { setContext } from 'svelte';
 
   import Header from './components/Header.svelte';
