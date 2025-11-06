@@ -29,6 +29,48 @@
 
 /*--- Project Properties ---*/
 
+@property --breakpoint-sm {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 576px;
+}
+
+@property --breakpoint-md {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 768px;
+}
+
+@property --breakpoint-lg {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 992px;
+}
+
+@property --breakpoint-xl {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 1200px;
+}
+
+@property --breakpoint-xxl {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 1400px;
+}
+
+@property --z-index-topmost {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 9999;
+}
+
+@property --z-index-bottommost {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: -9999;
+}
+
 @property --font-family-pixel {
   syntax: '*';
   inherits: false;
