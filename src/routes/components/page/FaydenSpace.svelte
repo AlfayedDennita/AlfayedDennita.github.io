@@ -3,7 +3,7 @@
   import Button from '$lib/components/ui/Button.svelte';
   import ErrorLoad from '$lib/components/ErrorLoad.svelte';
 
-  const { arts } = $props();
+  const { arts, navbarOffsetHeight = 0 } = $props();
 
   let elementOffsetTop = $state({
     value: undefined,
@@ -21,6 +21,7 @@
     update: (newUpdate) => (elementOffsetTop.update = newUpdate),
   }}
   class="space"
+  style:--navbar-offset-height={`${navbarOffsetHeight}px`}
   id="arts"
 >
   <header class="space__header">
@@ -97,6 +98,7 @@
 
 <style>
   .space {
+    scroll-margin-top: calc(var(--navbar-offset-height) - 1px);
     max-width: 1200px;
     margin: 0 auto;
     display: flex;

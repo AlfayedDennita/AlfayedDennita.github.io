@@ -4,7 +4,7 @@
   import ProjectCards from '$lib/components/ProjectCards.svelte';
   import ProjectCard from '$lib/components/ProjectCard.svelte';
 
-  const { projects, jumbotronOffsetHeight } = $props();
+  const { projects, jumbotronOffsetHeight, navbarOffsetHeight = 0 } = $props();
 
   let elementOffsetTop = $state({
     value: undefined,
@@ -32,6 +32,7 @@
   id="projects"
   style:animation-duration={birdSpeed}
   style:--jumbotron-offset-height={`${jumbotronOffsetHeight}px`}
+  style:--navbar-offset-height={`${navbarOffsetHeight}px`}
   style:--cloud-animation-duration={cloudSpeed}
 >
   <div class="faydev__container">
@@ -90,6 +91,7 @@
     --bird-size: 60px;
 
     position: relative;
+    scroll-margin-top: calc(var(--navbar-offset-height) - 1px);
     background:
       url('$lib/assets/faydev/objects/bird.gif') no-repeat,
       linear-gradient(to bottom, #e3faff, transparent);

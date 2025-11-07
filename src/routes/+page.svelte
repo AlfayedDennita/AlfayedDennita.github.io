@@ -19,6 +19,7 @@
   const getFooterOffsetHeight = getContext('footer-offset-height');
 
   let jumbotron = $state();
+  let navbar = $state();
   let about = $state();
   let faydev = $state();
   let faydenSpace = $state();
@@ -27,22 +28,22 @@
   const linkedSections = $derived([
     {
       name: 'About',
-      url: '#about',
+      url: '/#about',
       offsetTop: about?.getOffsetTop(),
     },
     {
       name: 'Projects',
-      url: '#projects',
+      url: '/#projects',
       offsetTop: faydev?.getOffsetTop(),
     },
     {
       name: 'Arts',
-      url: '#arts',
+      url: '/#arts',
       offsetTop: faydenSpace?.getOffsetTop(),
     },
     {
       name: 'Contact',
-      url: '#contact',
+      url: '/#contact',
       offsetTop: contact?.getOffsetTop(),
     },
   ]);
@@ -53,15 +54,20 @@
     bind:this={jumbotron}
     headerOffsetHeight={getHeaderOffsetHeight()}
   />
-  <Navbar {linkedSections} />
-  <About bind:this={about} />
+  <Navbar bind:this={navbar} {linkedSections} />
+  <About bind:this={about} navbarOffsetHeight={navbar?.getOffsetHeight()} />
   <Faydev
     bind:this={faydev}
     projects={data.projects}
     jumbotronOffsetHeight={jumbotron?.getOffsetHeight()}
+    navbarOffsetHeight={navbar?.getOffsetHeight()}
   />
-  <FaydenSpace bind:this={faydenSpace} arts={data.arts} />
-  <Contact bind:this={contact} />
+  <FaydenSpace
+    bind:this={faydenSpace}
+    arts={data.arts}
+    navbarOffsetHeight={navbar?.getOffsetHeight()}
+  />
+  <Contact bind:this={contact} navbarOffsetHeight={navbar?.getOffsetHeight()} />
   <FooterObjects
     contactOffsetHeight={contact?.getOffsetHeight()}
     footerOffsetHeight={getFooterOffsetHeight()}

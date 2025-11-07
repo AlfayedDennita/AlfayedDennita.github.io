@@ -1,43 +1,26 @@
 <script>
-  import { onMount, tick } from 'svelte';
   import { slide } from 'svelte/transition';
 
-  const { linkedSections } = $props();
+  const { linkedSections = [] } = $props();
 
+  let offsetHeight = $state();
   let windowScrollY = $state();
   let windowInnerWidth = $state();
   let isNavbarListOpen = $state(false);
-  let isNavbarSliding = $state(false);
-
-  const navbarSlidingDuration = 400;
-
-  async function updateLinkedSectionsOffsetTop() {
-    await tick();
-    for (let section of linkedSections) {
-      section.offsetTop?.update();
-    }
-  }
 
   $effect(() => {
-    if (windowInnerWidth >= 576) {
-      setTimeout(async () => {
-        await updateLinkedSectionsOffsetTop();
-      }, navbarSlidingDuration);
-    }
+    offsetHeight;
+
+    setTimeout(() => {
+      for (let section of linkedSections) {
+        section.offsetTop?.update();
+      }
+    }, 0);
   });
 
   const activeSectionIdx = $derived.by(() => {
-    for (let [i, section] of linkedSections.entries()) {
-      if (i < linkedSections.length - 1) {
-        if (
-          windowScrollY >= section.offsetTop?.value - 48 &&
-          windowScrollY < linkedSections[i + 1].offsetTop?.value - 48
-        ) {
-          return i;
-        } else {
-          continue;
-        }
-      } else if (windowScrollY >= section.offsetTop?.value - 48) {
+    for (let i = linkedSections.length - 1; i >= 0; i--) {
+      if (windowScrollY >= linkedSections[i].offsetTop?.value - offsetHeight) {
         return i;
       } else {
         continue;
@@ -47,18 +30,9 @@
     return 0;
   });
 
-  async function handleClickLink(event, i) {
-    event.preventDefault();
-
-    if (!isNavbarSliding) {
-      windowScrollY = linkedSections[i].offsetTop?.value - 48;
-      isNavbarListOpen = false;
-    }
+  export function getOffsetHeight() {
+    return offsetHeight;
   }
-
-  onMount(async () => {
-    await updateLinkedSectionsOffsetTop();
-  });
 </script>
 
 <svelte:window
@@ -66,68 +40,43 @@
   bind:innerWidth={windowInnerWidth}
 />
 
-<nav class={['navbar', `navbar--is-${isNavbarListOpen ? 'open' : 'closed'}`]}>
-  <div class="navbar__container">
+<nav class="navbar" class:navbar--open={isNavbarListOpen} bind:offsetHeight>
+  <div class="navbar__inner">
     {#if windowInnerWidth < 576}
       <button
         class="navbar__toggle"
-        title={isNavbarListOpen ? 'Close Navigations' : 'Open Navigations'}
+        aria-controls="navbar-list"
+        aria-expanded={isNavbarListOpen}
+        title={isNavbarListOpen
+          ? 'Close Navigation Links'
+          : 'Open Navigation Links'}
         onclick={() => (isNavbarListOpen = !isNavbarListOpen)}
       >
         <span class="navbar__toggle-text">
-          <span>Section:</span>
-          <span class="navbar__toggle-text-section-wrapper">
+          Section:
+          <span class="navbar__toggle-text-section">
             {#key activeSectionIdx}
-              <span transition:slide class="navbar__toggle-text-section">
-                #{linkedSections[activeSectionIdx].name}
+              <span class="navbar__toggle-text-section-inner" transition:slide>
+                #{linkedSections[activeSectionIdx]?.name}
               </span>
             {/key}
           </span>
         </span>
-        <i class="navbar__toggle-chevron hn hn-chevron-down-solid"></i>
+        <i class="hn hn-chevron-down-solid navbar__toggle-chevron"></i>
       </button>
     {/if}
 
     {#if windowInnerWidth >= 576 || isNavbarListOpen}
-      <ul
-        class={[
-          'navbar__list',
-          `navbar__list--is-${isNavbarListOpen ? 'open' : 'closed'}`,
-        ]}
-        transition:slide={{ duration: navbarSlidingDuration }}
-        onintrostart={() => (isNavbarSliding = true)}
-        onoutrostart={() => (isNavbarSliding = true)}
-        onintroend={() => {
-          setTimeout(() => {
-            isNavbarSliding = false;
-          }, 100);
-        }}
-        onoutroend={() => {
-          setTimeout(() => {
-            isNavbarSliding = false;
-          }, 100);
-        }}
-        {@attach async () => {
-          await updateLinkedSectionsOffsetTop();
-
-          return async () => {
-            await updateLinkedSectionsOffsetTop();
-          };
-        }}
-      >
+      <ul class="navbar__list" id="navbar-list" transition:slide>
         {#each linkedSections as section, i (section.name)}
           <li class="navbar__list-item">
             <a
+              class="navbar__link"
+              class:navbar__link--active={linkedSections[activeSectionIdx]
+                .url === section.url}
               href={section.url}
-              class={[
-                'navbar__link',
-                linkedSections[activeSectionIdx].url === section.url &&
-                  'navbar__link--is-active',
-                isNavbarSliding && 'navbar__link--is-disabled',
-              ]}
               title={section.name}
-              disabled={isNavbarSliding}
-              onclick={(event) => handleClickLink(event, i)}
+              onclick={() => (isNavbarListOpen = !isNavbarListOpen)}
             >
               {section.name}
             </a>
@@ -140,7 +89,7 @@
 
 <style>
   .navbar {
-    z-index: 9999;
+    z-index: var(--z-index-topmost);
     position: sticky;
     top: 0;
     inset-inline: 0;
@@ -169,8 +118,10 @@
     }
   }
 
-  .navbar__container {
+  .navbar__inner {
+    margin-inline: auto;
     min-height: 48px;
+    max-width: var(--breakpoint-xl);
     display: flex;
     flex-direction: column;
   }
@@ -203,14 +154,14 @@
     gap: 4px;
     font-family: var(--font-family-pixel);
     text-decoration: underline 2px dotted transparent;
-    transition: text-decoration 0.25s;
+    transition: text-decoration-color 0.25s;
   }
 
   .navbar__toggle:focus-visible .navbar__toggle-text {
     text-decoration-color: var(--color-black-pure);
   }
 
-  .navbar__toggle-text-section-wrapper {
+  .navbar__toggle-text-section {
     overflow: hidden;
     flex-grow: 1;
     align-self: stretch;
@@ -218,7 +169,7 @@
     flex-direction: column;
   }
 
-  .navbar__toggle-text-section {
+  .navbar__toggle-text-section-inner {
     flex: 1 0 auto;
     height: 48px;
     display: flex;
@@ -231,7 +182,7 @@
     transition: transform 0.25s;
   }
 
-  .navbar--is-open .navbar__toggle-chevron {
+  .navbar--open .navbar__toggle-chevron {
     transform: rotate(180deg);
   }
 
@@ -258,15 +209,15 @@
     border-top: 1px solid var(--color-white-alt-1);
     outline: none;
     font-size: var(--font-size-semi-small);
-    color: var(--color-black-pure);
     text-decoration: underline 2px dotted transparent;
     text-decoration-skip-ink: none;
+    color: var(--color-black-pure);
     transition:
-      padding 0.25s,
-      background 0.25s,
+      padding-left 0.25s,
+      background-color 0.25s,
       font-weight 0.25s,
-      color 0.25s,
-      text-decoration 0.25s;
+      text-decoration-color 0.25s,
+      color 0.25s;
   }
 
   @media (min-width: 576px) {
@@ -285,7 +236,7 @@
       top: 0;
       inset-inline: 0;
       height: 4px;
-      transition: background 0.25s;
+      transition: background-color 0.25s;
     }
   }
 
@@ -311,22 +262,18 @@
     text-decoration-color: var(--color-black-pure);
   }
 
-  .navbar__link--is-active {
+  .navbar__link--active {
     font-weight: bold;
     color: var(--color-primary-main);
   }
 
   @media (min-width: 576px) {
-    .navbar__link--is-active::after {
+    .navbar__link--active::after {
       background-color: var(--color-primary-main);
     }
   }
 
-  .navbar__link--is-active:focus-visible {
+  .navbar__link--active:focus-visible {
     text-decoration-color: var(--color-primary-main);
-  }
-
-  .navbar__link--is-disabled {
-    cursor: not-allowed;
   }
 </style>

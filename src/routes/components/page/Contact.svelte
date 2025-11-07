@@ -12,6 +12,8 @@
   import Button from '$lib/components/ui/Button.svelte';
   import TextField from '$lib/components/ui/TextField.svelte';
 
+  const { navbarOffsetHeight = 0 } = $props();
+
   let offsetHeight = $state();
 
   let elementOffsetTop = $state({
@@ -122,6 +124,7 @@
     update: (newUpdate) => (elementOffsetTop.update = newUpdate),
   }}
   class="contact"
+  style:--navbar-offset-height={`${navbarOffsetHeight}px`}
   id="contact"
   bind:offsetHeight
 >
@@ -301,6 +304,7 @@
   .contact {
     z-index: 1;
     position: relative;
+    scroll-margin-top: calc(var(--navbar-offset-height) - 1px);
   }
 
   .contact__container {

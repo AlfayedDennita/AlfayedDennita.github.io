@@ -1,6 +1,8 @@
 <script>
   import { offsetTop } from '$lib/actions/offsetTop';
 
+  const { navbarOffsetHeight = 0 } = $props();
+
   let elementOffsetTop = $state({
     value: undefined,
     update: () => undefined,
@@ -17,6 +19,7 @@
     update: (newUpdate) => (elementOffsetTop.update = newUpdate),
   }}
   class="about"
+  style:--navbar-offset-height={`${navbarOffsetHeight}px`}
   id="about"
 >
   <div class="about__message">
@@ -49,6 +52,7 @@
 
 <style>
   .about {
+    scroll-margin-top: calc(var(--navbar-offset-height) - 1px);
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
