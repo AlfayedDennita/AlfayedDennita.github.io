@@ -15,6 +15,7 @@
     additionalKeywords: ['portfolio', 'projects', 'arts', 'contact'],
   });
 
+  const getHeaderOffsetHeight = getContext('header-offset-height');
   const getFooterOffsetHeight = getContext('footer-offset-height');
 
   let jumbotron = $state();
@@ -48,7 +49,10 @@
 </script>
 
 <main class="main">
-  <Jumbotron bind:this={jumbotron} />
+  <Jumbotron
+    bind:this={jumbotron}
+    headerOffsetHeight={getHeaderOffsetHeight()}
+  />
   <Navbar {linkedSections} />
   <About bind:this={about} />
   <Faydev
