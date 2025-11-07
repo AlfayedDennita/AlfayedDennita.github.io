@@ -84,6 +84,12 @@
     }
   }
 
+  @media (min-width: 576px) {
+    .header {
+      padding-inline: 20px;
+    }
+  }
+
   @media (min-width: 768px) {
     .header {
       height: 112px;

@@ -48,7 +48,8 @@
       </h2>
       <p class="welcome-box__subtitle">
         A place where a
-        <i class="hn hn-sun-solid welcome-box__subtitle-icon"></i>
+        <i class="hn hn-sun-solid welcome-box__subtitle-icon" aria-label="sun"
+        ></i>
         wanderer belongs.
       </p>
     </div>
