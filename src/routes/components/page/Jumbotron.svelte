@@ -28,38 +28,38 @@
   bind:offsetHeight
 >
   <div
-    class="jumbotron__welcome-box"
+    class="welcome-box jumbotron__welcome-box"
     bind:offsetHeight={welcomeBoxOffsetHeight}
   >
-    <div class="jumbotron__logo">
+    <div class="welcome-box__logo">
       <img
-        class="jumbotron__logo-image"
+        class="welcome-box__logo-image"
         src="/images/fayden-logo.svg"
         alt="Fayden Logo"
       />
     </div>
-    <div class="jumbotron__greeting">
-      <h2 class="jumbotron__title" id="jumbotron-title">
-        <span class="jumbotron__title-welcome">Welcome to</span>
-        <span class="jumbotron__title-fayden-world">
-          <span class="jumbotron__title-fayden">Fayden</span>
-          <span class="jumbotron__title-world">World</span>
+    <div class="welcome-box__greeting">
+      <h2 class="welcome-box__title" id="jumbotron-title">
+        <span class="welcome-box__title-welcome">Welcome to</span>
+        <span class="welcome-box__title-fayden-world">
+          <span class="welcome-box__title-fayden">Fayden</span>
+          <span class="welcome-box__title-world">World</span>
         </span>
       </h2>
-      <p class="jumbotron__subtitle">
+      <p class="welcome-box__subtitle">
         A place where a
-        <i class="hn hn-sun-solid jumbotron__subtitle-icon"></i>
+        <i class="hn hn-sun-solid welcome-box__subtitle-icon"></i>
         wanderer belongs.
       </p>
     </div>
     <Button
-      class="jumbotron__cta"
+      class="welcome-box__cta"
       href="/#about"
       theme="secondary"
       title="Start Exploring"
     >
       Start Exploring
-      <i class="hn hn-arrow-down-solid jumbotron__cta-icon"></i>
+      <i class="hn hn-arrow-down-solid welcome-box__cta-icon"></i>
     </Button>
   </div>
 
@@ -166,6 +166,9 @@
 
   .jumbotron__welcome-box {
     z-index: 1;
+  }
+
+  .welcome-box {
     display: grid;
     grid-template-areas:
       'logo'
@@ -178,7 +181,7 @@
   }
 
   @media (min-width: 768px) {
-    .jumbotron__welcome-box {
+    .welcome-box {
       grid-template-areas:
         'logo greeting'
         'logo cta';
@@ -190,12 +193,12 @@
   }
 
   @media (min-width: 1400px) {
-    .jumbotron__welcome-box {
+    .welcome-box {
       column-gap: 56px;
     }
   }
 
-  .jumbotron__logo {
+  .welcome-box__logo {
     grid-area: logo;
     margin-bottom: 24px;
     display: flex;
@@ -207,13 +210,13 @@
   }
 
   @media (min-width: 768px) {
-    .jumbotron__logo {
+    .welcome-box__logo {
       align-self: center;
       margin: 0;
     }
   }
 
-  .jumbotron__logo-image {
+  .welcome-box__logo-image {
     height: 160px;
     animation: logo-image 1s infinite alternate;
   }
@@ -224,7 +227,7 @@
     }
   }
 
-  .jumbotron__greeting {
+  .welcome-box__greeting {
     --text-stroke-width: 2px;
 
     grid-area: greeting;
@@ -246,14 +249,14 @@
   }
 
   @media (min-width: 768px) {
-    .jumbotron__greeting {
+    .welcome-box__greeting {
       margin: 0;
       align-items: flex-start;
       text-align: left;
     }
   }
 
-  .jumbotron__title {
+  .welcome-box__title {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -262,18 +265,18 @@
   }
 
   @media (min-width: 768px) {
-    .jumbotron__title {
+    .welcome-box__title {
       align-items: flex-start;
       gap: 4px;
     }
   }
 
-  .jumbotron__title-welcome {
+  .welcome-box__title-welcome {
     font-size: var(--font-size-heading-3);
     line-height: 1;
   }
 
-  .jumbotron__title-fayden-world {
+  .welcome-box__title-fayden-world {
     --text-stroke-width: 4px;
 
     font-size: var(--font-size-heading-1);
@@ -281,25 +284,25 @@
     text-transform: uppercase;
   }
 
-  .jumbotron__title-fayden {
+  .welcome-box__title-fayden {
     color: var(--color-primary-main);
   }
 
-  .jumbotron__title-world {
+  .welcome-box__title-world {
     color: var(--color-secondary-main);
   }
 
-  .jumbotron__subtitle-icon {
+  .welcome-box__subtitle-icon {
     line-height: 1.5;
     vertical-align: middle;
     color: var(--color-secondary-main);
   }
 
-  .jumbotron :global(.jumbotron__cta) {
+  .welcome-box :global(.welcome-box__cta) {
     grid-area: cta;
   }
 
-  .jumbotron__cta-icon {
+  .welcome-box__cta-icon {
     transform: translateY(-2px);
     animation: cta-icon 1s infinite alternate ease-in;
   }
