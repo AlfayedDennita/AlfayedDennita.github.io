@@ -92,6 +92,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-inline: var(--screen-margin-dynamic);
     background:
       url('$lib/assets/jumbotron/objects/bird-top.gif') no-repeat,
       url('$lib/assets/jumbotron/backgrounds/2.webp') no-repeat,
@@ -177,7 +178,7 @@
       'cta';
     gap: 8px;
     place-items: center;
-    padding: calc(var(--header-offset-height) + 64px) 16px 128px;
+    padding: calc(var(--header-offset-height) + 64px) 0 128px;
     text-align: center;
   }
 

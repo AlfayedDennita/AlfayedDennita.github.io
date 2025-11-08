@@ -96,6 +96,12 @@
     background-color: var(--color-white-pure);
   }
 
+  @media (min-width: 576px) {
+    .navbar {
+      padding-inline: var(--screen-margin-dynamic);
+    }
+  }
+
   .navbar::after {
     content: '';
     position: absolute;
@@ -132,7 +138,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 8px;
-    padding: 0 16px;
+    padding: 0 var(--screen-margin);
     background-color: transparent;
     border: none;
     outline: none;

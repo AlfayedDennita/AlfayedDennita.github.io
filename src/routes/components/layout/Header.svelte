@@ -75,7 +75,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 16px;
-    padding-inline: 16px;
+    padding-inline: var(--screen-margin-dynamic);
   }
 
   @media (max-width: 256px) {
@@ -84,23 +84,15 @@
     }
   }
 
-  @media (min-width: 576px) {
-    .header {
-      padding-inline: 20px;
-    }
-  }
-
   @media (min-width: 768px) {
     .header {
       height: 112px;
-      padding-inline: 24px;
     }
   }
 
   @media (min-width: 992px) {
     .header {
       height: 128px;
-      padding-inline: 32px;
     }
   }
 

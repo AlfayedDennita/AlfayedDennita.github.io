@@ -71,6 +71,42 @@
   initial-value: -9999;
 }
 
+@property --screen-margin {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 16px;
+}
+
+@property --screen-margin-sm {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 20px;
+}
+
+@property --screen-margin-md {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 24px;
+}
+
+@property --screen-margin-lg {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 28px;
+}
+
+@property --screen-margin-xl {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 32px;
+}
+
+@property --screen-margin-xxl {
+  syntax: '<length>';
+  inherits: false;
+  initial-value: 36px;
+}
+
 @property --font-family-pixel {
   syntax: '*';
   inherits: false;
@@ -295,11 +331,43 @@
 }
 
 body {
+  --screen-margin-dynamic: var(--screen-margin);
+
   background-color: var(--color-white-pure);
   font-family: var(--font-family-sans);
   font-size: var(--font-size-paragraph);
   line-height: 1.5;
   color: var(--color-black-pure);
+}
+
+@media (min-width: 576px) {
+  body {
+    --screen-margin-dynamic: var(--screen-margin-sm);
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    --screen-margin-dynamic: var(--screen-margin-md);
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    --screen-margin-dynamic: var(--screen-margin-lg);
+  }
+}
+
+@media (min-width: 1200px) {
+  body {
+    --screen-margin-dynamic: var(--screen-margin-xl);
+  }
+}
+
+@media (min-width: 1400px) {
+  body {
+    --screen-margin-dynamic: var(--screen-margin-xxl);
+  }
 }
 
 body::-webkit-scrollbar {
