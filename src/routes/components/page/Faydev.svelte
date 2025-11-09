@@ -121,7 +121,7 @@
   @keyframes cloud {
     to {
       background-position-x: calc(
-        576px * calc(var(--jumbotron-offset-height) / 324px) * -1
+        576px * (var(--jumbotron-offset-height) / 324px) * -1
       );
     }
   }

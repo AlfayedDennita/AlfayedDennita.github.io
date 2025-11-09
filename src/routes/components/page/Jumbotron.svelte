@@ -126,8 +126,8 @@
   @keyframes cloud-top {
     to {
       background-position-x:
-        calc(576px * calc(var(--jumbotron-offset-height) / 324px)),
-        calc(576px * calc(var(--jumbotron-offset-height) / 324px) * -1);
+        calc(576px * (var(--jumbotron-offset-height) / 324px)),
+        calc(576px * (var(--jumbotron-offset-height) / 324px) * -1);
     }
   }
 
@@ -161,7 +161,7 @@
   @keyframes cloud-bottom {
     to {
       background-position-x: calc(
-        576px * calc(var(--jumbotron-offset-height) / 324px) * -1
+        576px * (var(--jumbotron-offset-height) / 324px) * -1
       );
     }
   }
