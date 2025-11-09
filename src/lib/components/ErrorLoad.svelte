@@ -1,9 +1,13 @@
 <script>
-  const { message = 'Something went wrong.', ...props } = $props();
+  const {
+    class: className,
+    message = 'Something went wrong.',
+    ...props
+  } = $props();
 </script>
 
-<div class="error-load" {...props}>
-  <i class="error-load__icon hn hn-octagon-times-solid"></i>
+<div class={['error-load', className]} {...props}>
+  <i class="hn hn-octagon-times-solid error-load__icon"></i>
   <p>{message}</p>
 </div>
 
@@ -12,7 +16,7 @@
     flex-grow: 1;
     justify-self: stretch;
     align-self: stretch;
-    height: 512px;
+    min-height: 512px;
     display: flex;
     flex-direction: column;
     justify-content: center;

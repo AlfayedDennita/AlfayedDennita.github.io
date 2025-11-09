@@ -1,38 +1,57 @@
 <script>
-  const { slug, title, image, typeIcon, typeName, description } = $props();
+  const {
+    class: className,
+    skeleton = false,
+    slug,
+    title,
+    image,
+    typeIcon,
+    typeName,
+    description,
+    ...props
+  } = $props();
 </script>
 
-<div class="project-card">
-  <div class="project-card__container">
-    {#if image}
-      <img
-        src={`/images/projects/${image.name}`}
-        class="project-card__image"
-        alt={image.alt}
-      />
-    {:else}
-      <p class="project-card__image project-card__image--is-blank">No Image</p>
-    {/if}
-    <div class="project-card__info">
-      <a href={`/projects/${slug}/`} class="project-card__anchor" {title}>
-        <h3 class="project-card__title">{title}</h3>
-      </a>
-      <p class="project-card__type">
-        <i class={['hn', `hn-${typeIcon}`]}></i>
-        {typeName}
-      </p>
-      <p class="project-card__description">{description}</p>
+<li class="project-card" class:project-card--skeleton={skeleton} {...props}>
+  {#if !skeleton}
+    <div class="project-card__inner">
+      <div class="project-card__image">
+        {#if image}
+          <img
+            class="project-card__image-object project-card__image-object--type--image"
+            src={`/images/projects/${image.name}`}
+            alt={image.alt}
+          />
+        {:else}
+          <p
+            class="project-card__image-object project-card__image-object--type--blank"
+          >
+            No Image
+          </p>
+        {/if}
+      </div>
+      <div class="project-card__info">
+        <a class="project-card__anchor" href={`/projects/${slug}/`} {title}>
+          <h3 class="project-card__title">{title}</h3>
+        </a>
+        <p class="project-card__type">
+          <i class={['hn', `hn-${typeIcon}`]}></i>
+          {typeName}
+        </p>
+        <p class="project-card__description">{description}</p>
+      </div>
     </div>
-  </div>
-</div>
+  {/if}
+</li>
 
 <style>
   .project-card {
     --card-border-radius: 16px;
 
-    flex-grow: 1;
     position: relative;
-    max-width: 352px;
+    min-height: 384px;
+    width: 384px;
+    max-width: 100%;
     padding: 8px 8px 24px;
     background-color: var(--color-primary-shadow);
     border-radius: var(--card-border-radius);
@@ -44,11 +63,16 @@
     }
   }
 
-  .project-card:nth-child(even) {
+  .project-card:not(.project-card--skeleton):nth-child(even) {
     background-color: var(--color-secondary-shadow);
   }
 
-  .project-card__container {
+  .project-card--skeleton {
+    background-color: var(--color-white-alt-1);
+  }
+
+  .project-card__inner {
+    height: 100%;
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -58,20 +82,26 @@
   }
 
   .project-card__image {
+    overflow: hidden;
     width: 100%;
     aspect-ratio: 16 / 9;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: var(--color-white-alt-1);
-    object-fit: cover;
-    object-position: center;
     border-radius: 4px;
     font-family: var(--font-family-pixel);
     color: rgba(var(--color-black-alt-2-rgb), 0.5);
   }
 
-  .project-card__image--is-blank {
+  .project-card__image-object--type--image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .project-card__image-object--type--blank {
     user-select: none;
   }
 
@@ -85,11 +115,11 @@
     outline: none;
     font-family: var(--font-family-pixel);
     font-size: var(--font-size-heading-6);
-    color: var(--color-black-pure);
     text-transform: uppercase;
     text-decoration: 2px underline dotted transparent;
     text-underline-offset: 4px;
-    transition: text-decoration 0.25s;
+    color: var(--color-black-pure);
+    transition: text-decoration-color 0.25s;
   }
 
   .project-card__anchor:is(:hover, :focus-visible) {
@@ -108,7 +138,7 @@
     border-radius: var(--card-border-radius);
     outline: 4px solid transparent;
     outline-offset: 4px;
-    transition: outline 0.25s;
+    transition: outline-color 0.25s;
   }
 
   .project-card__anchor:focus-visible::after {

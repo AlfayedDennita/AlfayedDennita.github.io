@@ -1,16 +1,10 @@
 <script>
-  import ErrorLoad from './ErrorLoad.svelte';
-
-  const { children } = $props();
+  const { class: className, children, ...props } = $props();
 </script>
 
-<div class="project-cards">
-  {#if children}
-    {@render children()}
-  {:else}
-    <ErrorLoad message="Failed to load projects." />
-  {/if}
-</div>
+<ul class={['project-cards', className]} {...props}>
+  {@render children?.()}
+</ul>
 
 <style>
   .project-cards {
@@ -19,6 +13,6 @@
     align-items: stretch;
     flex-wrap: wrap;
     gap: 40px;
-    padding-inline: 32px;
+    list-style: none;
   }
 </style>
