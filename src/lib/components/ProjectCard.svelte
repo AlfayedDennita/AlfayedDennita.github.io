@@ -13,9 +13,9 @@
 </script>
 
 <li class="project-card" class:project-card--skeleton={skeleton} {...props}>
-  {#if !skeleton}
-    <div class="project-card__inner">
-      <div class="project-card__image">
+  <div class="project-card__inner">
+    <div class="project-card__image">
+      {#if !skeleton}
         {#if image}
           <img
             class="project-card__image-object project-card__image-object--type--image"
@@ -29,19 +29,39 @@
             No Image
           </p>
         {/if}
-      </div>
-      <div class="project-card__info">
-        <a class="project-card__anchor" href={`/projects/${slug}/`} {title}>
+      {/if}
+    </div>
+    <div class="project-card__info">
+      <svelte:element
+        this={!skeleton ? 'a' : 'div'}
+        class="project-card__anchor"
+        class:project-card__anchor--skeleton={skeleton}
+        href={!skeleton ? `/projects/${slug}/` : undefined}
+        title={!skeleton ? title : undefined}
+      >
+        {#if !skeleton}
           <h3 class="project-card__title">{title}</h3>
-        </a>
-        <p class="project-card__type">
+        {/if}
+      </svelte:element>
+      <svelte:element
+        this={!skeleton ? 'p' : 'div'}
+        class="project-card__type"
+        class:project-card__type--skeleton={skeleton}
+      >
+        {#if !skeleton}
           <i class={['hn', `hn-${typeIcon}`]}></i>
           {typeName}
-        </p>
-        <p class="project-card__description">{description}</p>
-      </div>
+        {/if}
+      </svelte:element>
+      <svelte:element
+        this={!skeleton ? 'p' : 'div'}
+        class="project-card__description"
+        class:project-card__description--skeleton={skeleton}
+      >
+        {description}
+      </svelte:element>
     </div>
-  {/if}
+  </div>
 </li>
 
 <style>
@@ -68,7 +88,7 @@
   }
 
   .project-card--skeleton {
-    background-color: var(--color-white-alt-1);
+    background-color: var(--color-white-alt-2);
   }
 
   .project-card__inner {
@@ -122,16 +142,22 @@
     transition: text-decoration-color 0.25s;
   }
 
-  .project-card__anchor:is(:hover, :focus-visible) {
+  .project-card__anchor:not(.project-card__anchor--skeleton):is(
+      :hover,
+      :focus-visible
+    ) {
     text-decoration-color: var(--color-primary-main);
   }
 
   .project-card:nth-child(even)
-    .project-card__anchor:is(:hover, :focus-visible) {
+    .project-card__anchor:not(.project-card__anchor--skeleton):is(
+      :hover,
+      :focus-visible
+    ) {
     text-decoration-color: var(--color-secondary-main);
   }
 
-  .project-card__anchor::after {
+  .project-card__anchor:not(.project-card__anchor--skeleton)::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -141,12 +167,24 @@
     transition: outline-color 0.25s;
   }
 
-  .project-card__anchor:focus-visible::after {
+  .project-card__anchor:not(
+      .project-card__anchor--skeleton
+    ):focus-visible::after {
     outline-color: var(--color-primary-main);
   }
 
-  .project-card:nth-child(even) .project-card__anchor:focus-visible::after {
+  .project-card:nth-child(even)
+    .project-card__anchor:not(
+      .project-card__anchor--skeleton
+    ):focus-visible::after {
     outline-color: var(--color-secondary-main);
+  }
+
+  .project-card__anchor--skeleton {
+    margin-bottom: 4px;
+    height: 28px;
+    background-color: var(--color-white-alt-1);
+    border-radius: 4px;
   }
 
   .project-card__type {
@@ -161,9 +199,16 @@
     color: var(--color-primary-shadow);
   }
 
-  .project-card:nth-child(even) .project-card__type {
+  .project-card:nth-child(even)
+    .project-card__type:not(.project-card__type--skeleton) {
     background-color: var(--color-secondary-highlight);
     color: var(--color-secondary-shadow);
+  }
+
+  .project-card__type--skeleton {
+    width: 128px;
+    height: 26px;
+    background-color: var(--color-white-alt-1);
   }
 
   .project-card__description {
@@ -174,5 +219,12 @@
     line-clamp: 4;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
+  }
+
+  .project-card__description--skeleton {
+    display: block;
+    height: 96px;
+    background-color: var(--color-white-alt-1);
+    border-radius: 4px;
   }
 </style>
