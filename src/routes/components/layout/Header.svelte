@@ -2,6 +2,8 @@
   import { page } from '$app/state';
   import Button from '$lib/components/ui/Button.svelte';
 
+  const { class: className } = $props();
+
   let offsetHeight = $state();
   let isBGMPaused = $state(true);
 
@@ -10,7 +12,7 @@
   }
 </script>
 
-<header class="header" bind:offsetHeight>
+<header class={['header', className]} bind:offsetHeight>
   <a class="title" href="/" title="Fayden World">
     <svelte:element
       this={page.route.id === '/' ? 'h1' : 'h2'}
