@@ -1,6 +1,7 @@
 <script>
   import { offsetTop } from '$lib/actions/offsetTop';
   import Button from '$lib/components/ui/Button.svelte';
+  import SectionHeader from '$lib/components/SectionHeader.svelte';
   import ErrorLoad from '$lib/components/ErrorLoad.svelte';
 
   const { arts, navbarOffsetHeight = 0 } = $props();
@@ -16,60 +17,74 @@
 </script>
 
 <section
+  class="space"
+  style:--navbar-offset-height={`${navbarOffsetHeight}px`}
+  id="arts"
+  aria-labelledby="arts-title"
   use:offsetTop={{
     value: (newValue) => (elementOffsetTop.value = newValue),
     update: (newUpdate) => (elementOffsetTop.update = newUpdate),
   }}
-  class="space"
-  style:--navbar-offset-height={`${navbarOffsetHeight}px`}
-  id="arts"
 >
-  <header class="space__header">
-    <div class="space__title">
-      <i class="space__title-icon hn hn-pencil-ruler-solid"></i>
-      <h2 class="space__title-text">
-        <span class="space__title-text-blue">fayden</span>.<span
-          class="space__title-text-yellow">space</span
-        >
-      </h2>
-    </div>
-    <p class="space__subtitle">Fayden's Art Exhibition</p>
-  </header>
+  <div class="space__inner">
+    <SectionHeader
+      sectionId="arts"
+      icon="pencil-ruler-solid"
+      subtitle="Fayden's Art Exhibition"
+    >
+      {#snippet titleLeft()}
+        fayden
+      {/snippet}
+      .
+      {#snippet titleRight()}
+        space
+      {/snippet}
+    </SectionHeader>
 
-  <div class="space__arts">
-    {#if Error.isError(arts)}
-      <ErrorLoad message="DeviantArt is currently not responding." />
-    {:else}
-      <div class="space__gallery">
+    {#await arts}
+      <ul class="arts">
         {#each { length: 6 }, i}
-          <svelte:element
-            this={arts[i] ? 'a' : 'div'}
-            href={arts[i]?.url}
-            target={arts[i] ? '_blank' : undefined}
-            rel={arts[i] ? 'external' : undefined}
-            title={arts[i]?.title}
-            class={['space__art', arts[i] && 'space__art--is-link']}
-          >
-            {#if arts[i]}
-              <img
-                src={arts[i].thumbnailUrl}
-                class="space__art-image"
-                alt={arts[i].title}
-              />
-              <div class="space__art-message">
-                <i class="space__art-message-icon hn hn-external-link-solid"
-                ></i>
-                <p class="space__art-message-text">See on DeviantArt</p>
-              </div>
-            {:else}
-              <p class="space__art-soon">More soon...</p>
-            {/if}
-          </svelte:element>
+          <li class="arts__art">
+            <div class="arts__art-object"></div>
+          </li>
         {/each}
-      </div>
-    {/if}
+      </ul>
+    {:then arts}
+      <ul class="arts">
+        {#each { length: 6 }, i}
+          <li class="arts__art">
+            <svelte:element
+              this={arts[i] ? 'a' : 'div'}
+              class="arts__art-object"
+              class:arts__art-object--link={arts[i]}
+              href={arts[i]?.url}
+              target={arts[i] ? '_blank' : undefined}
+              rel={arts[i] ? 'external' : undefined}
+              title={arts[i]?.title}
+            >
+              {#if arts[i]}
+                <img
+                  class="arts__art-image"
+                  src={arts[i].thumbnailUrl}
+                  alt={arts[i].title}
+                />
+                <div class="arts__art-message">
+                  <i class="hn hn-external-link-solid arts__art-message-icon"
+                  ></i>
+                  <p class="arts__art-message-text">See on DeviantArt</p>
+                </div>
+              {:else}
+                <p class="arts__art-soon">More soon...</p>
+              {/if}
+            </svelte:element>
+          </li>
+        {/each}
+      </ul>
+    {:catch}
+      <ErrorLoad message="DeviantArt is currently not responding." />
+    {/await}
 
-    <div class="space__arts-buttons">
+    <div class="space__ctas">
       <Button
         href="https://www.deviantart.com/alfayeddennita/"
         theme="primary"
@@ -99,113 +114,67 @@
 <style>
   .space {
     scroll-margin-top: calc(var(--navbar-offset-height) - 1px);
-    max-width: 1200px;
+    padding-inline: var(--screen-margin-dynamic);
+  }
+
+  .space__inner {
     margin: 0 auto;
+    max-width: var(--breakpoint-xl);
     display: flex;
     flex-direction: column;
     gap: 64px;
-    padding: 112px 16px;
+    padding-block: 96px;
   }
 
-  .space__header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    text-align: center;
-  }
-
-  .space__title {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .space__title-icon {
-    font-size: var(--font-size-heading-3);
-  }
-
-  .space__title-text {
-    font-family: var(--font-family-pixel);
-    font-size: var(--font-size-heading-3);
-  }
-
-  .space__title-text-blue {
-    color: var(--color-primary-main);
-  }
-
-  .space__title-text-yellow {
-    color: var(--color-secondary-main);
-  }
-
-  .space__subtitle {
-    color: var(--color-black-alt-1);
-  }
-
-  .space__arts {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 64px;
-  }
-
-  .space__gallery {
+  .arts {
+    align-self: center;
     overflow: hidden;
     display: grid;
     border-radius: 8px;
+    list-style: none;
   }
 
   @media (min-width: 768px) {
-    .space__gallery {
+    .arts {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (min-width: 992px) {
-    .space__gallery {
+    .arts {
       grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  .space__art {
-    --inset-border-color: transparent;
+  .arts__art {
+    display: contents;
+  }
 
+  .arts__art-object {
     position: relative;
     overflow: hidden;
-    height: 416px;
+    height: 384px;
+    max-width: 100%;
     aspect-ratio: 4 / 5;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 8px;
-    background-color: rgba(var(--color-white-alt-1-rgb), 0.25);
+    background-color: rgba(var(--color-white-alt-1-rgb), 0.5);
     outline: none;
     text-align: center;
   }
 
-  .space__art--is-link {
+  .arts__art-object--link {
     cursor: pointer;
   }
 
-  @media (min-width: 576px) {
-    .space__art {
-      height: 448px;
-    }
+  .arts__art:nth-child(even) .arts__art-object {
+    background-color: rgba(var(--color-white-alt-2-rgb), 0.5);
   }
 
-  @media (min-width: 768px) {
-    .space__art {
-      height: 384px;
-    }
-  }
-
-  .space__art:nth-child(even) {
-    background-color: rgba(var(--color-white-alt-1-rgb), 0.5);
-  }
-
-  .space__art-image {
+  .arts__art-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -213,11 +182,11 @@
     transition: transform 0.25s;
   }
 
-  .space__art:is(:hover, :focus-visible) .space__art-image {
+  .arts__art-object--link:is(:hover, :focus-visible) .arts__art-image {
     transform: scale(1.25);
   }
 
-  .space__art-message {
+  .arts__art-message {
     opacity: 0;
     position: absolute;
     inset: 0;
@@ -227,33 +196,33 @@
     gap: 8px;
     background-color: rgba(var(--color-black-pure-rgb), 0.75);
     font-family: var(--font-family-pixel);
-    color: var(--color-white-pure);
     text-decoration: 2px underline dotted transparent;
     text-underline-offset: 8px;
+    color: var(--color-white-pure);
     user-select: none;
     transition:
       opacity 0.25s,
-      text-decoration 0.25s;
+      text-decoration-color 0.25s;
   }
 
-  .space__art:is(:hover, :focus-visible) .space__art-message {
+  .arts__art-object--link:is(:hover, :focus-visible) .arts__art-message {
     opacity: 1;
     text-decoration-color: var(--color-white-alt-2);
   }
 
-  .space__art-soon {
+  .arts__art-soon {
     font-family: var(--font-family-pixel);
-    color: rgba(var(--color-black-alt-2-rgb), 0.5);
     text-transform: lowercase;
+    color: rgba(var(--color-black-alt-2-rgb), 0.5);
     user-select: none;
   }
 
-  .space__arts-buttons {
+  .space__ctas {
+    align-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 16px;
-    padding-inline: 32px;
   }
 </style>

@@ -2,7 +2,8 @@ import { getProjects } from '$lib/data/projects.js';
 import { getArts } from '$lib/data/arts.js';
 
 export async function load({ fetch }) {
-  const arts = await getArts(fetch, true);
-
-  return { projects: getProjects(fetch), arts };
+  return {
+    projects: getProjects(fetch),
+    arts: getArts(fetch, 6),
+  };
 }

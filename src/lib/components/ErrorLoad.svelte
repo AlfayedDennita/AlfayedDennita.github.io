@@ -13,9 +13,6 @@
 
 <style>
   .error-load {
-    flex-grow: 1;
-    justify-self: stretch;
-    align-self: stretch;
     min-height: 512px;
     display: flex;
     flex-direction: column;

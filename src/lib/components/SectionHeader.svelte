@@ -17,6 +17,7 @@
     <svelte:element
       this={i === 0 ? 'header' : 'div'}
       class="section-header__inner"
+      class:section-header__inner--shadow={shadow && i === 1}
       class:section-header__inner--overlay={shadow && i === 0}
       aria-hidden={i === 1}
     >
@@ -66,6 +67,9 @@
     align-items: center;
     gap: 8px;
     text-align: center;
+  }
+
+  .section-header__inner--shadow {
     user-select: none;
   }
 
@@ -100,6 +104,8 @@
 
   .section-header__title-text {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-items: center;
     font-family: var(--font-family-pixel);
     font-size: var(--font-size-heading-3);
