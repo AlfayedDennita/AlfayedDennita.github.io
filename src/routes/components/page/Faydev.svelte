@@ -53,26 +53,32 @@
       {/snippet}
     </SectionHeader>
 
-    <ProjectCards>
-      {#await projects}
+    {#await projects}
+      <ProjectCards>
         {#each { length: 6 }}
           <ProjectCard skeleton />
         {/each}
-      {:then projects}
-        {#each projects as project (project.id)}
-          <ProjectCard
-            slug={project.slug}
-            title={project.title}
-            image={project.images[0]}
-            typeIcon={project.type.icon}
-            typeName={project.type.name}
-            description={project.description}
-          />
-        {/each}
-      {:catch}
-        <ErrorLoad message="Failed to load projects" />
-      {/await}
-    </ProjectCards>
+      </ProjectCards>
+    {:then projects}
+      {#if projects}
+        <ProjectCards>
+          {#each projects as project (project.id)}
+            <ProjectCard
+              slug={project.slug}
+              title={project.title}
+              image={project.images[0]}
+              typeIcon={project.type.icon}
+              typeName={project.type.name}
+              description={project.description}
+            />
+          {/each}
+        </ProjectCards>
+      {:else}
+        <ErrorLoad message="No projects to view." />
+      {/if}
+    {:catch}
+      <ErrorLoad message="Failed to load projects." />
+    {/await}
 
     <Button
       class="faydev__cta"
@@ -98,7 +104,7 @@
     background-position-x: calc(100% + var(--bird-size)), 0;
     background-position-y: 40px, 0;
     background-size: var(--bird-size), auto;
-    padding: var(--screen-margin-dynamic);
+    padding-inline: var(--screen-margin-dynamic);
     animation: bird infinite linear;
   }
 
@@ -132,7 +138,7 @@
     display: flex;
     flex-direction: column;
     gap: 64px;
-    padding-block: 64px;
+    padding-block: 96px;
   }
 
   .faydev :global(.faydev__cta) {
