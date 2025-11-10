@@ -1,14 +1,19 @@
 <script>
-  const { contactOffsetHeight, footerOffsetHeight } = $props();
+  const {
+    class: className,
+    contactOffsetHeight,
+    footerOffsetHeight,
+  } = $props();
+
   const footerObjectsHeight = $derived(
-    `${contactOffsetHeight + footerOffsetHeight}px` || false
+    `${contactOffsetHeight + footerOffsetHeight}px` || undefined
   );
 </script>
 
 <div
-  class="footer-objects"
-  aria-hidden="true"
+  class={['footer-objects', className]}
   style:height={footerObjectsHeight}
+  aria-hidden="true"
 ></div>
 
 <style>
@@ -25,8 +30,8 @@
     inset-inline: 0;
     bottom: 0;
     background:
-      url('$lib/assets/footer/backgrounds/leaning-tree.png') no-repeat,
-      url('$lib/assets/footer/backgrounds/tree.png') no-repeat,
+      url('$lib/assets/footer/backgrounds/leaning-tree.webp') no-repeat,
+      url('$lib/assets/footer/backgrounds/tree.webp') no-repeat,
       url('$lib/assets/footer/objects/old-man.gif') no-repeat;
     background-size: 256px, 128px, 32px;
     background-position:

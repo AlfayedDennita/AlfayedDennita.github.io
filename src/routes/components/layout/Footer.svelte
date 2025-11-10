@@ -1,14 +1,16 @@
 <script>
   let offsetHeight = $state();
 
+  const { class: className } = $props();
+
+  let windowInnerWidth = $state();
+
   const firstBuildYear = 2025;
   const currentYear = new Date().getFullYear();
   const copyrightYear =
     currentYear === firstBuildYear
       ? currentYear
       : `${firstBuildYear}\u2013${currentYear}`;
-
-  let windowInnerWidth = $state();
 
   const walkingKidsSpeed = $derived(`${windowInnerWidth / 20}s`);
 
@@ -33,12 +35,13 @@
 
 <style>
   .footer {
+    padding-inline: var(--screen-margin-dynamic);
     background:
       url('$lib/assets/footer/objects/sheep.gif') no-repeat,
       url('$lib/assets/footer/objects/lamb.gif') no-repeat,
       url('$lib/assets/footer/objects/walking-boy.gif') no-repeat,
       url('$lib/assets/footer/objects/walking-girl.gif') no-repeat,
-      url('$lib/assets/footer/backgrounds/field.png') repeat-x;
+      url('$lib/assets/footer/backgrounds/field.webp') repeat-x;
     background-size: 32px, 32px, 48px, 48px, auto;
     background-position:
       40% calc(100% - 52px),
@@ -61,17 +64,17 @@
   }
 
   .footer__container {
-    max-width: 1200px;
     margin-inline: auto;
+    max-width: var(--breakpoint-xl);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 128px 16px 40px;
+    padding: 128px 0 40px;
   }
 
   .footer__copyright {
     font-family: var(--font-family-pixel);
-    color: rgba(var(--color-white-pure-rgb), 0.75);
     text-align: center;
+    color: rgba(var(--color-white-pure-rgb), 0.75);
   }
 </style>
