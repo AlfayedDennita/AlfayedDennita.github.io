@@ -1,9 +1,8 @@
-import { getProjects } from '$lib/data/projects.js';
-import { getArts } from '$lib/data/arts.js';
+import db from '$lib/db';
 
 export async function load({ fetch }) {
   return {
-    projects: getProjects(fetch),
-    arts: getArts(fetch, 6),
+    projects: db.projects.getAll(fetch),
+    arts: db.arts.getAll(fetch, 6),
   };
 }

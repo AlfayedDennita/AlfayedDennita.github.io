@@ -1,7 +1,7 @@
-import { getProjects } from '$lib/data/projects';
+import db from '$lib/db';
 
 export async function load({ fetch }) {
-  const projects = await getProjects(fetch);
+  const projects = await db.projects.getAll(fetch);
 
   return { projects };
 }
