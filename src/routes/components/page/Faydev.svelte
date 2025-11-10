@@ -6,7 +6,12 @@
   import ProjectCard from '$lib/components/ProjectCard.svelte';
   import ErrorLoad from '$lib/components/ErrorLoad.svelte';
 
-  const { projects, jumbotronOffsetHeight, navbarOffsetHeight = 0 } = $props();
+  const {
+    class: className,
+    projects,
+    jumbotronOffsetHeight,
+    navbarOffsetHeight = 0,
+  } = $props();
 
   let windowInnerWidth = $state();
 
@@ -26,12 +31,12 @@
 <svelte:window bind:innerWidth={windowInnerWidth} />
 
 <section
-  class="faydev"
-  id="projects"
+  class={['faydev', className]}
   style:animation-duration={birdSpeed}
   style:--jumbotron-offset-height={`${jumbotronOffsetHeight}px`}
   style:--navbar-offset-height={`${navbarOffsetHeight}px`}
   style:--cloud-animation-duration={cloudSpeed}
+  id="projects"
   aria-labelledby="projects-title"
   use:offsetTop={{
     update: (newValue) => (elementOffsetTop.value = newValue),

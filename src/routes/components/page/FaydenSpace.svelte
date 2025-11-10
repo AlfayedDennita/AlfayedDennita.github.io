@@ -4,7 +4,7 @@
   import SectionHeader from '$lib/components/SectionHeader.svelte';
   import ErrorLoad from '$lib/components/ErrorLoad.svelte';
 
-  const { arts, navbarOffsetHeight = 0 } = $props();
+  const { class: className, arts, navbarOffsetHeight = 0 } = $props();
 
   let elementOffsetTop = $state({
     value: undefined,
@@ -17,7 +17,7 @@
 </script>
 
 <section
-  class="space"
+  class={['space', className]}
   style:--navbar-offset-height={`${navbarOffsetHeight}px`}
   id="arts"
   aria-labelledby="arts-title"

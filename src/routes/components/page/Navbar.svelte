@@ -1,7 +1,7 @@
 <script>
   import { slide } from 'svelte/transition';
 
-  const { linkedSections = [] } = $props();
+  const { class: className, linkedSections = [] } = $props();
 
   let offsetHeight = $state();
   let windowScrollY = $state();
@@ -40,11 +40,15 @@
   bind:innerWidth={windowInnerWidth}
 />
 
-<nav class="navbar" class:navbar--open={isNavbarListOpen} bind:offsetHeight>
+<nav
+  class={['navbar', className]}
+  class:navbar--open={isNavbarListOpen}
+  bind:offsetHeight
+>
   <div class="navbar__inner">
     {#if windowInnerWidth < 576}
       <button
-        class="navbar__toggle"
+        class="toggle navbar__toggle"
         aria-controls="navbar-list"
         aria-expanded={isNavbarListOpen}
         title={isNavbarListOpen
@@ -52,27 +56,27 @@
           : 'Open Navigation Links'}
         onclick={() => (isNavbarListOpen = !isNavbarListOpen)}
       >
-        <span class="navbar__toggle-text">
+        <span class="toggle__text">
           Section:
-          <span class="navbar__toggle-text-section">
+          <span class="toggle__text-section">
             {#key activeSectionIdx}
-              <span class="navbar__toggle-text-section-inner" transition:slide>
+              <span class="toggle__text-section-inner" transition:slide>
                 #{linkedSections[activeSectionIdx]?.name}
               </span>
             {/key}
           </span>
         </span>
-        <i class="hn hn-chevron-down-solid navbar__toggle-chevron"></i>
+        <i class="hn hn-chevron-down-solid toggle__chevron"></i>
       </button>
     {/if}
 
     {#if windowInnerWidth >= 576 || isNavbarListOpen}
-      <ul class="navbar__list" id="navbar-list" transition:slide>
+      <ul class="links" id="navbar-list" transition:slide>
         {#each linkedSections as section, i (section.name)}
-          <li class="navbar__list-item">
+          <li class="links__item">
             <a
-              class="navbar__link"
-              class:navbar__link--active={linkedSections[activeSectionIdx]
+              class="links__link"
+              class:links__link--active={linkedSections[activeSectionIdx]
                 .url === section.url}
               href={section.url}
               title={section.name}
@@ -132,7 +136,7 @@
     flex-direction: column;
   }
 
-  .navbar__toggle {
+  .toggle {
     height: 48px;
     display: flex;
     justify-content: space-between;
@@ -148,11 +152,11 @@
     transition: background 0.25s;
   }
 
-  .navbar__toggle:is(:hover, :focus-visible) {
+  .toggle:is(:hover, :focus-visible) {
     background-color: rgba(var(--color-white-alt-1-rgb), 0.5);
   }
 
-  .navbar__toggle-text {
+  .toggle__text {
     flex-grow: 1;
     align-self: stretch;
     display: flex;
@@ -163,11 +167,11 @@
     transition: text-decoration-color 0.25s;
   }
 
-  .navbar__toggle:focus-visible .navbar__toggle-text {
+  .toggle:focus-visible .toggle__text {
     text-decoration-color: var(--color-black-pure);
   }
 
-  .navbar__toggle-text-section {
+  .toggle__text-section {
     overflow: hidden;
     flex-grow: 1;
     align-self: stretch;
@@ -175,7 +179,7 @@
     flex-direction: column;
   }
 
-  .navbar__toggle-text-section-inner {
+  .toggle__text-section-inner {
     flex: 1 0 auto;
     height: 48px;
     display: flex;
@@ -183,16 +187,16 @@
     text-align: left;
   }
 
-  .navbar__toggle-chevron {
+  .toggle__chevron {
     font-size: var(--font-size-small);
     transition: transform 0.25s;
   }
 
-  .navbar--open .navbar__toggle-chevron {
+  .navbar--open .navbar__toggle .toggle__chevron {
     transform: rotate(180deg);
   }
 
-  .navbar__list {
+  .links {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -200,13 +204,13 @@
   }
 
   @media (min-width: 576px) {
-    .navbar__list {
+    .links {
       flex-direction: row;
       justify-content: center;
     }
   }
 
-  .navbar__link {
+  .links__link {
     min-height: 48px;
     display: flex;
     align-items: center;
@@ -227,7 +231,7 @@
   }
 
   @media (min-width: 576px) {
-    .navbar__link {
+    .links__link {
       position: relative;
       justify-content: center;
       border: none;
@@ -236,7 +240,7 @@
       text-underline-offset: 4px;
     }
 
-    .navbar__link::after {
+    .links__link::after {
       content: '';
       position: absolute;
       top: 0;
@@ -247,39 +251,39 @@
   }
 
   @media (max-width: 575px) {
-    .navbar__list-item:first-child .navbar__link {
+    .links__item:first-child .links__link {
       border-width: 2px;
       border-color: rgba(var(--color-white-alt-1-rgb), 0.75);
     }
   }
 
-  .navbar__link:is(:hover, :focus-visible) {
+  .links__link:is(:hover, :focus-visible) {
     padding-left: 24px;
     background-color: rgba(var(--color-white-alt-1-rgb), 0.5);
   }
 
   @media (min-width: 576px) {
-    .navbar__link:is(:hover, :focus-visible) {
+    .links__link:is(:hover, :focus-visible) {
       padding-left: 20px;
     }
   }
 
-  .navbar__link:focus-visible {
+  .links__link:focus-visible {
     text-decoration-color: var(--color-black-pure);
   }
 
-  .navbar__link--active {
+  .links__link--active {
     font-weight: bold;
     color: var(--color-primary-main);
   }
 
   @media (min-width: 576px) {
-    .navbar__link--active::after {
+    .links__link--active::after {
       background-color: var(--color-primary-main);
     }
   }
 
-  .navbar__link--active:focus-visible {
+  .links__link--active:focus-visible {
     text-decoration-color: var(--color-primary-main);
   }
 </style>
