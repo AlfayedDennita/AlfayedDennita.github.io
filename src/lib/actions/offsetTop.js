@@ -1,10 +1,10 @@
-export function offsetTop(node, { value, update: updateFn }) {
+export function offsetTop(node, { update: change, getUpdateFn }) {
   function update() {
-    value(node.offsetTop);
+    change(node.offsetTop);
   }
 
   update();
-  updateFn(update);
+  getUpdateFn(update);
 
   window.addEventListener('resize', update);
 

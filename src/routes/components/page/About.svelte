@@ -19,8 +19,8 @@
   id="about"
   aria-labelledby="about-title"
   use:offsetTop={{
-    value: (newValue) => (elementOffsetTop.value = newValue),
-    update: (newUpdate) => (elementOffsetTop.update = newUpdate),
+    update: (newValue) => (elementOffsetTop.value = newValue),
+    getUpdateFn: (updateFn) => (elementOffsetTop.update = updateFn),
   }}
 >
   <div class="about__inner">
