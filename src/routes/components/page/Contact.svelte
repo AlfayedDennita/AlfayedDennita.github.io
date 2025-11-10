@@ -1,18 +1,14 @@
 <script>
-  import {
-    PUBLIC_MODE,
-    PUBLIC_WEB3FORMS_ACCESS_KEY,
-    PUBLIC_HCAPTCHA_SITEKEY,
-  } from '$env/static/public';
+  import { PUBLIC_MODE, PUBLIC_HCAPTCHA_SITEKEY } from '$env/static/public';
   import { slide } from 'svelte/transition';
   import Joi from 'joi';
-  import enhance from 'svelte-captcha-enhance';
-
+  import captcha from 'svelte-captcha-enhance';
+  import db from '$lib/db';
   import { offsetTop } from '$lib/actions/offsetTop';
   import Button from '$lib/components/ui/Button.svelte';
   import TextField from '$lib/components/ui/TextField.svelte';
 
-  const { navbarOffsetHeight = 0 } = $props();
+  const { class: className, navbarOffsetHeight = 0 } = $props();
 
   let offsetHeight = $state();
 
@@ -20,10 +16,6 @@
     value: undefined,
     update: () => undefined,
   });
-
-  export function getOffsetTop() {
-    return elementOffsetTop;
-  }
 
   const socials = [
     {
@@ -62,7 +54,7 @@
     message: undefined,
   });
 
-  async function handleSubmitForm({
+  async function handleSubmittingForm({
     formData,
     formElement,
     result: captchaResult,
@@ -75,27 +67,20 @@
         'Captcha challenge was error, message failed to send.';
     } else {
       try {
-        formData.append('access_key', PUBLIC_WEB3FORMS_ACCESS_KEY);
-
-        if (formData.get('name') === '') {
-          formData.set('name', 'Anonymous');
-        }
-
-        const res = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          body: formData,
+        const data = await db.contact.insertOne({
+          name: formData.get('name'),
+          email: formData.get('email'),
+          message: formData.get('message'),
         });
-        const resData = await res.json();
 
-        if (resData.success) {
+        if (data.success) {
           sendingResponse.status = 'success';
           sendingResponse.message = 'Message successfully sent.';
           formElement.reset();
         } else {
           sendingResponse.status = 'failed';
           sendingResponse.message =
-            resData.message ||
-            'Message failed to send, please try again later.';
+            data.message || 'Message failed to send, please try again later.';
         }
       } catch {
         sendingResponse.status = 'failed';
@@ -105,6 +90,10 @@
     }
 
     isSendingForm = false;
+  }
+
+  export function getOffsetTop() {
+    return elementOffsetTop;
   }
 
   export function getOffsetHeight() {
@@ -119,33 +108,35 @@
 </svelte:head>
 
 <section
+  class={['contact', className]}
+  style:--navbar-offset-height={`${navbarOffsetHeight}px`}
+  id="contact"
+  aria-labelledby="contact-title"
   use:offsetTop={{
     value: (newValue) => (elementOffsetTop.value = newValue),
     update: (newUpdate) => (elementOffsetTop.update = newUpdate),
   }}
-  class="contact"
-  style:--navbar-offset-height={`${navbarOffsetHeight}px`}
-  id="contact"
   bind:offsetHeight
 >
-  <div class="contact__container">
-    <div class="contact__socials">
-      <header>
-        <h2 class="contact__title">Keep in Touch</h2>
-        <p class="contact__message">
+  <div class="contact__inner">
+    <div class="contact__info">
+      <header class="header">
+        <h2 class="header__title" id="contact-title">Keep in Touch</h2>
+        <p class="header__subtitle">
           Follow my socials or send me a message to get to know me better.
         </p>
       </header>
-      <address>
-        <ul class="contact__social-buttons">
+
+      <address class="socials">
+        <ul class="socials__list">
           {#each socials as social (social.name)}
             <li>
               <Button
                 href={social.url}
+                square
                 target="_blank"
                 rel="external"
                 title={social.name}
-                square
               >
                 <i class={['hn', `hn-${social.icon}`]}></i>
               </Button>
@@ -156,19 +147,21 @@
     </div>
 
     <form
+      class="form contact__form"
       method="post"
-      class="contact__form"
-      use:enhance={{
+      use:captcha={{
         type: PUBLIC_MODE === 'dev' ? 'bypass' : 'hcaptcha',
-        submit: ({ formData }) => handleSubmitForm,
+        submit: () => handleSubmittingForm,
       }}
     >
-      <div class="contact__input contact__input--field-name" title="Name">
-        <label for="input-name" class="contact__input-label">Name</label>
+      <div class="form__input form__input--field--name" title="Name">
+        <label class="form__input-label" for="input-name">Name</label>
         <TextField
           type="text"
           name="name"
           id="input-name"
+          autocomplete="name"
+          aria-invalid={![undefined, true].includes(inputErrors.name)}
           oninput={(event) => {
             sendingResponse.status = undefined;
             sendingResponse.message = undefined;
@@ -185,25 +178,24 @@
           {/snippet}
         </TextField>
         {#if ![undefined, true].includes(inputErrors.name)}
-          <p class="contact__input-error" transition:slide>
+          <p class="form__input-error" transition:slide>
             <i class="hn hn-exclamation-triangle-solid"></i>
             {inputErrors.name}.
           </p>
         {/if}
       </div>
-      <div
-        class="contact__input contact__input--field-email"
-        title="Email (Required)"
-      >
-        <label for="input-email" class="contact__input-label">
+      <div class="form__input form__input--field--email" title="Email">
+        <label class="form__input-label" for="input-email">
           Email
-          <span class="contact__input-label-required">(Required)</span>
+          <span class="form__input-label-required">(Required)</span>
         </label>
         <TextField
           type="email"
           name="email"
           id="input-email"
+          autocomplete="email"
           required
+          aria-invalid={![undefined, true].includes(inputErrors.email)}
           oninput={(event) => {
             sendingResponse.status = undefined;
             sendingResponse.message = undefined;
@@ -220,26 +212,24 @@
           {/snippet}
         </TextField>
         {#if ![undefined, true].includes(inputErrors.email)}
-          <p class="contact__input-error" transition:slide>
+          <p class="form__input-error" transition:slide>
             <i class="hn hn-exclamation-triangle-solid"></i>
             {inputErrors.email}.
           </p>
         {/if}
       </div>
-      <div
-        class="contact__input contact__input--field-message"
-        title="Message (Required)"
-      >
-        <label for="input-message" class="contact__input-label">
+      <div class="form__input form__input--field--message" title="Message">
+        <label class="form__input-label" for="input-message">
           Message
-          <span class="contact__input-label-required">(Required)</span>
+          <span class="form__input-label-required">(Required)</span>
         </label>
         <TextField
-          fieldClass="contact__input-textarea"
+          fieldClass="form__input-textarea"
           type="textarea"
           name="message"
           id="input-message"
           required
+          aria-invalid={![undefined, true].includes(inputErrors.message)}
           oninput={(event) => {
             sendingResponse.status = undefined;
             sendingResponse.message = undefined;
@@ -251,7 +241,7 @@
           }}
         />
         {#if ![undefined, true].includes(inputErrors.message)}
-          <p class="contact__input-error" transition:slide>
+          <p class="form__input-error" transition:slide>
             <i class="hn hn-exclamation-triangle-solid"></i>
             {inputErrors.message}.
           </p>
@@ -259,18 +249,17 @@
       </div>
       {#if PUBLIC_MODE !== 'dev'}
         <div
-          class="contact__form-captcha h-captcha"
+          class="h-captcha form__captcha"
           data-sitekey={PUBLIC_HCAPTCHA_SITEKEY}
         ></div>
       {/if}
       {#if sendingResponse.status}
         <div
-          class={[
-            'contact__sending-response',
-            sendingResponse.status === 'success'
-              ? 'contact__sending-response--is-success'
-              : 'contact__sending-response--is-failed',
-          ]}
+          class="form__sending-response"
+          class:form__sending-response--state--success={sendingResponse.status ===
+            'success'}
+          class:form__sending-response--state--failed={sendingResponse.status !==
+            'success'}
           transition:slide
         >
           <i
@@ -283,13 +272,13 @@
         </div>
       {/if}
       <Button
+        class="form__submit"
         type="submit"
-        class="contact__submit-button"
-        title={isValidationError ? undefined : 'Send Message'}
         disabled={isValidationError || isSendingForm}
+        title={!isValidationError ? 'Send Message' : undefined}
       >
         {#if isSendingForm}
-          <i class="contact__submit-loading-icon hn hn-spinner-solid"></i>
+          <i class="hn hn-spinner-solid form__submit-loading-icon"></i>
           Sending...
         {:else}
           Send Message
@@ -302,113 +291,122 @@
 
 <style>
   .contact {
-    z-index: 1;
     position: relative;
     scroll-margin-top: calc(var(--navbar-offset-height) - 1px);
+    padding-inline: var(--screen-margin-dynamic);
   }
 
-  .contact__container {
-    max-width: 1200px;
-    margin: 0 auto;
+  .contact__inner {
+    margin-inline: auto;
+    max-width: var(--breakpoint-xl);
     display: flex;
     flex-direction: column;
-    gap: 56px;
-    padding: 64px 16px 192px;
+    justify-content: space-between;
+    gap: 48px;
+    padding: 64px 0 224px;
   }
 
   @media (min-width: 576px) {
-    .contact__container {
-      gap: 64px;
-      padding: 96px 64px 224px;
+    .contact__inner {
+      padding-top: 96px;
     }
   }
 
   @media (min-width: 992px) {
-    .contact__container {
+    .contact__inner {
       flex-direction: row;
-      padding: 128px 32px;
+      gap: 96px;
+      padding-block: 128px;
     }
   }
 
   @media (min-width: 1200px) {
-    .contact__container {
+    .contact__inner {
       gap: 128px;
-      padding-inline: 64px;
     }
   }
 
-  .contact__socials {
-    flex-grow: 1;
+  .contact__info {
+    flex: 1 1 100%;
     display: flex;
     flex-direction: column;
     gap: 24px;
   }
 
-  .contact__title {
+  .header__title {
     font-family: var(--font-family-pixel);
     font-size: var(--font-size-heading-3);
   }
 
   @media (min-width: 576px) {
-    .contact__title {
+    .header__title {
       font-size: var(--font-size-heading-2);
     }
   }
 
-  .contact__social-buttons {
+  .socials {
+    display: contents;
+  }
+
+  .socials__list {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 12px;
     list-style: none;
   }
 
   .contact__form {
-    flex-grow: 1;
+    flex: 1 1 100%;
+  }
+
+  .form {
     display: grid;
     gap: 32px;
   }
 
   @media (min-width: 768px) {
-    .contact__form {
+    .form {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .contact__input {
+  .form__input {
     display: flex;
     flex-direction: column;
     gap: 8px;
   }
 
   @media (min-width: 768px) {
-    .contact__input--field-name {
+    .form__input--field--name {
       grid-column: 1 / 2;
     }
 
-    .contact__input--field-email {
+    .form__input--field--email {
       grid-column: 2 / 3;
     }
 
-    .contact__input--field-message {
-      grid-column: 1 / 3;
+    .form__input--field--message {
+      grid-column: 1 / -1;
     }
   }
 
-  .contact__input-label {
+  .form__input-label {
     font-family: var(--font-family-pixel);
     text-transform: uppercase;
   }
 
-  .contact__input-label-required {
+  .form__input-label-required {
     color: var(--color-black-alt-2);
   }
 
-  .contact__input :global(.contact__input-textarea) {
+  .form__input :global(.form__input-textarea) {
     height: 192px;
     resize: none;
   }
 
-  .contact__input-error {
+  .form__input-error {
+    margin-top: 4px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -416,33 +414,40 @@
     color: #e74c3c;
   }
 
-  .contact__form-captcha {
-    grid-column: 1 / -1;
+  @media (min-width: 768px) {
+    .form__captcha {
+      grid-column: 1 / -1;
+    }
   }
 
-  .contact__sending-response {
-    grid-column: 1 / -1;
+  .form__sending-response {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-weight: bold;
   }
 
-  .contact__sending-response--is-success {
+  @media (min-width: 768px) {
+    .form__sending-response {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .form__sending-response--state--success {
     color: #2ecc71;
   }
 
-  .contact__sending-response--is-failed {
+  .form__sending-response--state--failed {
     color: #e74c3c;
   }
 
   @media (min-width: 768px) {
-    .contact__form :global(.contact__submit-button) {
-      grid-column: 1 / 3;
+    .form :global(.form__submit) {
+      grid-column: 1 / -1;
     }
   }
 
-  .contact__submit-loading-icon {
+  .form__submit-loading-icon {
     animation: loading 1s infinite linear;
   }
 

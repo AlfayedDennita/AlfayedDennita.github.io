@@ -67,7 +67,11 @@
     arts={data.arts}
     navbarOffsetHeight={navbar?.getOffsetHeight()}
   />
-  <Contact bind:this={contact} navbarOffsetHeight={navbar?.getOffsetHeight()} />
+  <Contact
+    bind:this={contact}
+    class="main__contact"
+    navbarOffsetHeight={navbar?.getOffsetHeight()}
+  />
   <FooterObjects
     contactOffsetHeight={contact?.getOffsetHeight()}
     footerOffsetHeight={getFooterOffsetHeight()}
@@ -77,5 +81,9 @@
 <style>
   .main {
     display: contents;
+  }
+
+  .main :global(.main__contact) {
+    z-index: 1;
   }
 </style>
