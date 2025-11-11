@@ -1,4 +1,5 @@
 <script>
+  import { onMount } from 'svelte';
   import { offsetTop } from '$lib/actions/offsetTop';
   import Button from '$lib/components/ui/Button.svelte';
   import SectionHeader from '$lib/components/SectionHeader.svelte';
@@ -20,12 +21,21 @@
     update: () => undefined,
   });
 
+  let limitedProjects = $state([]);
+
   const birdSpeed = $derived(`${windowInnerWidth / 40}s`);
   const cloudSpeed = $derived(`${windowInnerWidth / 5}s`);
 
   export function getOffsetTop() {
     return elementOffsetTop;
   }
+
+  onMount(async () => {
+    const maxProjects = 6;
+
+    const allProjects = await projects;
+    limitedProjects = allProjects.slice(0, maxProjects);
+  });
 </script>
 
 <svelte:window bind:innerWidth={windowInnerWidth} />
@@ -64,10 +74,10 @@
           <ProjectCard skeleton />
         {/each}
       </ProjectCards>
-    {:then projects}
-      {#if projects}
+    {:then}
+      {#if limitedProjects}
         <ProjectCards>
-          {#each projects as project (project.id)}
+          {#each limitedProjects as project (project.id)}
             <ProjectCard
               slug={project.slug}
               title={project.title}
