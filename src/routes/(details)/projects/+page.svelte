@@ -7,6 +7,8 @@
 
   const { data } = $props();
 
+  let windowScrollY = $state();
+
   let projects = $state([]);
   let currentPage = $state(1);
   const totalProjects = $derived(projects.length);
@@ -23,10 +25,17 @@
     );
   });
 
+  $effect(() => {
+    currentPage;
+    windowScrollY = 0;
+  });
+
   onMount(async () => {
     projects = await data.projects;
   });
 </script>
+
+<svelte:window bind:scrollY={windowScrollY} />
 
 <section class="projects" aria-labelledby="projects-title">
   <div class="projects__inner">
