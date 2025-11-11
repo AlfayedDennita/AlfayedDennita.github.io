@@ -97,7 +97,7 @@
 
     <Button
       class="faydev__cta"
-      href="/projects"
+      href="/projects/"
       theme="secondary"
       title="Explore More"
     >
