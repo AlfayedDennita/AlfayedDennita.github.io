@@ -1,5 +1,4 @@
 <script>
-  import { onMount } from 'svelte';
   import ProjectCards from '$lib/components/ProjectCards.svelte';
   import ProjectCard from '$lib/components/ProjectCard.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
@@ -13,6 +12,10 @@
   let currentPage = $state(1);
   const totalProjects = $derived(projects.length);
   const projectsPerPage = 6;
+
+  $effect(async () => {
+    projects = await data.projects;
+  });
 
   const visibleProjects = $derived.by(() => {
     if (!projects) {
@@ -28,10 +31,6 @@
   $effect(() => {
     currentPage;
     windowScrollY = 0;
-  });
-
-  onMount(async () => {
-    projects = await data.projects;
   });
 </script>
 
