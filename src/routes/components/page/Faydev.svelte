@@ -77,7 +77,7 @@
     {:then}
       {#if limitedProjects}
         <ProjectCards>
-          {#each limitedProjects as project (project.id)}
+          {#each limitedProjects as project (project.slug)}
             <ProjectCard
               slug={project.slug}
               title={project.title}

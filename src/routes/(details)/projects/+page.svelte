@@ -50,7 +50,7 @@
     {:then}
       {#if visibleProjects}
         <ProjectCards>
-          {#each visibleProjects as project (project.id)}
+          {#each visibleProjects as project (project.slug)}
             <ProjectCard
               slug={project.slug}
               title={project.title}

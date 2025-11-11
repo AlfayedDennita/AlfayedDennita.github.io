@@ -1,12 +1,13 @@
 [
   {
-    "id": 1,
     "slug": "project-a",
     "title": "Project A",
     "type": {
       "icon": "globe",
       "name": "Web Development"
     },
+    "createdAt": "2025-11-11T12:59:27.943Z",
+    "updatedAt": "2025-11-11T12:59:27.943Z",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "externalLinks": [
       {
@@ -64,7 +65,6 @@
     ]
   },
   {
-    "id": 2,
     "slug": "project-b",
     "title": "Project B",
     "type": {
@@ -92,7 +92,6 @@
     "images": []
   },
   {
-    "id": 3,
     "slug": "project-c",
     "title": "Project C",
     "type": {
@@ -112,7 +111,6 @@
     ]
   },
   {
-    "id": 4,
     "slug": "project-d",
     "title": "Project D",
     "type": {
@@ -143,7 +141,6 @@
     ]
   },
   {
-    "id": 5,
     "slug": "project-e",
     "title": "Project E",
     "type": {
@@ -184,9 +181,60 @@
     ]
   },
   {
-    "id": 6,
     "slug": "project-f",
     "title": "Project F",
+    "type": {
+      "icon": "discord",
+      "name": "Discord Bot"
+    },
+    "badges": [
+      {
+        "name": "HTML5",
+        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
+      },
+      {
+        "name": "Tailwind CSS",
+        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+      },
+      {
+        "name": "JavaScript",
+        "content": "JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
+      },
+      {
+        "name": "SvelteKit",
+        "content": "SvelteKit-FF3E00?style=for-the-badge&logo=Svelte&logoColor=white"
+      },
+      {
+        "name": "Swagger",
+        "content": "Swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white"
+      }
+    ],
+    "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "externalLinks": [
+      {
+        "name": "Discord Server",
+        "url": "https://discord.com",
+        "icon": "discord"
+      }
+    ],
+    "images": [
+      {
+        "name": "1-1.jpg",
+        "width": 1920,
+        "height": 1280,
+        "alt": "Image 1"
+      },
+      {
+        "name": "1-2.jpg",
+        "width": 1920,
+        "height": 1440,
+        "alt": "Image 2"
+      }
+    ]
+  },
+  {
+    "slug": "project-g",
+    "title": "Project G",
     "type": {
       "icon": "discord",
       "name": "Discord Bot"
