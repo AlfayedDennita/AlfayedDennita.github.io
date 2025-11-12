@@ -9,7 +9,7 @@
   } = $props();
 
   const pages = $derived.by(() => {
-    if (totalPages < 1) {
+    if (!currentPage || totalPages < 1) {
       return [];
     }
 

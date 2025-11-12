@@ -1,4 +1,7 @@
 <script>
+  import { onMount, tick, untrack } from 'svelte';
+  import { page } from '$app/state';
+  import { replaceState } from '$app/navigation';
   import ProjectCards from '$lib/components/ProjectCards.svelte';
   import ProjectCard from '$lib/components/ProjectCard.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
@@ -9,12 +12,23 @@
   let windowScrollY = $state();
 
   let projects = $state([]);
-  let currentPage = $state(1);
+  let currentPage = $state(null);
   const totalProjects = $derived(projects.length);
   const projectsPerPage = 6;
+  const totalPages = $derived(Math.ceil(totalProjects / projectsPerPage));
 
   $effect(async () => {
     projects = await data.projects;
+
+    untrack(() => {
+      const pageParam = parseInt(page.url.searchParams.get('page'));
+
+      if (pageParam <= totalPages) {
+        currentPage = pageParam;
+      } else {
+        currentPage = 1;
+      }
+    });
   });
 
   const visibleProjects = $derived.by(() => {
@@ -29,8 +43,13 @@
   });
 
   $effect(() => {
-    currentPage;
-    windowScrollY = 0;
+    if (currentPage !== null) {
+      const newUrl = untrack(() => page.url);
+      newUrl.searchParams.set('page', currentPage);
+      replaceState(newUrl);
+
+      windowScrollY = 0;
+    }
   });
 </script>
 
@@ -67,10 +86,7 @@
       <ErrorLoad message="Failed to load projects." />
     {/await}
 
-    <Pagination
-      bind:currentPage
-      totalPages={Math.ceil(totalProjects / projectsPerPage)}
-    />
+    <Pagination bind:currentPage {totalPages} />
   </div>
 </section>
 
