@@ -62,7 +62,7 @@
     cursor: pointer;
     transition:
       opacity 0.25s,
-      margin-top 0.25s,
+      transform 0.25s,
       padding-bottom 0.25s,
       outline-color 0.25s;
   }
@@ -88,7 +88,7 @@
   }
 
   .button:not(:disabled):active {
-    margin-top: 4px;
+    transform: translateY(4px);
     padding-bottom: 2px;
   }
 
