@@ -1,15 +1,19 @@
 <script>
-  import { offsetTop } from '$lib/actions/offsetTop';
+  import { trackOffsetTop } from '$lib/attachments/trackOffsetTop';
 
   const { class: className, navbarOffsetHeight = 0 } = $props();
 
-  let elementOffsetTop = $state({
+  let offsetTop = $state({
     value: undefined,
     update: () => undefined,
   });
 
   export function getOffsetTop() {
-    return elementOffsetTop;
+    return offsetTop.value;
+  }
+
+  export function getUpdateOffsetTop() {
+    return offsetTop.update;
   }
 </script>
 
@@ -18,10 +22,10 @@
   style:--navbar-offset-height={`${navbarOffsetHeight}px`}
   id="about"
   aria-labelledby="about-title"
-  use:offsetTop={{
-    update: (newValue) => (elementOffsetTop.value = newValue),
-    getUpdateFn: (updateFn) => (elementOffsetTop.update = updateFn),
-  }}
+  {@attach trackOffsetTop(
+    (newOffsetTop) => (offsetTop.value = newOffsetTop),
+    (update) => (offsetTop.update = update)
+  )}
 >
   <div class="about__inner">
     <h2 class="title about__title" id="about-title">

@@ -1,4 +1,5 @@
 <script>
+  import { untrack } from 'svelte';
   import { slide } from 'svelte/transition';
 
   const { class: className, linkedSections = [] } = $props();
@@ -11,16 +12,22 @@
   $effect(() => {
     offsetHeight;
 
-    setTimeout(() => {
+    untrack(() => {
       for (let section of linkedSections) {
-        section.offsetTop?.update();
+        section.updateOffsetTop?.();
       }
-    }, 0);
+    });
+  });
+
+  $effect(() => {
+    if (windowInnerWidth >= 576) {
+      isNavbarListOpen = false;
+    }
   });
 
   const activeSectionIdx = $derived.by(() => {
     for (let i = linkedSections.length - 1; i >= 0; i--) {
-      if (windowScrollY >= linkedSections[i].offsetTop?.value - offsetHeight) {
+      if (windowScrollY >= linkedSections[i].offsetTop - offsetHeight) {
         return i;
       } else {
         continue;

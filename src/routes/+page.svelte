@@ -1,5 +1,5 @@
 <script>
-  import { getContext } from 'svelte';
+  import { onMount, getContext, tick } from 'svelte';
   import { setPageData } from '$lib/states/pageData.svelte';
   import Jumbotron from './components/page/Jumbotron.svelte';
   import Navbar from './components/page/Navbar.svelte';
@@ -30,23 +30,35 @@
       name: 'About',
       url: '/#about',
       offsetTop: about?.getOffsetTop(),
+      updateOffsetTop: about?.getUpdateOffsetTop(),
     },
     {
       name: 'Projects',
       url: '/#projects',
       offsetTop: faydev?.getOffsetTop(),
+      updateOffsetTop: faydev?.getUpdateOffsetTop(),
     },
     {
       name: 'Arts',
       url: '/#arts',
       offsetTop: faydenSpace?.getOffsetTop(),
+      updateOffsetTop: faydenSpace?.getUpdateOffsetTop(),
     },
     {
       name: 'Contact',
       url: '/#contact',
       offsetTop: contact?.getOffsetTop(),
+      updateOffsetTop: contact?.getUpdateOffsetTop(),
     },
   ]);
+
+  onMount(async () => {
+    await tick();
+
+    for (const section of linkedSections) {
+      section.updateOffsetTop();
+    }
+  });
 </script>
 
 <main class="main">

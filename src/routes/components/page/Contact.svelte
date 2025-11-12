@@ -4,7 +4,7 @@
   import Joi from 'joi';
   import captcha from 'svelte-captcha-enhance';
   import db from '$lib/db';
-  import { offsetTop } from '$lib/actions/offsetTop';
+  import { trackOffsetTop } from '$lib/attachments/trackOffsetTop';
   import Button from '$lib/components/ui/Button.svelte';
   import TextField from '$lib/components/ui/TextField.svelte';
 
@@ -12,7 +12,7 @@
 
   let offsetHeight = $state();
 
-  let elementOffsetTop = $state({
+  let offsetTop = $state({
     value: undefined,
     update: () => undefined,
   });
@@ -93,7 +93,11 @@
   }
 
   export function getOffsetTop() {
-    return elementOffsetTop;
+    return offsetTop.value;
+  }
+
+  export function getUpdateOffsetTop() {
+    return offsetTop.update;
   }
 
   export function getOffsetHeight() {
@@ -112,10 +116,10 @@
   style:--navbar-offset-height={`${navbarOffsetHeight}px`}
   id="contact"
   aria-labelledby="contact-title"
-  use:offsetTop={{
-    update: (newValue) => (elementOffsetTop.value = newValue),
-    getUpdateFn: (updateFn) => (elementOffsetTop.update = updateFn),
-  }}
+  {@attach trackOffsetTop(
+    (newOffsetTop) => (offsetTop.value = newOffsetTop),
+    (update) => (offsetTop.update = update)
+  )}
   bind:offsetHeight
 >
   <div class="contact__inner">

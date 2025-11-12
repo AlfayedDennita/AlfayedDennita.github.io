@@ -1,18 +1,22 @@
 <script>
-  import { offsetTop } from '$lib/actions/offsetTop';
+  import { trackOffsetTop } from '$lib/attachments/trackOffsetTop';
   import Button from '$lib/components/ui/Button.svelte';
   import SectionHeader from '$lib/components/SectionHeader.svelte';
   import ErrorLoad from '$lib/components/ErrorLoad.svelte';
 
   const { class: className, arts, navbarOffsetHeight = 0 } = $props();
 
-  let elementOffsetTop = $state({
+  let offsetTop = $state({
     value: undefined,
     update: () => undefined,
   });
 
   export function getOffsetTop() {
-    return elementOffsetTop;
+    return offsetTop.value;
+  }
+
+  export function getUpdateOffsetTop() {
+    return offsetTop.update;
   }
 </script>
 
@@ -21,10 +25,10 @@
   style:--navbar-offset-height={`${navbarOffsetHeight}px`}
   id="arts"
   aria-labelledby="arts-title"
-  use:offsetTop={{
-    update: (newValue) => (elementOffsetTop.value = newValue),
-    getUpdateFn: (updateFn) => (elementOffsetTop.update = updateFn),
-  }}
+  {@attach trackOffsetTop(
+    (newOffsetTop) => (offsetTop.value = newOffsetTop),
+    (update) => (offsetTop.update = update)
+  )}
 >
   <div class="space__inner">
     <SectionHeader

@@ -1,5 +1,5 @@
 <script>
-  import { offsetTop } from '$lib/actions/offsetTop';
+  import { trackOffsetTop } from '$lib/attachments/trackOffsetTop';
   import Button from '$lib/components/ui/Button.svelte';
   import SectionHeader from '$lib/components/SectionHeader.svelte';
   import ProjectCards from '$lib/components/ProjectCards.svelte';
@@ -15,7 +15,7 @@
 
   let windowInnerWidth = $state();
 
-  let elementOffsetTop = $state({
+  let offsetTop = $state({
     value: undefined,
     update: () => undefined,
   });
@@ -32,7 +32,11 @@
   const cloudSpeed = $derived(`${windowInnerWidth / 5}s`);
 
   export function getOffsetTop() {
-    return elementOffsetTop;
+    return offsetTop.value;
+  }
+
+  export function getUpdateOffsetTop() {
+    return offsetTop.update;
   }
 </script>
 
@@ -46,10 +50,10 @@
   style:--cloud-animation-duration={cloudSpeed}
   id="projects"
   aria-labelledby="projects-title"
-  use:offsetTop={{
-    update: (newValue) => (elementOffsetTop.value = newValue),
-    getUpdateFn: (updateFn) => (elementOffsetTop.update = updateFn),
-  }}
+  {@attach trackOffsetTop(
+    (newOffsetTop) => (offsetTop.value = newOffsetTop),
+    (update) => (offsetTop.update = update)
+  )}
 >
   <div class="faydev__inner">
     <SectionHeader
