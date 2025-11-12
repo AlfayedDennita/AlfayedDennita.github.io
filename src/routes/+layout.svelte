@@ -23,7 +23,7 @@
   <title>{pageData.title}</title>
 </svelte:head>
 
-{#if page.route.id !== '/'}
+{#if page.route.id !== '/' || page.status !== 200}
   <SkipToContent />
 {/if}
 <Header bind:this={header} />

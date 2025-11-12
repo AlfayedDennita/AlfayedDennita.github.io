@@ -42,13 +42,15 @@
             icon: 'bullet-list-solid',
           },
         ]}
-        currentPage={project.title}
+        currentPage={project?.title || 'Not Found'}
       />
     {/await}
 
-    {#await data.project}
+    {#snippet imageSliderSkeleton(mainFrameText)}
       <div class="project__image-slider project__image-slider--skeleton">
-        <div class="project__main-frame project__main-frame--skeleton"></div>
+        <div class="project__main-frame project__main-frame--skeleton">
+          {mainFrameText}
+        </div>
         <div class="project__thumbs-swiper project__thumbs-swiper--skeleton">
           {#each { length: 4 }}
             <div
@@ -57,119 +59,143 @@
           {/each}
         </div>
       </div>
-    {:then}
-      <ImageSlider
-        class="project__image-slider"
-        mainFrameClass="project__main-frame"
-        images={imagesForSlider}
-      />
+    {/snippet}
+
+    {#await data.project}
+      {@render imageSliderSkeleton()}
+    {:then project}
+      {#if project}
+        <ImageSlider
+          class="project__image-slider"
+          mainFrameClass="project__main-frame"
+          images={imagesForSlider}
+        />
+      {:else}
+        {@render imageSliderSkeleton('Not Found')}
+      {/if}
     {/await}
+
+    {#snippet infoSkeleton()}
+      <div class="info__header">
+        <div class="info__title info__title--skeleton"></div>
+        <div class="info__type info__type--skeleton"></div>
+      </div>
+      <div class="info__description info__description--skeleton"></div>
+    {/snippet}
 
     <div class="info project__info">
       {#await data.project}
-        <div class="info__header">
-          <div class="info__title info__title--skeleton"></div>
-          <div class="info__type info__type--skeleton"></div>
-        </div>
-        <div class="info__description info__description--skeleton"></div>
+        {@render infoSkeleton()}
       {:then project}
-        <header class="info__header">
-          <h1 class="info__title" id="project-title">
-            {project.title}
-          </h1>
-          <p class="info__type">
-            <i class={['hn', `hn-${project.type.icon}`]}></i>
-            {project.type.name}
-          </p>
-        </header>
-        {#if project.createdAt || project.updatedAt}
-          <div class="dates info__dates">
-            {#if project.createdAt}
-              <p class="dates__date">
-                <b>Published:</b>
-                {isoStringToDateString(project.createdAt)}
-              </p>
-            {/if}
-            {#if project.updatedAt}
-              <p class="dates__date">
-                <b>Last Updated:</b>
-                {isoStringToDateString(project.updatedAt)}
-              </p>
-            {/if}
-          </div>
-        {/if}
-        <p class="info__description">{project.description}</p>
-        {#if project.externalLinks?.length > 0}
-          <section class="links info__links" aria-labelledby="links-title">
-            <h3 class="links__title" id="links-title">
-              {`External Link${project.externalLinks.length > 1 ? 's' : ''}`}
-              <i class="hn hn-external-link-solid links__title-icon"></i>
-              :
-            </h3>
-            <ul class="links__list">
-              {#each project.externalLinks as link (link.name)}
-                <li>
-                  <a
-                    class="links__link"
-                    href={link.url}
-                    target="_blank"
-                    rel="external"
-                    title={link.name}
-                  >
-                    <i class={['hn', `hn-${link.icon}`]}></i>
-                    {link.name}
-                  </a>
-                </li>
-              {/each}
-            </ul>
-          </section>
-        {/if}
-        {#if project.badges?.length > 0}
-          <section class="badges info__badges" aria-labelledby="badges-title">
-            <h3 class="badges__title" id="badges-title">Tech Stacks:</h3>
-            <ul class="badges__list">
-              {#each project.badges as badge (badge.name)}
-                <li>
-                  <img
-                    class="badges__badge"
-                    src={`https://img.shields.io/badge/${badge.content}`}
-                    alt={badge.name}
-                  />
-                </li>
-              {/each}
-            </ul>
-          </section>
+        {#if project}
+          <header class="info__header">
+            <h1 class="info__title" id="project-title">
+              {project.title}
+            </h1>
+            <p class="info__type">
+              <i class={['hn', `hn-${project.type.icon}`]}></i>
+              {project.type.name}
+            </p>
+          </header>
+          {#if project.createdAt || project.updatedAt}
+            <div class="dates info__dates">
+              {#if project.createdAt}
+                <p class="dates__date">
+                  <b>Published:</b>
+                  {isoStringToDateString(project.createdAt)}
+                </p>
+              {/if}
+              {#if project.updatedAt}
+                <p class="dates__date">
+                  <b>Last Updated:</b>
+                  {isoStringToDateString(project.updatedAt)}
+                </p>
+              {/if}
+            </div>
+          {/if}
+          <p class="info__description">{project.description}</p>
+          {#if project.externalLinks?.length > 0}
+            <section class="links info__links" aria-labelledby="links-title">
+              <h3 class="links__title" id="links-title">
+                {`External Link${project.externalLinks.length > 1 ? 's' : ''}`}
+                <i class="hn hn-external-link-solid links__title-icon"></i>
+                :
+              </h3>
+              <ul class="links__list">
+                {#each project.externalLinks as link (link.name)}
+                  <li>
+                    <a
+                      class="links__link"
+                      href={link.url}
+                      target="_blank"
+                      rel="external"
+                      title={link.name}
+                    >
+                      <i class={['hn', `hn-${link.icon}`]}></i>
+                      {link.name}
+                    </a>
+                  </li>
+                {/each}
+              </ul>
+            </section>
+          {/if}
+          {#if project.badges?.length > 0}
+            <section class="badges info__badges" aria-labelledby="badges-title">
+              <h3 class="badges__title" id="badges-title">Tech Stacks:</h3>
+              <ul class="badges__list">
+                {#each project.badges as badge (badge.name)}
+                  <li>
+                    <img
+                      class="badges__badge"
+                      src={`https://img.shields.io/badge/${badge.content}`}
+                      alt={badge.name}
+                    />
+                  </li>
+                {/each}
+              </ul>
+            </section>
+          {/if}
+        {:else}
+          {@render infoSkeleton()}
         {/if}
       {/await}
     </div>
 
+    {#snippet navSkeleton()}
+      <div class="nav__button nav__button--skeleton"></div>
+      <div class="nav__button nav__button--skeleton"></div>
+    {/snippet}
+
     <div class="nav project__nav">
       {#await data.project}
-        <div class="nav__button nav__button--skeleton"></div>
-        <div class="nav__button nav__button--skeleton"></div>
+        {@render navSkeleton()}
       {:then project}
-        {#if project.prevProject}
-          <Button
-            class="nav__button nav__button--dir--prev"
-            href={`/projects/${project.prevProject.slug}`}
-            title={project.prevProject.title}
-          >
-            <i class="hn hn-arrow-left-solid"></i>
-            Prev:
-            {project.prevProject.title}
-          </Button>
-        {/if}
-        {#if project.nextProject}
-          <Button
-            class="nav__button nav__button--dir--next"
-            href={`/projects/${project.nextProject.slug}`}
-            theme="secondary"
-            title={project.nextProject.title}
-          >
-            Next:
-            {project.nextProject.title}
-            <i class="hn hn-arrow-right-solid"></i>
-          </Button>
+        {#if project}
+          {#if project.prevProject}
+            <Button
+              class="nav__button nav__button--dir--prev"
+              href={`/projects/${project.prevProject.slug}`}
+              title={project.prevProject.title}
+            >
+              <i class="hn hn-arrow-left-solid"></i>
+              Prev:
+              {project.prevProject.title}
+            </Button>
+          {/if}
+          {#if project.nextProject}
+            <Button
+              class="nav__button nav__button--dir--next"
+              href={`/projects/${project.nextProject.slug}`}
+              theme="secondary"
+              title={project.nextProject.title}
+            >
+              Next:
+              {project.nextProject.title}
+              <i class="hn hn-arrow-right-solid"></i>
+            </Button>
+          {/if}
+        {:else}
+          {@render navSkeleton()}
         {/if}
       {/await}
     </div>
@@ -255,7 +281,14 @@
 
   .project__main-frame--skeleton {
     aspect-ratio: 16 / 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--color-white-alt-1);
+    font-family: var(--font-family-pixel);
+    text-align: center;
+    color: rgba(var(--color-black-alt-2-rgb), 0.5);
+    user-select: none;
   }
 
   @media (min-width: 576px) {
@@ -434,6 +467,10 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+  }
+
+  .nav :global(.nav__button--dir--next) {
+    margin-left: auto;
   }
 
   @media (min-width: 768px) {

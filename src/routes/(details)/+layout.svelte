@@ -1,5 +1,6 @@
 <script>
   import { getContext } from 'svelte';
+  import DetailsMain from '$lib/components/DetailsMain.svelte';
 
   const { children } = $props();
 
@@ -7,19 +8,9 @@
   const getFooterOffsetHeight = getContext('footer-offset-height');
 </script>
 
-<main
-  class="main"
-  style:--header-offset-height={`${getHeaderOffsetHeight()}px`}
-  style:--footer-offset-height={`${getFooterOffsetHeight()}px`}
-  id="main"
+<DetailsMain
+  headerOffsetHeight={getHeaderOffsetHeight()}
+  footerOffsetHeight={getFooterOffsetHeight()}
 >
   {@render children?.()}
-</main>
-
-<style>
-  .main {
-    scroll-margin-top: calc(var(--header-offset-height) * -1);
-    min-height: calc(100dvh - var(--footer-offset-height));
-    padding-top: var(--header-offset-height);
-  }
-</style>
+</DetailsMain>

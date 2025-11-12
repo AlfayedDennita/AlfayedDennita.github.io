@@ -15,7 +15,7 @@
 <header class={['header', className]} bind:offsetHeight>
   <a class="title" href="/" title="Fayden World">
     <svelte:element
-      this={page.route.id === '/' ? 'h1' : 'h2'}
+      this={page.route.id === '/' && page.status === 200 ? 'h1' : 'h2'}
       class="title__text"
     >
       <span class="title__text-left">Fayden</span>
