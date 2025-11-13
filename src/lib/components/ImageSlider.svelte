@@ -391,7 +391,7 @@
     aspect-ratio: 16 / 9;
     object-fit: cover;
     object-position: center;
-    filter: brightness(0.75);
+    filter: brightness(0.5);
     transition: filter 0.25s;
   }
 
