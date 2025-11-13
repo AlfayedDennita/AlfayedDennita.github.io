@@ -1,13 +1,16 @@
 <script>
+  import { isoStringToDateString } from '$lib/utils/formatDate';
+
   const {
     class: className,
     skeleton = false,
     slug,
     title,
-    image,
     typeIcon,
     typeName,
+    isoCreatedAt,
     description,
+    image,
     ...props
   } = $props();
 </script>
@@ -51,6 +54,18 @@
         {#if !skeleton}
           <i class={['hn', `hn-${typeIcon}`]}></i>
           {typeName}
+        {/if}
+      </svelte:element>
+      <svelte:element
+        this={!skeleton ? 'p' : 'div'}
+        class="project-card__date"
+        class:project-card__date--skeleton={skeleton}
+      >
+        {#if !skeleton}
+          <i class="hn hn-calender-solid project-card__date-icon"></i>
+          <time datetime={isoCreatedAt}
+            >{isoStringToDateString(isoCreatedAt, false)}</time
+          >
         {/if}
       </svelte:element>
       <svelte:element
@@ -190,6 +205,7 @@
   .project-card__type {
     align-self: flex-start;
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 6px;
     padding: 4px 8px;
@@ -211,8 +227,26 @@
     background-color: var(--color-white-alt-1);
   }
 
-  .project-card__description {
+  .project-card__date {
+    align-self: flex-start;
     margin-top: 12px;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px;
+    font-size: var(--font-size-small);
+    color: var(--color-black-alt-1);
+  }
+
+  .project-card__date--skeleton {
+    width: 96px;
+    height: 18px;
+    background-color: var(--color-white-alt-1);
+    border-radius: 2px;
+  }
+
+  .project-card__description {
+    margin-top: 8px;
     overflow: hidden;
     display: -webkit-box;
     text-overflow: ellipsis;

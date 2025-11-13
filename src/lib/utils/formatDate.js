@@ -1,4 +1,4 @@
-export function isoStringToDateString(isoString) {
+export function isoStringToDateString(isoString, time = true) {
   const months = [
     'Jan',
     'Feb',
@@ -15,7 +15,11 @@ export function isoStringToDateString(isoString) {
   ];
 
   const date = new Date(isoString);
-  const dateString = `${date.getDate()}-${months[date.getMonth()]}-${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+  let dateString = `${date.getDate().toString().padStart(2, 0)}-${months[date.getMonth()]}-${date.getFullYear()}`;
+
+  if (time) {
+    dateString += ` ${date.getHours().toString().padStart(2, 0)}:${date.getMinutes().toString().padStart(2, 0)}`;
+  }
 
   return dateString;
 }

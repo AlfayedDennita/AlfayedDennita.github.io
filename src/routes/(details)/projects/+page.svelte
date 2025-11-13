@@ -80,10 +80,11 @@
             <ProjectCard
               slug={project.slug}
               title={project.title}
-              image={project.images[0]}
               typeIcon={project.type.icon}
               typeName={project.type.name}
+              isoCreatedAt={project.createdAt}
               description={project.description}
+              image={project.images[0]}
             />
           {/each}
         </ProjectCards>

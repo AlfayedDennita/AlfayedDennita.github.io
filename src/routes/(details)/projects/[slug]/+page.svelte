@@ -111,13 +111,17 @@
               {#if project.createdAt}
                 <p class="dates__date">
                   <b>Published:</b>
-                  {isoStringToDateString(project.createdAt)}
+                  <time datetime={project.createdAt}
+                    >{isoStringToDateString(project.createdAt)}</time
+                  >
                 </p>
               {/if}
               {#if project.updatedAt}
                 <p class="dates__date">
                   <b>Last Updated:</b>
-                  {isoStringToDateString(project.updatedAt)}
+                  <time datetime={project.updatedAt}
+                    >{isoStringToDateString(project.updatedAt)}</time
+                  >
                 </p>
               {/if}
             </div>
