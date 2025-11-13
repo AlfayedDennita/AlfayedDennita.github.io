@@ -28,6 +28,11 @@
   let thumbsSwiper = $state();
   let activeSlideIdx = $state(0);
 
+  function changeMainSwiperActiveSlide(idx) {
+    activeSlideIdx = idx;
+    mainSwiper?.swiper?.slideTo(activeSlideIdx);
+  }
+
   function handleChangingSwiperActiveIdx(event) {
     activeSlideIdx = event.detail[0].activeIndex;
   }
@@ -50,8 +55,7 @@
     });
 
     lightbox.on('change', () => {
-      activeSlideIdx = window.pswp.currIndex;
-      mainSwiper?.swiper?.slideTo(activeSlideIdx);
+      changeMainSwiperActiveSlide(window.pswp.currIndex);
     });
 
     lightbox.init();
@@ -211,14 +215,24 @@
       {@attach thumbsSwiperAttachment(images)}
     >
       {#each images as image, i (image.name)}
-        <swiper-slide>
-          <button
-            class="thumbs-swiper__thumb"
-            type="button"
-            title={`Go to Image No. ${i + 1}`}
-          >
-            <img class="thumbs-swiper__image" src={image.url} alt={image.alt} />
-          </button>
+        <swiper-slide
+          class="thumbs-swiper__thumb"
+          role="button"
+          tabindex="0"
+          title={`Go to Image No. ${i + 1}`}
+          onkeydown={(event) => {
+            if (event.key === ' ') {
+              event.preventDefault();
+            }
+          }}
+          onkeyup={(event) => {
+            if (['Enter', ' '].includes(event.key)) {
+              event.preventDefault();
+              changeMainSwiperActiveSlide(i);
+            }
+          }}
+        >
+          <img class="thumbs-swiper__image" src={image.url} alt={image.alt} />
         </swiper-slide>
       {/each}
     </swiper-container>
