@@ -135,7 +135,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: url('$lib/assets/faydev/backgrounds/cloud.png') repeat-x;
+    background: url('$lib/assets/faydev/backgrounds/cloud.webp') repeat-x;
     background-size: auto var(--jumbotron-offset-height);
     pointer-events: none;
     animation: cloud var(--cloud-animation-duration) infinite linear;
