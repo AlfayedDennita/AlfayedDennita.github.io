@@ -1,5 +1,6 @@
 <script>
   import { isoStringToDateString } from '$lib/utils/formatDate.js';
+  import { setPageData } from '$lib/states/pageData.svelte';
   import Button from '$lib/components/ui/Button.svelte';
   import Breadcrumbs from '$lib/components/Breadcrumbs.svelte';
   import ImageSlider from '$lib/components/ImageSlider.svelte';
@@ -20,6 +21,14 @@
 
   $effect(async () => {
     project = await data.project;
+
+    setPageData({
+      title: project.title,
+      description: project.description,
+      additionalKeywords: project.badges
+        ? project.badges.map((badge) => badge.name)
+        : undefined,
+    });
   });
 </script>
 

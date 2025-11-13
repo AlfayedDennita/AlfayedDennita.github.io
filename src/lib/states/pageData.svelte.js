@@ -22,11 +22,13 @@ export let pageData = $state({
 });
 
 export function setPageData({ title, description, additionalKeywords = [] }) {
-  const keywords = [
-    ...new SvelteSet([...defaultKeywords, ...additionalKeywords]),
-  ].join(', ');
-
-  pageData.title = title || defaultPageData.title;
+  pageData.title = title ? `${title} - Fayden World` : defaultPageData.title;
   pageData.description = description || defaultPageData.description;
-  pageData.keywords = keywords;
+
+  if (additionalKeywords) {
+    const keywords = [
+      ...new SvelteSet([...defaultKeywords, ...additionalKeywords]),
+    ].join(', ');
+    pageData.keywords = keywords;
+  }
 }

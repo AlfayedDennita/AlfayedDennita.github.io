@@ -2,12 +2,20 @@
   import { onMount, tick, untrack } from 'svelte';
   import { page } from '$app/state';
   import { replaceState } from '$app/navigation';
+  import { setPageData } from '$lib/states/pageData.svelte';
   import ProjectCards from '$lib/components/ProjectCards.svelte';
   import ProjectCard from '$lib/components/ProjectCard.svelte';
   import Pagination from '$lib/components/Pagination.svelte';
   import ErrorLoad from '$lib/components/ErrorLoad.svelte';
 
   const { data } = $props();
+
+  setPageData({
+    title: 'All Projects',
+    description:
+      'All listed projects that Alfayed Dennita made or contributed. Mostly, the projects are about software development. All projects are well explained on their respective page.',
+    additionalKeywords: ['projects', 'software development', 'applications'],
+  });
 
   let windowScrollY = $state();
 
