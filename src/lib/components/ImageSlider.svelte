@@ -278,18 +278,18 @@
     top: 0;
     inset-block: 0;
     padding: 16px;
-    background: rgba(var(--color-black-pure-rgb), 0.05);
+    background: none;
     border: none;
     outline: none;
     transition: background-color 0.25s;
   }
 
   .main-swiper__nav-button:hover {
-    background-color: rgba(var(--color-black-pure-rgb), 0.1);
+    background-color: rgba(var(--color-black-pure-rgb), 0.05);
   }
 
   .main-swiper__nav-button:focus-visible {
-    background-color: rgba(var(--color-black-pure-rgb), 0.5);
+    background-color: rgba(var(--color-black-pure-rgb), 0.1);
   }
 
   .main-swiper__nav-button:global(.swiper-button-disabled) {
@@ -303,6 +303,8 @@
 
   .main-swiper__nav-button :global(.swiper-navigation-icon) {
     height: 16px;
+    stroke: var(--color-black-alt-2);
+    stroke-width: 0.4px;
   }
 
   .main-swiper__pagination {
