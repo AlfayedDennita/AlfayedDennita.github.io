@@ -278,7 +278,7 @@
     top: 0;
     inset-block: 0;
     padding: 16px;
-    background: none;
+    background: rgba(var(--color-black-pure-rgb), 0.05);
     border: none;
     outline: none;
     transition: background-color 0.25s;
@@ -289,7 +289,7 @@
   }
 
   .main-swiper__nav-button:focus-visible {
-    background-color: rgba(var(--color-black-pure-rgb), 0.4);
+    background-color: rgba(var(--color-black-pure-rgb), 0.5);
   }
 
   .main-swiper__nav-button:global(.swiper-button-disabled) {
