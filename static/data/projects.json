@@ -1,5 +1,97 @@
 [
   {
+    "slug": "forus",
+    "title": "Forus",
+    "type": {
+      "icon": "globe",
+      "name": "Web Application"
+    },
+    "createdAt": "2022-12-09T06:55:00Z",
+    "updatedAt": "2022-12-09T06:55:00Z",
+    "description": "Forus is a forum app that can connect you to people. You can see all threads, create your own thread, and give your comments on threads. The website features a leaderboard system, so you need to post and comment more to earn points and climb the leaderboard. I built this app to complete a Dicoding course, \"Menjadi React Web Developer Expert\".",
+    "externalLinks": [
+      {
+        "name": "Live Website",
+        "url": "https://forus-beta.vercel.app/",
+        "icon": "globe-solid"
+      },
+      {
+        "name": "GitHub Repository",
+        "url": "https://github.com/AlfayedDennita/forus/",
+        "icon": "github"
+      },
+      {
+        "name": "Dicoding Competency Certificate",
+        "url": "https://www.dicoding.com/certificates/QLZ924L2EX5D/",
+        "icon": "badge-check-solid"
+      }
+    ],
+    "images": [
+      {
+        "name": "forus-1.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Banner"
+      },
+      {
+        "name": "forus-2.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Sign Up"
+      },
+      {
+        "name": "forus-3.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Sign In"
+      },
+      {
+        "name": "forus-4.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "View a Thread"
+      },
+      {
+        "name": "forus-5.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "View Leaderboard"
+      },
+      {
+        "name": "forus-6.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Create a Thread"
+      }
+    ],
+    "badges": [
+      {
+        "name": "React",
+        "content": "React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"
+      },
+      {
+        "name": "Redux",
+        "content": "Redux-593D88?style=for-the-badge&logo=redux&logoColor=white"
+      },
+      {
+        "name": "Tailwind CSS",
+        "content": "TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+      },
+      {
+        "name": "Storybook",
+        "content": "Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white"
+      },
+      {
+        "name": "Cypress",
+        "content": "Cypress-E5E5E5?style=for-the-badge&logo=cypress&logoColor=058A5E"
+      },
+      {
+        "name": "Jest",
+        "content": "Jest-C21325?style=for-the-badge&logo=jest&logoColor=white"
+      }
+    ]
+  },
+  {
     "slug": "astronote",
     "title": "Astronote!",
     "type": {
@@ -23,7 +115,7 @@
       {
         "name": "Dicoding Competency Certificate",
         "url": "https://www.dicoding.com/certificates/L4PQ4DE2VXO1/",
-        "icon": "globe-solid"
+        "icon": "badge-check-solid"
       }
     ],
     "images": [
@@ -101,7 +193,7 @@
       {
         "name": "Dicoding Competency Certificate",
         "url": "https://www.dicoding.com/certificates/GRX5LDDWVP0M/",
-        "icon": "globe-solid"
+        "icon": "badge-check-solid"
       }
     ],
     "images": [
@@ -150,6 +242,184 @@
     ]
   },
   {
+    "slug": "simple-bookshelf",
+    "title": "Simple Bookshelf",
+    "type": {
+      "icon": "globe",
+      "name": "Web Application"
+    },
+    "createdAt": "2022-06-13T06:19:00Z",
+    "updatedAt": "2022-06-13T06:19:00Z",
+    "description": "Simple Bookshelf is a web app that stores your read history in your browser's local storage. You can add all of your favorite books, including your wishlist, and mark them as read later. This is a submission project of a Dicoding course, \"Belajar Membuat Front-End Web untuk Pemula\".",
+    "externalLinks": [
+      {
+        "name": "Live Website",
+        "url": "https://alfayeddennita.github.io/bookshelf-apps/",
+        "icon": "globe-solid"
+      },
+      {
+        "name": "GitHub Repository",
+        "url": "https://github.com/AlfayedDennita/bookshelf-apps/",
+        "icon": "github"
+      },
+      {
+        "name": "Dicoding Competency Certificate",
+        "url": "https://www.dicoding.com/certificates/6RPND6GNRZ2M/",
+        "icon": "badge-check-solid"
+      }
+    ],
+    "images": [
+      {
+        "name": "simple-bookshelf-1.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Banner"
+      },
+      {
+        "name": "simple-bookshelf-2.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "View Books"
+      },
+      {
+        "name": "simple-bookshelf-3.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Filtering Books"
+      }
+    ],
+    "badges": [
+      {
+        "name": "HTML5",
+        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
+      },
+      {
+        "name": "CSS",
+        "content": "CSS-1572B6?style=for-the-badge&logo=css&logoColor=white"
+      },
+      {
+        "name": "JavaScript",
+        "content": "JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
+      }
+    ]
+  },
+  {
+    "slug": "besnik",
+    "title": "Besnik",
+    "type": {
+      "icon": "pen-nib-solid",
+      "name": "UI/UX Slicing"
+    },
+    "createdAt": "2022-04-19T23:32:00Z",
+    "updatedAt": "2022-04-19T23:32:00Z",
+    "description": "Besnik is a freelance website for companies that need freelancers and freelancers who are ready to give their skills. I sliced the UI design from UIHut into ready-use HTML template powered by Tailwind CSS as its styling.",
+    "externalLinks": [
+      {
+        "name": "Live Website",
+        "url": "https://alfayeddennita.github.io/portfolio-besnik/",
+        "icon": "globe-solid"
+      },
+      {
+        "name": "GitHub Repository",
+        "url": "https://github.com/AlfayedDennita/portfolio-besnik/",
+        "icon": "github"
+      }
+    ],
+    "images": [
+      {
+        "name": "besnik-1.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Jumbotron"
+      },
+      {
+        "name": "besnik-2.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Job Categories"
+      },
+      {
+        "name": "besnik-3.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Reviews"
+      },
+      {
+        "name": "besnik-4.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Footer"
+      }
+    ],
+    "badges": [
+      {
+        "name": "HTML5",
+        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
+      },
+      {
+        "name": "CSS",
+        "content": "CSS-1572B6?style=for-the-badge&logo=css&logoColor=white"
+      },
+      {
+        "name": "Tailwind CSS",
+        "content": "TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+      }
+    ]
+  },
+  {
+    "slug": "yre-travel",
+    "title": "YRE Travel",
+    "type": {
+      "icon": "pen-nib-solid",
+      "name": "UI/UX Slicing"
+    },
+    "createdAt": "2022-04-16T08:35:00Z",
+    "updatedAt": "2022-04-16T08:35:00Z",
+    "description": "YRE Travel is an online travel service that makes it easier for you to tour the world without worrying too much. This landing page only contains HTML and CSS, so you can use it as a template with any front-end frameworks and libraries.",
+    "externalLinks": [
+      {
+        "name": "Live Website",
+        "url": "https://alfayeddennita.github.io/portfolio-yre-travel/",
+        "icon": "globe-solid"
+      },
+      {
+        "name": "GitHub Repository",
+        "url": "https://github.com/AlfayedDennita/portfolio-yre-travel/",
+        "icon": "github"
+      }
+    ],
+    "images": [
+      {
+        "name": "yre-travel-1.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Jumbotron"
+      },
+      {
+        "name": "yre-travel-2.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Destinations"
+      },
+      {
+        "name": "yre-travel-3.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Footer"
+      }
+    ],
+    "badges": [
+      {
+        "name": "HTML5",
+        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
+      },
+      {
+        "name": "CSS",
+        "content": "CSS-1572B6?style=for-the-badge&logo=css&logoColor=white"
+      }
+    ]
+  },
+  {
     "slug": "jelajah-semesta",
     "title": "Jelajah Semesta",
     "type": {
@@ -158,7 +428,7 @@
     },
     "createdAt": "2020-06-23T03:32:00Z",
     "updatedAt": "2020-06-23T03:32:00Z",
-    "description": "Jelajah Semesta is a simple website that contains information from various sources about popular objects in our solar system, such as the sun and its planets. The website brings the reader to take a solar system quick tour, from the sun to Pluto, in Bahasa Indonesia.",
+    "description": "Jelajah Semesta is a simple website that contains information from various sources about popular objects in our solar system, such as the sun and its planets. The website brings the reader to take a solar system quick tour, from the sun to Pluto, in Bahasa Indonesia. I built this website to complete a Dicoding course, \"Membangun Progressive Web Apps\".",
     "externalLinks": [
       {
         "name": "Live Website",
@@ -169,6 +439,11 @@
         "name": "GitHub Repository",
         "url": "https://github.com/AlfayedDennita/jelajah-semesta/",
         "icon": "github"
+      },
+      {
+        "name": "Dicoding Competency Certificate",
+        "url": "https://www.dicoding.com/certificates/07Z6LVM9RPQR/",
+        "icon": "badge-check-solid"
       }
     ],
     "images": [
