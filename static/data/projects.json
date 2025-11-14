@@ -23,7 +23,7 @@
       {
         "name": "Dicoding Competency Certificate",
         "url": "https://www.dicoding.com/certificates/QLZ924L2EX5D/",
-        "icon": "badge-check-solid"
+        "icon": "writing"
       }
     ],
     "images": [
@@ -75,7 +75,7 @@
       },
       {
         "name": "Tailwind CSS",
-        "content": "TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
       },
       {
         "name": "Storybook",
@@ -83,7 +83,7 @@
       },
       {
         "name": "Cypress",
-        "content": "Cypress-E5E5E5?style=for-the-badge&logo=cypress&logoColor=058A5E"
+        "content": "Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white"
       },
       {
         "name": "Jest",
@@ -115,7 +115,7 @@
       {
         "name": "Dicoding Competency Certificate",
         "url": "https://www.dicoding.com/certificates/L4PQ4DE2VXO1/",
-        "icon": "badge-check-solid"
+        "icon": "writing"
       }
     ],
     "images": [
@@ -193,7 +193,7 @@
       {
         "name": "Dicoding Competency Certificate",
         "url": "https://www.dicoding.com/certificates/GRX5LDDWVP0M/",
-        "icon": "badge-check-solid"
+        "icon": "writing"
       }
     ],
     "images": [
@@ -265,7 +265,7 @@
       {
         "name": "Dicoding Competency Certificate",
         "url": "https://www.dicoding.com/certificates/6RPND6GNRZ2M/",
-        "icon": "badge-check-solid"
+        "icon": "writing"
       }
     ],
     "images": [
@@ -308,7 +308,7 @@
     "title": "Besnik",
     "type": {
       "icon": "pen-nib-solid",
-      "name": "UI/UX Slicing"
+      "name": "Web UI Slicing"
     },
     "createdAt": "2022-04-19T23:32:00Z",
     "updatedAt": "2022-04-19T23:32:00Z",
@@ -362,7 +362,7 @@
       },
       {
         "name": "Tailwind CSS",
-        "content": "TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
       }
     ]
   },
@@ -371,7 +371,7 @@
     "title": "YRE Travel",
     "type": {
       "icon": "pen-nib-solid",
-      "name": "UI/UX Slicing"
+      "name": "Web UI Slicing"
     },
     "createdAt": "2022-04-16T08:35:00Z",
     "updatedAt": "2022-04-16T08:35:00Z",
@@ -420,6 +420,63 @@
     ]
   },
   {
+    "slug": "ruang-ilmu",
+    "title": "Ruang Ilmu",
+    "type": {
+      "icon": "pen-nib-solid",
+      "name": "Mobile UI Slicing"
+    },
+    "createdAt": "2022-02-19T04:47:00Z",
+    "updatedAt": "2020-05-23T08:42:00Z",
+    "description": "Ruang Ilmu is a multi-platform mobile app for you to find and buy your favorite books easily. This app is a result of my UI slicing project with Flutter, so it doesn't have any logic in it; it's just a front-end app. I built this to complete my Dicoding course, \"Belajar Membuat Aplikasi Flutter untuk Pemula\".",
+    "externalLinks": [
+      {
+        "name": "GitHub Repository",
+        "url": "https://github.com/AlfayedDennita/ruang-ilmu/",
+        "icon": "github"
+      },
+      {
+        "name": "Dicoding Competency Certificate",
+        "url": "https://www.dicoding.com/certificates/4EXG6LL9DZRL/",
+        "icon": "writing"
+      }
+    ],
+    "images": [
+      {
+        "name": "ruang-ilmu-1.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Banner"
+      },
+      {
+        "name": "ruang-ilmu-2.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Home, Book Details, and Inventory"
+      },
+      {
+        "name": "ruang-ilmu-3.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Book Seach, Shopping Cart, and Login"
+      }
+    ],
+    "badges": [
+      {
+        "name": "Dart",
+        "content": "Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white"
+      },
+      {
+        "name": "Flutter",
+        "content": "Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white"
+      },
+      {
+        "name": "Material Design",
+        "content": "Material%20Design-757575?style=for-the-badge&logo=material%20design&logoColor=white"
+      }
+    ]
+  },
+  {
     "slug": "jelajah-semesta",
     "title": "Jelajah Semesta",
     "type": {
@@ -443,7 +500,7 @@
       {
         "name": "Dicoding Competency Certificate",
         "url": "https://www.dicoding.com/certificates/07Z6LVM9RPQR/",
-        "icon": "badge-check-solid"
+        "icon": "writing"
       }
     ],
     "images": [
