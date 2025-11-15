@@ -147,13 +147,19 @@
   }
 
   .project-card__anchor {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
     outline: none;
     font-family: var(--font-family-pixel);
     font-size: var(--font-size-heading-6);
+    text-overflow: ellipsis;
     text-transform: uppercase;
     text-decoration: 2px underline dotted transparent;
     text-underline-offset: 4px;
     color: var(--color-black-pure);
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
     transition: text-decoration-color 0.25s;
   }
 
@@ -249,10 +255,10 @@
     margin-top: 8px;
     overflow: hidden;
     display: -webkit-box;
+    -webkit-box-orient: vertical;
     text-overflow: ellipsis;
     line-clamp: 4;
     -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
   }
 
   .project-card__description--skeleton {

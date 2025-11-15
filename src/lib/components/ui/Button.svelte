@@ -104,6 +104,7 @@
     min-width: 48px;
     min-height: 48px;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     gap: 8px;

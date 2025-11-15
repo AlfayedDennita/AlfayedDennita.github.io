@@ -191,8 +191,9 @@
               title={project.prevProject.title}
             >
               <i class="hn hn-arrow-left-solid"></i>
-              Prev:
-              {project.prevProject.title}
+              <span class="nav__button-text"
+                >Prev: {project.prevProject.title}</span
+              >
             </Button>
           {/if}
           {#if project.nextProject}
@@ -202,8 +203,9 @@
               theme="secondary"
               title={project.nextProject.title}
             >
-              Next:
-              {project.nextProject.title}
+              <span class="nav__button-text"
+                >Next: {project.nextProject.title}</span
+              >
               <i class="hn hn-arrow-right-solid"></i>
             </Button>
           {/if}
@@ -477,9 +479,6 @@
 
   .nav :global(.nav__button) {
     flex-grow: 1;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
   .nav :global(.nav__button--dir--next) {
@@ -489,6 +488,7 @@
   @media (min-width: 768px) {
     .nav :global(.nav__button) {
       flex-grow: 0;
+      max-width: 50%;
     }
   }
 
@@ -497,5 +497,14 @@
     height: 48px;
     background-color: var(--color-white-alt-1);
     border-radius: 4px;
+  }
+
+  .nav__button-text {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
   }
 </style>
