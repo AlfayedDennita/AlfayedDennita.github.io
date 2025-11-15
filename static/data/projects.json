@@ -304,6 +304,51 @@
     ]
   },
   {
+    "slug": "sistem-rekomendasi-postingan",
+    "title": "Sistem Rekomendasi Postingan (Post Recommendation System)",
+    "type": {
+      "icon": "machine-learning",
+      "name": "Machine Learning"
+    },
+    "createdAt": "2022-05-02T08:54:00Z",
+    "updatedAt": "2025-11-15T01:56:00Z",
+    "description": "Sistem Rekomendasi Postingan (Post Recommendation System) is my final project of \"Machine Learning Terapan\" Dicoding course. I created a machine learning model of a post recommendation system using two methods: content-based filtering and collaborative filtering. Content-based filtering is used to recommend posts related to a post, while collaborative filtering is used to recommend posts based on a user's post preferences.",
+    "externalLinks": [
+      {
+        "name": "GitHub Repository and Report",
+        "url": "https://github.com/AlfayedDennita/sistem-rekomendasi-postingan/",
+        "icon": "github"
+      },
+      {
+        "name": "Dicoding Competency Certificate",
+        "url": "https://www.dicoding.com/certificates/98XWK0W8WXM3/",
+        "icon": "writing"
+      }
+    ],
+    "images": [
+      {
+        "name": "sistem-rekomendasi-postingan-1.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Banner"
+      }
+    ],
+    "badges": [
+      {
+        "name": "Python",
+        "content": "Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue"
+      },
+      {
+        "name": "Google Colab",
+        "content": "Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252"
+      },
+      {
+        "name": "TensorFlow",
+        "content": "TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"
+      }
+    ]
+  },
+  {
     "slug": "besnik",
     "title": "Besnik",
     "type": {
