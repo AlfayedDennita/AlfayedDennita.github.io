@@ -67,20 +67,12 @@
     ],
     "badges": [
       {
-        "name": "HTML5",
-        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
-      },
-      {
-        "name": "CSS",
-        "content": "CSS-1572B6?style=for-the-badge&logo=css&logoColor=white"
-      },
-      {
-        "name": "JavaScript",
-        "content": "JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
-      },
-      {
         "name": "SvelteKit",
-        "content": "SvelteKit-FF3E00?style=for-the-badge&logo=Svelte&logoColor=white"
+        "content": "SvelteKit-FF3E00?style=for-the-badge&logo=svelte&logoColor=white"
+      },
+      {
+        "name": "GitHub Pages",
+        "content": "GitHub_Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white"
       }
     ]
   },
@@ -154,7 +146,7 @@
     "badges": [
       {
         "name": "Express.js",
-        "content": "Express%20js-000000?style=for-the-badge&logo=express&logoColor=white"
+        "content": "Express_js-000000?style=for-the-badge&logo=express&logoColor=white"
       },
       {
         "name": "PostgreSQL",
@@ -162,23 +154,23 @@
       },
       {
         "name": "Sequelize",
-        "content": "Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white"
+        "content": "Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white"
       },
       {
         "name": "Vue.js",
-        "content": "Vue%20js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D"
+        "content": "Vue_js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D"
       },
       {
         "name": "Tailwind CSS",
-        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
-      },
-      {
-        "name": "Cypress",
-        "content": "Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white"
+        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white"
       },
       {
         "name": "Jest",
         "content": "Jest-C21325?style=for-the-badge&logo=jest&logoColor=white"
+      },
+      {
+        "name": "Cypress",
+        "content": "Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white"
       },
       {
         "name": "TensorFlow",
@@ -224,36 +216,28 @@
     ],
     "badges": [
       {
-        "name": "Google Cloud",
-        "content": "Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white"
-      },
-      {
-        "name": "Firebase",
-        "content": "Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"
-      },
-      {
-        "name": "Docker",
-        "content": "Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white"
-      },
-      {
-        "name": "Node.js",
-        "content": "Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"
-      },
-      {
         "name": "Express.js",
-        "content": "Express%20js-000000?style=for-the-badge&logo=express&logoColor=white"
-      },
-      {
-        "name": "Sequelize",
-        "content": "Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white"
+        "content": "Express_js-000000?style=for-the-badge&logo=express&logoColor=white"
       },
       {
         "name": "MySQL",
         "content": "MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white"
       },
       {
-        "name": "JWT",
-        "content": "JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white"
+        "name": "Sequelize",
+        "content": "Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white"
+      },
+      {
+        "name": "Docker",
+        "content": "Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white"
+      },
+      {
+        "name": "Firebase",
+        "content": "Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"
+      },
+      {
+        "name": "Google Cloud",
+        "content": "Google_Cloud-4285F4?style=for-the-badge&logo=googlecloud&logoColor=white"
       }
     ]
   },
@@ -333,19 +317,23 @@
       },
       {
         "name": "Tailwind CSS",
-        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white"
       },
       {
         "name": "Storybook",
         "content": "Storybook-FF4785?style=for-the-badge&logo=storybook&logoColor=white"
       },
       {
+        "name": "Jest",
+        "content": "Jest-C21325?style=for-the-badge&logo=jest&logoColor=white"
+      },
+      {
         "name": "Cypress",
         "content": "Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white"
       },
       {
-        "name": "Jest",
-        "content": "Jest-C21325?style=for-the-badge&logo=jest&logoColor=white"
+        "name": "Vercel",
+        "content": "Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"
       }
     ]
   },
@@ -410,20 +398,12 @@
     ],
     "badges": [
       {
-        "name": "HTML5",
-        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
-      },
-      {
-        "name": "CSS",
-        "content": "CSS-1572B6?style=for-the-badge&logo=css&logoColor=white"
-      },
-      {
-        "name": "JavaScript",
-        "content": "JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
-      },
-      {
         "name": "React",
         "content": "React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"
+      },
+      {
+        "name": "Vercel",
+        "content": "Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"
       }
     ]
   },
@@ -482,20 +462,12 @@
     ],
     "badges": [
       {
-        "name": "HTML5",
-        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
-      },
-      {
-        "name": "CSS",
-        "content": "CSS-1572B6?style=for-the-badge&logo=css&logoColor=white"
-      },
-      {
-        "name": "JavaScript",
-        "content": "JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
-      },
-      {
         "name": "React",
         "content": "React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"
+      },
+      {
+        "name": "Vercel",
+        "content": "Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"
       }
     ]
   },
@@ -558,6 +530,10 @@
       {
         "name": "JavaScript",
         "content": "JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
+      },
+      {
+        "name": "GitHub Pages",
+        "content": "GitHub_Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white"
       }
     ]
   },
@@ -598,7 +574,7 @@
       },
       {
         "name": "Google Colab",
-        "content": "Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252"
+        "content": "Google Colab-F9AB00?style=for-the-badge&logo=googlecolab&color=525252"
       },
       {
         "name": "TensorFlow",
@@ -660,12 +636,12 @@
         "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
       },
       {
-        "name": "CSS",
-        "content": "CSS-1572B6?style=for-the-badge&logo=css&logoColor=white"
+        "name": "Tailwind CSS",
+        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white"
       },
       {
-        "name": "Tailwind CSS",
-        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+        "name": "GitHub Pages",
+        "content": "GitHub_Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white"
       }
     ]
   },
@@ -719,6 +695,10 @@
       {
         "name": "CSS",
         "content": "CSS-1572B6?style=for-the-badge&logo=css&logoColor=white"
+      },
+      {
+        "name": "GitHub Pages",
+        "content": "GitHub_Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white"
       }
     ]
   },
@@ -775,7 +755,7 @@
       },
       {
         "name": "Material Design",
-        "content": "Material%20Design-757575?style=for-the-badge&logo=material%20design&logoColor=white"
+        "content": "Material_Design-757575?style=for-the-badge&logo=materialdesign&logoColor=white"
       }
     ]
   },
@@ -838,16 +818,16 @@
         "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
       },
       {
-        "name": "CSS",
-        "content": "CSS-1572B6?style=for-the-badge&logo=css&logoColor=white"
-      },
-      {
-        "name": "Materialize",
-        "content": "Materialize-EE6E73?style=for-the-badge&logo=material%20design&logoColor=white"
+        "name": "Materialize CSS",
+        "content": "Materialize_CSS-EE6E73?style=for-the-badge&logo=materialdesign&logoColor=white"
       },
       {
         "name": "JavaScript",
         "content": "JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
+      },
+      {
+        "name": "Vercel",
+        "content": "Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"
       }
     ]
   }
