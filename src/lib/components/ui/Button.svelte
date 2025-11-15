@@ -4,6 +4,7 @@
 
   const {
     class: className,
+    buttonClass,
     type = types[0],
     href,
     theme = themes[0],
@@ -23,24 +24,35 @@
   });
 </script>
 
-<svelte:element
-  this={href ? 'a' : 'button'}
-  class={[
-    'button',
-    `button--theme--${themes.includes(theme) ? theme : themes[0]}`,
-    className,
-  ]}
-  class:button--square={square}
-  type={finalType}
-  {href}
-  {...props}
->
-  <div class="button__inner">
-    {@render children?.()}
-  </div>
-</svelte:element>
+<div class={['wrapper', className]}>
+  <svelte:element
+    this={href ? 'a' : 'button'}
+    class={[
+      'button',
+      `button--theme--${themes.includes(theme) ? theme : themes[0]}`,
+      buttonClass,
+    ]}
+    class:button--square={square}
+    type={finalType}
+    {href}
+    {...props}
+  >
+    <div class="button__inner">
+      {@render children?.()}
+    </div>
+  </svelte:element>
+</div>
 
 <style>
+  .wrapper {
+    display: inline-block;
+    transition: padding-top 0.25s;
+  }
+
+  .wrapper:has(.button:not(:disabled):active) {
+    padding-top: 4px;
+  }
+
   .button {
     --shadow-color: var(--color-primary-shadow);
     --background-color: var(--color-primary-main);

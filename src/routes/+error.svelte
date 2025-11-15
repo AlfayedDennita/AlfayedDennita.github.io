@@ -17,17 +17,15 @@
     <div class="error__inner">
       <h1 class="error__title" id="error-title">Error: {page.status}</h1>
       <p class="error__message">{page.error.message}</p>
-      <div class="error__cta">
-        <Button
-          class="error__cta-button"
-          href="/"
-          theme="secondary"
-          title="Back to Home"
-        >
-          <i class="hn hn-home-solid"></i>
-          Back to Home
-        </Button>
-      </div>
+      <Button
+        class="error__cta"
+        href="/"
+        theme="secondary"
+        title="Back to Home"
+      >
+        <i class="hn hn-home-solid"></i>
+        Back to Home
+      </Button>
     </div>
   </section>
 </DetailsMain>
@@ -76,12 +74,7 @@
     max-width: var(--breakpoint-md);
   }
 
-  .error__cta {
+  :global(.error__cta) {
     margin-top: 16px;
-    transition: padding-top 0.25s;
-  }
-
-  .error__cta:has(:global(.error__cta-button:active)) {
-    padding-top: 4px;
   }
 </style>
