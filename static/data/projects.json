@@ -1,5 +1,76 @@
 [
   {
+    "slug": "fitsync",
+    "title": "FitSync (Back-End and Infrastructure)",
+    "type": {
+      "icon": "android",
+      "name": "Android Application"
+    },
+    "createdAt": "2023-12-22T08:30:00Z",
+    "updatedAt": "2023-12-22T08:30:00Z",
+    "description": "FitSync is a state-of-the-art fitness and nutrition tracker application that aims to empower individuals to take control of their health and transform their lives. FitSync combines cutting-edge technology with comprehensive fitness tracking, personalized dietary nutrition recommendations, creating a holistic platform for users. FitSync provides a mobile home workout exercises which can be done without using any additional equipments for you to use, giving you the convenience to do the provided exercises anywhere anytime. I contributed to this Bangkit project as a back-end developer, responsible for building the back-end REST API and managing the application infrastructure.",
+    "externalLinks": [
+      {
+        "name": "GitHub Repository (Main)",
+        "url": "https://github.com/CH2-PS020-FitSync/",
+        "icon": "github"
+      },
+      {
+        "name": "GitHub Repository (Cloud Computing)",
+        "url": "https://github.com/CH2-PS020-FitSync/CH2-PS020-CC/",
+        "icon": "github"
+      }
+    ],
+    "images": [
+      {
+        "name": "fitsync-1.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Banner"
+      },
+      {
+        "name": "fitsync-2.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Screenshots"
+      }
+    ],
+    "badges": [
+      {
+        "name": "Google Cloud",
+        "content": "Google_Cloud-4285F4?style=for-the-badge&logo=google-cloud&logoColor=white"
+      },
+      {
+        "name": "Firebase",
+        "content": "Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"
+      },
+      {
+        "name": "Docker",
+        "content": "Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white"
+      },
+      {
+        "name": "Node.js",
+        "content": "Node%20js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white"
+      },
+      {
+        "name": "Express.js",
+        "content": "Express%20js-000000?style=for-the-badge&logo=express&logoColor=white"
+      },
+      {
+        "name": "Sequelize",
+        "content": "Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white"
+      },
+      {
+        "name": "MySQL",
+        "content": "MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white"
+      },
+      {
+        "name": "JWT",
+        "content": "JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white"
+      }
+    ]
+  },
+  {
     "slug": "forus",
     "title": "Forus",
     "type": {
