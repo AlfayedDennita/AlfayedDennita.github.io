@@ -71,14 +71,14 @@
     </SectionHeader>
 
     {#await projects}
-      <ProjectCards>
+      <ProjectCards class="faydev__cards">
         {#each { length: 6 }}
           <ProjectCard skeleton />
         {/each}
       </ProjectCards>
     {:then}
       {#if limitedProjects}
-        <ProjectCards>
+        <ProjectCards class="faydev__cards">
           {#each limitedProjects as project (project.slug)}
             <ProjectCard
               slug={project.slug}
@@ -92,10 +92,10 @@
           {/each}
         </ProjectCards>
       {:else}
-        <ErrorLoad message="No projects to view." />
+        <ErrorLoad class="faydev__cards" message="No projects to view." />
       {/if}
     {:catch}
-      <ErrorLoad message="Failed to load projects." />
+      <ErrorLoad class="faydev__cards" message="Failed to load projects." />
     {/await}
 
     <Button
@@ -157,6 +157,10 @@
     flex-direction: column;
     gap: 64px;
     padding-block: 96px;
+  }
+
+  .faydev :global(.faydev__cards) {
+    z-index: 1;
   }
 
   .faydev :global(.faydev__cta) {
