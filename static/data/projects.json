@@ -1,5 +1,192 @@
 [
   {
+    "slug": "fayden-world",
+    "title": "Fayden World",
+    "type": {
+      "icon": "globe",
+      "name": "Web Application"
+    },
+    "createdAt": "2025-11-16T12:00:00Z",
+    "updatedAt": "2025-11-16T12:00:00Z",
+    "description": "Fayden World is Alfayed Dennita's main personal website that contains public personal information, such as personal description, software development portfolio, art gallery, and contact details. This is the gen-4 of my personal website.",
+    "externalLinks": [
+      {
+        "name": "Live Website",
+        "url": "https://alfayeddennita.github.io/",
+        "icon": "globe-solid"
+      },
+      {
+        "name": "GitHub Repository",
+        "url": "https://github.com/AlfayedDennita/AlfayedDennita.github.io/",
+        "icon": "github"
+      }
+    ],
+    "images": [
+      {
+        "name": "fayden-world-1.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Banner"
+      },
+      {
+        "name": "fayden-world-2.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Jumbotron"
+      },
+      {
+        "name": "fayden-world-3.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "About"
+      },
+      {
+        "name": "fayden-world-4.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Projects"
+      },
+      {
+        "name": "fayden-world-5.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Arts"
+      },
+      {
+        "name": "fayden-world-6.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Contact"
+      },
+      {
+        "name": "fayden-world-7.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Project"
+      }
+    ],
+    "badges": [
+      {
+        "name": "HTML5",
+        "content": "HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"
+      },
+      {
+        "name": "CSS",
+        "content": "CSS-1572B6?style=for-the-badge&logo=css&logoColor=white"
+      },
+      {
+        "name": "JavaScript",
+        "content": "JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
+      },
+      {
+        "name": "SvelteKit",
+        "content": "SvelteKit-FF3E00?style=for-the-badge&logo=Svelte&logoColor=white"
+      }
+    ]
+  },
+  {
+    "slug": "arsip-digital-rri-palembang",
+    "title": "Arsip Digital RRI Palembang",
+    "type": {
+      "icon": "globe",
+      "name": "Web Application"
+    },
+    "createdAt": "2024-08-12T05:00:00Z",
+    "updatedAt": "2024-08-12T05:00:00Z",
+    "description": "Arsip Digital RRI Palembang is a web-based document archiving system built for RRI Palembang. It uses a Retrieval-Augmented Generation (RAG) to generate a summary of documents returned from search queries. This system was developed as my undergraduate thesis project.",
+    "externalLinks": [],
+    "images": [
+      {
+        "name": "arsip-digital-rri-palembang-1.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Banner"
+      },
+      {
+        "name": "arsip-digital-rri-palembang-2.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Login"
+      },
+      {
+        "name": "arsip-digital-rri-palembang-3.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Dashboard"
+      },
+      {
+        "name": "arsip-digital-rri-palembang-4.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Archives"
+      },
+      {
+        "name": "arsip-digital-rri-palembang-5.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Retrieval-Augmented Generation"
+      },
+      {
+        "name": "arsip-digital-rri-palembang-6.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Archive Codes"
+      },
+      {
+        "name": "arsip-digital-rri-palembang-7.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Users"
+      },
+      {
+        "name": "arsip-digital-rri-palembang-8.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Scopes"
+      },
+      {
+        "name": "arsip-digital-rri-palembang-9.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Reports"
+      }
+    ],
+    "badges": [
+      {
+        "name": "Express.js",
+        "content": "Express%20js-000000?style=for-the-badge&logo=express&logoColor=white"
+      },
+      {
+        "name": "PostgreSQL",
+        "content": "PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white"
+      },
+      {
+        "name": "Sequelize",
+        "content": "Sequelize-52B0E7?style=for-the-badge&logo=Sequelize&logoColor=white"
+      },
+      {
+        "name": "Vue.js",
+        "content": "Vue%20js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D"
+      },
+      {
+        "name": "Tailwind CSS",
+        "content": "Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"
+      },
+      {
+        "name": "Cypress",
+        "content": "Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white"
+      },
+      {
+        "name": "Jest",
+        "content": "Jest-C21325?style=for-the-badge&logo=jest&logoColor=white"
+      },
+      {
+        "name": "TensorFlow",
+        "content": "TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"
+      }
+    ]
+  },
+  {
     "slug": "fitsync",
     "title": "FitSync (Back-End and Infrastructure)",
     "type": {
@@ -428,7 +615,7 @@
     },
     "createdAt": "2022-04-19T23:32:00Z",
     "updatedAt": "2022-04-19T23:32:00Z",
-    "description": "Besnik is a freelance website for companies that need freelancers and freelancers who are ready to give their skills. I sliced the UI design from UIHut into ready-use HTML template powered by Tailwind CSS as its styling.",
+    "description": "Besnik is a freelance website for companies that need freelancers and freelancers who are ready to give their skills. I sliced the UI design from UIHut into ready-to-use HTML template powered by Tailwind CSS as its styling.",
     "externalLinks": [
       {
         "name": "Live Website",
