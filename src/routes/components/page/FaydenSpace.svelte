@@ -4,7 +4,7 @@
   import SectionHeader from '$lib/components/SectionHeader.svelte';
   import ErrorLoad from '$lib/components/ErrorLoad.svelte';
 
-  const { class: className, arts, navbarOffsetHeight = 0 } = $props();
+  const { class: className, arts, navbarOffsetHeight = 0, ...props } = $props();
 
   let offsetTop = $state({
     value: undefined,
@@ -29,6 +29,7 @@
     (newOffsetTop) => (offsetTop.value = newOffsetTop),
     (update) => (offsetTop.update = update)
   )}
+  {...props}
 >
   <div class="space__inner">
     <SectionHeader
@@ -46,7 +47,7 @@
     </SectionHeader>
 
     {#await arts}
-      <ul class="arts">
+      <ul class="arts space__arts">
         {#each { length: 6 }, i}
           <li class="arts__art">
             <div class="arts__art-object"></div>
@@ -54,7 +55,7 @@
         {/each}
       </ul>
     {:then arts}
-      <ul class="arts">
+      <ul class="arts space__arts">
         {#each { length: 6 }, i}
           <li class="arts__art">
             <svelte:element
@@ -130,8 +131,11 @@
     padding-block: 96px;
   }
 
-  .arts {
+  .space__arts {
     align-self: center;
+  }
+
+  .arts {
     overflow: hidden;
     display: grid;
     border-radius: 8px;
@@ -191,9 +195,9 @@
   }
 
   .arts__art-message {
-    opacity: 0;
     position: absolute;
     inset: 0;
+    opacity: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -224,9 +228,9 @@
   .space__ctas {
     align-self: center;
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     gap: 16px;
   }
 </style>

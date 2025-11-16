@@ -25,6 +25,7 @@
 
   <div class="bgm header__bgm">
     <audio
+      id="bgm-audio"
       src="/audios/hello-planet.mp3"
       volume={0.5}
       bind:paused={isBGMPaused}
@@ -51,6 +52,8 @@
     <Button
       theme="secondary"
       square
+      aria-controls="bgm-audio"
+      aria-label={isBGMPaused ? 'Play BGM' : 'Pause BGM'}
       title={isBGMPaused ? 'Play BGM' : 'Pause BGM'}
       onclick={() => (isBGMPaused = !isBGMPaused)}
     >
@@ -69,7 +72,6 @@
     position: absolute;
     top: 0;
     inset-inline: 0;
-    width: 100%;
     height: 96px;
     max-width: var(--breakpoint-xxl);
     margin: 0 auto;

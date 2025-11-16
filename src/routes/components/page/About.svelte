@@ -1,7 +1,7 @@
 <script>
   import { trackOffsetTop } from '$lib/attachments/trackOffsetTop';
 
-  const { class: className, navbarOffsetHeight = 0 } = $props();
+  const { class: className, navbarOffsetHeight = 0, ...props } = $props();
 
   let offsetTop = $state({
     value: undefined,
@@ -26,6 +26,7 @@
     (newOffsetTop) => (offsetTop.value = newOffsetTop),
     (update) => (offsetTop.update = update)
   )}
+  {...props}
 >
   <div class="about__inner">
     <h2 class="title about__title" id="about-title">

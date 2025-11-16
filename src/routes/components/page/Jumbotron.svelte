@@ -20,10 +20,9 @@
 
 <section
   class="jumbotron"
+  style:--header-offset-height={`${headerOffsetHeight}px`}
   style:min-height={`${welcomeBoxOffsetHeight}px`}
   style:animation-duration={birdTopSpeed}
-  style:--header-offset-height={`${headerOffsetHeight}px`}
-  style:--jumbotron-offset-height={`${offsetHeight}px`}
   aria-labelledby="jumbotron-title"
   bind:offsetHeight
 >
@@ -68,6 +67,7 @@
     class="jumbotron__cloud-top"
     aria-hidden="true"
     style:animation-duration={cloudsSpeed}
+    style:--to-background-position-x={`${(576 * offsetHeight) / 324}px, ${((576 * offsetHeight) / 324) * -1}px`}
   ></div>
   <div
     class="jumbotron__bird-bottom"
@@ -78,6 +78,7 @@
     class="jumbotron__cloud-bottom"
     aria-hidden="true"
     style:animation-duration={cloudsSpeed}
+    style:--to-background-position-x={`${((576 * offsetHeight) / 324) * -1}px`}
   ></div>
 </section>
 
@@ -125,9 +126,7 @@
 
   @keyframes cloud-top {
     to {
-      background-position-x:
-        calc(576px * (var(--jumbotron-offset-height) / 324px)),
-        calc(576px * (var(--jumbotron-offset-height) / 324px) * -1);
+      background-position-x: var(--to-background-position-x);
     }
   }
 
@@ -160,9 +159,7 @@
 
   @keyframes cloud-bottom {
     to {
-      background-position-x: calc(
-        576px * (var(--jumbotron-offset-height) / 324px) * -1
-      );
+      background-position-x: var(--to-background-position-x);
     }
   }
 

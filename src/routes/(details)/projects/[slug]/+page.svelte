@@ -187,6 +187,7 @@
           {#if project.prevProject}
             <Button
               class="nav__button nav__button--dir--prev"
+              buttonClass="nav__button-element"
               href={`/projects/${project.prevProject.slug}`}
               title={project.prevProject.title}
             >
@@ -199,6 +200,7 @@
           {#if project.nextProject}
             <Button
               class="nav__button nav__button--dir--next"
+              buttonClass="nav__button-element"
               href={`/projects/${project.nextProject.slug}`}
               theme="secondary"
               title={project.nextProject.title}
@@ -471,24 +473,35 @@
 
   .nav {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     gap: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .nav {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+    }
   }
 
   .nav :global(.nav__button) {
     flex-grow: 1;
   }
 
-  .nav :global(.nav__button--dir--next) {
-    margin-left: auto;
+  .nav :global(.nav__button-element) {
+    width: 100%;
   }
 
   @media (min-width: 768px) {
     .nav :global(.nav__button) {
       flex-grow: 0;
       max-width: 50%;
+    }
+
+    .nav :global(.nav__button--dir--next) {
+      margin-left: auto;
     }
   }
 

@@ -2,7 +2,7 @@
   import { setContext } from 'svelte';
   import { page } from '$app/state';
   import { pageData } from '$lib/states/pageData.svelte';
-  import SkipToContent from '$lib/components/SkipToContent.svelte';
+  import SkipToContent from './components/layout/SkipToContent.svelte';
   import Header from './components/layout/Header.svelte';
   import Footer from './components/layout/Footer.svelte';
   import BackToTop from './components/layout/BackToTop.svelte';

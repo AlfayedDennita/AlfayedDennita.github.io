@@ -26,7 +26,7 @@
   style:animation-duration={walkingKidsSpeed}
   bind:offsetHeight
 >
-  <div class="footer__container">
+  <div class="footer__inner">
     <p class="footer__copyright">
       Copyright &copy; {copyrightYear} Alfayed Dennita
     </p>
@@ -63,7 +63,7 @@
     }
   }
 
-  .footer__container {
+  .footer__inner {
     margin-inline: auto;
     max-width: var(--breakpoint-xl);
     display: flex;

@@ -18,6 +18,7 @@
     mainSwiperClass,
     thumbsSwiperClass,
     images = [],
+    ...props
   } = $props();
 
   let windowInnerWidth = $state();
@@ -154,7 +155,7 @@
 
 <svelte:window bind:innerWidth={windowInnerWidth} />
 
-<section class={['image-slider', className]}>
+<section class={['image-slider', className]} {...props}>
   <div class={['image-slider__main-frame', mainFrameClass]}>
     {#if images.length > 0}
       {#key isThumbsSwiperShown}

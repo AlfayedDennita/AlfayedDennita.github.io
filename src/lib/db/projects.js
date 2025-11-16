@@ -1,6 +1,10 @@
-export async function getProjects(fetch) {
+export async function getProjects(fetch, projectsLimit = false) {
   const res = await fetch('/data/projects.json');
-  const projects = await res.json();
+  let projects = await res.json();
+
+  if (projectsLimit) {
+    projects = projects.slice(0, projectsLimit);
+  }
 
   return projects;
 }

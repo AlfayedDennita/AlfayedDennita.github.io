@@ -7,7 +7,8 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "generate:sitemap": "node generateSitemap.js",
+    "generate-sitemap:dev": "node generateSitemap.js",
+    "generate-sitemap:prod": "node generateSitemap.js \"./build/sitemap.xml\"",
     "prepare": "svelte-kit sync || echo ''",
     "format": "prettier --write .",
     "lint": "prettier --check . && eslint ."

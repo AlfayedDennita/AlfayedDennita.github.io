@@ -9,9 +9,9 @@
 <style>
   .project-cards {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: stretch;
-    flex-wrap: wrap;
     gap: 40px;
     list-style: none;
   }

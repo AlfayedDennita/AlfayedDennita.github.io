@@ -87,7 +87,7 @@
     --padding-x: 16px;
 
     flex-grow: 1;
-    min-width: 240px;
+    min-width: 160px;
     height: 48px;
     padding: 8px var(--padding-x);
     background-color: var(--color-white-pure);

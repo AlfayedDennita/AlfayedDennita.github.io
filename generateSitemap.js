@@ -5,7 +5,7 @@ import { SitemapStream, streamToPromise } from 'sitemap';
 import { Readable } from 'stream';
 import projects from './static/data/projects.json' with { type: 'json' };
 
-const xmlPath = './static/sitemap.xml';
+const xmlPath = process.argv[2] || './static/sitemap.xml';
 
 const links = [
   {

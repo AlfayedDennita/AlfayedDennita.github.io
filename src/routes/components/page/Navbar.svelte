@@ -2,7 +2,7 @@
   import { untrack } from 'svelte';
   import { slide } from 'svelte/transition';
 
-  const { class: className, linkedSections = [] } = $props();
+  const { class: className, linkedSections = [], ...props } = $props();
 
   let offsetHeight = $state();
   let windowScrollY = $state();
@@ -51,6 +51,7 @@
   class={['navbar', className]}
   class:navbar--open={isNavbarListOpen}
   bind:offsetHeight
+  {...props}
 >
   <div class="navbar__inner">
     {#if windowInnerWidth < 576}

@@ -3,6 +3,7 @@
     class: className,
     contactOffsetHeight,
     footerOffsetHeight,
+    ...props
   } = $props();
 
   const footerObjectsHeight = $derived(
@@ -14,6 +15,7 @@
   class={['footer-objects', className]}
   style:height={footerObjectsHeight}
   aria-hidden="true"
+  {...props}
 ></div>
 
 <style>

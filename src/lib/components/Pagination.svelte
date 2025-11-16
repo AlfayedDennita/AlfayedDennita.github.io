@@ -6,6 +6,7 @@
     currentPage = $bindable(1),
     totalPages = 1,
     totalNeighbours = 2,
+    ...props
   } = $props();
 
   const pages = $derived.by(() => {
@@ -47,7 +48,7 @@
   });
 </script>
 
-<ul class={['pagination', className]}>
+<ul class={['pagination', className]} {...props}>
   {#each pages as page}
     <li>
       {#if Number.isInteger(page)}

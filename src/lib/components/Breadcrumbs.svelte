@@ -3,10 +3,11 @@
     class: className,
     prevPaths = [],
     currentPage = 'Current',
+    ...props
   } = $props();
 </script>
 
-<nav class={['breadcrumbs', className]} aria-label="Breadcrumbs">
+<nav class={['breadcrumbs', className]} aria-label="Breadcrumbs" {...props}>
   <ul class="breadcrumbs__list">
     {#if prevPaths}
       {#each prevPaths as path (path.name)}

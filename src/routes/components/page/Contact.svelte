@@ -8,7 +8,7 @@
   import Button from '$lib/components/ui/Button.svelte';
   import TextField from '$lib/components/ui/TextField.svelte';
 
-  const { class: className, navbarOffsetHeight = 0 } = $props();
+  const { class: className, navbarOffsetHeight = 0, ...props } = $props();
 
   let offsetHeight = $state();
 
@@ -121,6 +121,7 @@
     (update) => (offsetTop.update = update)
   )}
   bind:offsetHeight
+  {...props}
 >
   <div class="contact__inner">
     <div class="contact__info">

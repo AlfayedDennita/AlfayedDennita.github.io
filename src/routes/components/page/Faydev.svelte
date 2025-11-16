@@ -11,6 +11,7 @@
     projects,
     jumbotronOffsetHeight,
     navbarOffsetHeight = 0,
+    ...props
   } = $props();
 
   let windowInnerWidth = $state();
@@ -20,16 +21,14 @@
     update: () => undefined,
   });
 
-  let limitedProjects = $state([]);
-
-  $effect(async () => {
-    const maxProjects = 6;
-    const allProjects = await projects;
-    limitedProjects = allProjects.slice(0, maxProjects);
-  });
+  let resolvedProjects = $state([]);
 
   const birdSpeed = $derived(`${windowInnerWidth / 40}s`);
   const cloudSpeed = $derived(`${windowInnerWidth / 5}s`);
+
+  $effect(async () => {
+    resolvedProjects = await projects;
+  });
 
   export function getOffsetTop() {
     return offsetTop.value;
@@ -44,16 +43,18 @@
 
 <section
   class={['faydev', className]}
-  style:animation-duration={birdSpeed}
   style:--jumbotron-offset-height={`${jumbotronOffsetHeight}px`}
   style:--navbar-offset-height={`${navbarOffsetHeight}px`}
   style:--cloud-animation-duration={cloudSpeed}
+  style:--to-background-position-x={`${((576 * jumbotronOffsetHeight) / 324) * -1}px`}
+  style:animation-duration={birdSpeed}
   id="projects"
   aria-labelledby="projects-title"
   {@attach trackOffsetTop(
     (newOffsetTop) => (offsetTop.value = newOffsetTop),
     (update) => (offsetTop.update = update)
   )}
+  {...props}
 >
   <div class="faydev__inner">
     <SectionHeader
@@ -77,9 +78,9 @@
         {/each}
       </ProjectCards>
     {:then}
-      {#if limitedProjects}
+      {#if resolvedProjects}
         <ProjectCards class="faydev__cards">
-          {#each limitedProjects as project (project.slug)}
+          {#each resolvedProjects as project (project.slug)}
             <ProjectCard
               slug={project.slug}
               title={project.title}
@@ -144,9 +145,7 @@
 
   @keyframes cloud {
     to {
-      background-position-x: calc(
-        576px * (var(--jumbotron-offset-height) / 324px) * -1
-      );
+      background-position-x: var(--to-background-position-x);
     }
   }
 
