@@ -1,0 +1,1 @@
+export const env={"PUBLIC_MODE":"prod","PUBLIC_DEVIANTART_RSS_URL":"https://backend.deviantart.com/rss.xml?type=deviation&q=by%3Aalfayeddennita+sort%3Atime+meta%3Aall","PUBLIC_WEB3FORMS_BASE_URL":"https://api.web3forms.com/submit","PUBLIC_WEB3FORMS_ACCESS_KEY":"17f894f7-47e9-4f87-a147-06713d83e23f","PUBLIC_HCAPTCHA_SITEKEY":"50b2fe65-b00b-4b9e-ad62-3ba471098be2"}
