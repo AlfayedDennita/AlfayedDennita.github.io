@@ -1,8 +1,9 @@
 <script>
   import { PUBLIC_MODE, PUBLIC_HCAPTCHA_SITEKEY } from '$env/static/public';
+  import { onMount, onDestroy } from 'svelte';
   import { slide } from 'svelte/transition';
   import Joi from 'joi';
-  import captcha from 'svelte-captcha-enhance';
+  import '@hcaptcha/vanilla-hcaptcha';
   import db from '$lib/db';
   import { trackOffsetTop } from '$lib/attachments/trackOffsetTop';
   import Button from '$lib/components/ui/Button.svelte';
@@ -40,6 +41,10 @@
     },
   ];
 
+  let form = $state();
+  let isWaitingCaptcha = $state(false);
+  let hcaptcha = $state();
+  let hcaptchaToken = $state();
   const inputErrors = $state({
     name: undefined,
     email: true,
@@ -54,43 +59,85 @@
     message: undefined,
   });
 
-  async function handleSubmittingForm({
-    formData,
-    formElement,
-    result: captchaResult,
-  }) {
+  async function sendForm() {
     isSendingForm = true;
 
-    if (PUBLIC_MODE !== 'dev' && captchaResult.error) {
-      sendingResponse.status = 'failed';
-      sendingResponse.message =
-        'Captcha challenge was error, message failed to send.';
-    } else {
-      try {
-        const data = await db.contact.insertOne({
-          name: formData.get('name'),
-          email: formData.get('email'),
-          message: formData.get('message'),
-        });
+    try {
+      const formData = new FormData(form);
 
-        if (data.success) {
-          sendingResponse.status = 'success';
-          sendingResponse.message = 'Message successfully sent.';
-          formElement.reset();
-        } else {
-          sendingResponse.status = 'failed';
-          sendingResponse.message =
-            data.message || 'Message failed to send, please try again later.';
-        }
-      } catch {
+      const data = await db.contact.insertOne({
+        captchaToken: hcaptchaToken,
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message'),
+      });
+
+      if (data.success) {
+        sendingResponse.status = 'success';
+        sendingResponse.message = 'Message successfully sent.';
+
+        form.reset();
+        hcaptcha.reset();
+        hcaptchaToken = null;
+      } else {
         sendingResponse.status = 'failed';
         sendingResponse.message =
-          'Message failed to send, please try again later.';
+          data.message || 'Message failed to send, please try again later.';
       }
+    } catch {
+      sendingResponse.status = 'failed';
+      sendingResponse.message =
+        'Message failed to send, please try again later.';
     }
 
     isSendingForm = false;
   }
+
+  async function handleSubmittingForm(event) {
+    event.preventDefault();
+
+    if (PUBLIC_MODE !== 'dev') {
+      if (hcaptchaToken) {
+        await sendForm();
+      } else {
+        isWaitingCaptcha = true;
+        hcaptcha.execute();
+      }
+    }
+  }
+
+  async function handleCaptchaVerified({ token }) {
+    hcaptchaToken = token;
+
+    if (isWaitingCaptcha) {
+      await sendForm();
+    }
+
+    isWaitingCaptcha = false;
+  }
+
+  async function handleCaptchaInvalid() {
+    hcaptchaToken = null;
+    isWaitingCaptcha = false;
+    sendingResponse.status = 'failed';
+    sendingResponse.message = 'Captcha challenge was invalid.';
+  }
+
+  onMount(() => {
+    if (PUBLIC_MODE !== 'dev') {
+      hcaptcha.addEventListener('verified', handleCaptchaVerified);
+      hcaptcha.addEventListener('error', handleCaptchaInvalid);
+      hcaptcha.addEventListener('expired', handleCaptchaInvalid);
+    }
+  });
+
+  onDestroy(() => {
+    if (PUBLIC_MODE !== 'dev') {
+      hcaptcha.removeEventListener('verified', handleCaptchaVerified);
+      hcaptcha.removeEventListener('error', handleCaptchaInvalid);
+      hcaptcha.removeEventListener('expired', handleCaptchaInvalid);
+    }
+  });
 
   export function getOffsetTop() {
     return offsetTop.value;
@@ -104,12 +151,6 @@
     return offsetHeight;
   }
 </script>
-
-<svelte:head>
-  {#if PUBLIC_MODE !== 'dev'}
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-  {/if}
-</svelte:head>
 
 <section
   class={['contact', className]}
@@ -152,12 +193,10 @@
     </div>
 
     <form
+      bind:this={form}
       class="form contact__form"
       method="post"
-      use:captcha={{
-        type: PUBLIC_MODE === 'dev' ? 'bypass' : 'hcaptcha',
-        submit: () => handleSubmittingForm,
-      }}
+      onsubmit={handleSubmittingForm}
     >
       <div class="form__input form__input--field--name" title="Name">
         <label class="form__input-label" for="input-name">Name</label>
@@ -253,10 +292,12 @@
         {/if}
       </div>
       {#if PUBLIC_MODE !== 'dev'}
-        <div
-          class="h-captcha form__captcha"
-          data-sitekey={PUBLIC_HCAPTCHA_SITEKEY}
-        ></div>
+        <h-captcha
+          bind:this={hcaptcha}
+          class="form__captcha"
+          site-key={PUBLIC_HCAPTCHA_SITEKEY}
+          recaptchacompat={false}
+        ></h-captcha>
       {/if}
       {#if sendingResponse.status}
         <div

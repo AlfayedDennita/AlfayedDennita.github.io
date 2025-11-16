@@ -33,9 +33,9 @@
   },
   "dependencies": {
     "@hackernoon/pixel-icon-library": "^1.0.6",
+    "@hcaptcha/vanilla-hcaptcha": "^1.1.4",
     "joi": "^18.0.1",
     "photoswipe": "^5.4.4",
-    "svelte-captcha-enhance": "^1.2.3",
     "swiper": "^12.0.3"
   }
 }
