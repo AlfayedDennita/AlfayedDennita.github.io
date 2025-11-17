@@ -149,12 +149,24 @@
         "content": "Express_js-000000?style=for-the-badge&logo=express&logoColor=white"
       },
       {
+        "name": "Sequelize",
+        "content": "Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white"
+      },
+      {
+        "name": "FastAPI",
+        "content": "FastAPI-109989?style=for-the-badge&logo=fastapi&logoColor=white"
+      },
+      {
+        "name": "Haystack",
+        "content": "Haystack-03AF9D?style=for-the-badge&logo=tensorflow&logoColor=white"
+      },
+      {
         "name": "PostgreSQL",
         "content": "PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white"
       },
       {
-        "name": "Sequelize",
-        "content": "Sequelize-52B0E7?style=for-the-badge&logo=sequelize&logoColor=white"
+        "name": "Hugging Face",
+        "content": "Hugging_Face-FDEE21?style=for-the-badge&logo=huggingface&logoColor=black"
       },
       {
         "name": "Vue.js",
@@ -171,10 +183,6 @@
       {
         "name": "Cypress",
         "content": "Cypress-17202C?style=for-the-badge&logo=cypress&logoColor=white"
-      },
-      {
-        "name": "TensorFlow",
-        "content": "TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white"
       }
     ]
   },
@@ -824,6 +832,10 @@
       {
         "name": "JavaScript",
         "content": "JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"
+      },
+      {
+        "name": "PWA",
+        "content": "PWA-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white"
       },
       {
         "name": "Vercel",
