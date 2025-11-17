@@ -154,7 +154,7 @@
           {/if}
           {#if project.badges?.length > 0}
             <section class="badges info__badges" aria-labelledby="badges-title">
-              <h3 class="badges__title" id="badges-title">Tech Stacks:</h3>
+              <h3 class="badges__title" id="badges-title">Tech Stack:</h3>
               <ul class="badges__list">
                 {#each project.badges as badge (badge.name)}
                   <li>
