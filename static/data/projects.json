@@ -1,5 +1,96 @@
 [
   {
+    "slug": "dismantled-spike",
+    "title": "Dismantled Spike",
+    "type": {
+      "icon": "globe",
+      "name": "Web Application"
+    },
+    "createdAt": "2025-12-07T01:40:00Z",
+    "updatedAt": "2025-12-07T01:40:00Z",
+    "description": "Dismantled Spike is a simplified one-stop VALORANT wiki that contains essential VALORANT information to boost your game knowledge. Find information about VALORANT agents, maps, weapons, and more easily in Dismantled Spike. All VALORANT data on this web app is obtained from Valorant-API (valorant-api.com) as a public API provider.",
+    "externalLinks": [
+      {
+        "name": "Live Website",
+        "url": "https://dismantled-spike.alfayeddennita.workers.dev/",
+        "icon": "globe-solid"
+      },
+      {
+        "name": "GitHub Repository",
+        "url": "https://github.com/AlfayedDennita/dismantled-spike/",
+        "icon": "github"
+      }
+    ],
+    "images": [
+      {
+        "name": "dismantled-spike-1.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Banner"
+      },
+      {
+        "name": "dismantled-spike-2.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Home"
+      },
+      {
+        "name": "dismantled-spike-3.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Agents"
+      },
+      {
+        "name": "dismantled-spike-4.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Agent"
+      },
+      {
+        "name": "dismantled-spike-5.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Maps"
+      },
+      {
+        "name": "dismantled-spike-6.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Map"
+      },
+      {
+        "name": "dismantled-spike-7.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Weapons"
+      },
+      {
+        "name": "dismantled-spike-8.webp",
+        "width": 1920,
+        "height": 1080,
+        "alt": "Weapon"
+      }
+    ],
+    "badges": [
+      {
+        "name": "SvelteKit",
+        "content": "SvelteKit-FF3E00?style=for-the-badge&logo=svelte&logoColor=white"
+      },
+      {
+        "name": "daisyUI",
+        "content": "daisyUI-FFC932?style=for-the-badge&logo=tailwindcss&logoColor=black"
+      },
+      {
+        "name": "Paraglide JS",
+        "content": "Paraglide_JS-black?style=for-the-badge&logo=javascript&logoColor=white"
+      },
+      {
+        "name": "Cloudflare Workers",
+        "content": "Cloudflare_Workers-F38020?style=for-the-badge&logo=cloudflareworkers&logoColor=white"
+      }
+    ]
+  },
+  {
     "slug": "fayden-world",
     "title": "Fayden World",
     "type": {
